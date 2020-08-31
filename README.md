@@ -5,6 +5,3 @@ Draft:https://docs.google.com/document/d/15xeEnnr8LzG6mBr9KnicltFDD3dp2jtHnLn8pk
 
 Use Case:https://docs.google.com/document/d/1II5Kj90h99MSuFcrcXV3Aj63Jt4Xq15kZq0IGH-XUI4/edit
 
-
-
-Programming Yea! Documentation Sugoi yoo!
