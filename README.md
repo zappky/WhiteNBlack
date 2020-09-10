@@ -7,7 +7,7 @@ Prototype:https://marvelapp.com/prototype/50c9g36
 
 Functional and Non-Function requirement:https://docs.google.com/document/d/1bGwuuv1jxZXbN2xrO0t85nX4Xk4nI6ZHITDom8tJrYs/edit
 
-Use Case: https://docs.google.com/document/d/1II5Kj90h99MSuFcrcXV3Aj63Jt4Xq15kZq0IGH-XUI4/edit(Joys)
+Use Case: https://docs.google.com/document/d/1II5Kj90h99MSuFcrcXV3Aj63Jt4Xq15kZq0IGH-XUI4/edit (Joys)
 
 # Example:
 
