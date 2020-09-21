@@ -12,6 +12,7 @@ namespace SmokeFreeApplication
     {
         protected void Application_Start()
         {
+            //Routes for application
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
