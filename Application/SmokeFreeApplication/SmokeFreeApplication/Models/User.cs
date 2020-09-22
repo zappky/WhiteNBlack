@@ -7,13 +7,13 @@ namespace SmokeFreeApplication.Models
 {
     public class User
     {
-        public string userName { get; set; }
-        public string name { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public int age { get; set; }
-        public string profilePicture { get; set; }
-        public bool emailVerify { get; set; }
+        protected string userName { get; set; }
+        protected string name { get; set; }
+        protected string email { get; set; }
+        protected string password { get; set; }
+        protected int age { get; set; }
+        protected string profilePicture { get; set; }
+        protected bool emailVerify { get; set; }
 
         public User()
         {
