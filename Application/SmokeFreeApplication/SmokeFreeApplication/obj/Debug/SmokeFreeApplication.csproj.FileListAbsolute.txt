@@ -54,3 +54,11 @@ C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFr
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.CopyComplete
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.dll
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.pdb
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.dll
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.xml
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\guanw\Desktop\github\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml

@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron">
@@ -16,9 +17,7 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
-        <p>
-            Wonder how you can begin your journey to being smoke free? Start here today!
-        </p>
+        <p>Wonder how you can begin your journey to being smoke free? Start here today!</p>
         <p class="btn btn-default">@Html.ActionLink("Sign Up", "SignUpMember", "Account")</p>
     </div>
     <div class="col-md-4">

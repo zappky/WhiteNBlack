@@ -1,0 +1,30 @@
+﻿@{ 
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card-header login-logout-tab">
+            <div class="card-header">
+                <ul class="nav nav-tabs ">
+                    <li class="nav-item">
+                        @Html.ActionLink("Sign up as a Member", "SignUpMember", "Account")
+                        
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Sign up as a Doctor", "SignUpDoctor", "Account")
+                        
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @RenderBody()
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

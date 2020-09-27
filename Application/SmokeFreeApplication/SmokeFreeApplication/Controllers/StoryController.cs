@@ -11,6 +11,16 @@ namespace SmokeFreeApplication.Controllers
         // GET: Story
         public ActionResult Stories()
         {
+            if(Session["username"] != null)
+            {
+
+            }
+            else
+            {
+                TempData["message"] = "Please sign in to see stories!";
+            }
+
+
             return View();
         }
     }
