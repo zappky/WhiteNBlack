@@ -31,12 +31,8 @@
 *.out
 *.app
 *.js
-*.js
-Application/SmokeFreeApplication/SmokeFreeApplication/Scripts/jquery.validate.js
-Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
 *.css
 *.p7s
-*.js
 *.svg
 *.css
 *.config
