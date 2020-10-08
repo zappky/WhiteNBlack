@@ -36,3 +36,6 @@
 *.svg
 *.css
 *.config
+Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
+*.config
+*.config
