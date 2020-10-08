@@ -1,0 +1,24 @@
+﻿@*remember the change the Test to Test2 when testing table 2*@
+@model IEnumerable<SmokeFreeApplication.Models.Test2>
+@{
+    ViewBag.Title = "DBTEST";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>This is a db test page</h2>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+    </tr>
+}
+
+
+

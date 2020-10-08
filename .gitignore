@@ -37,5 +37,7 @@
 *.css
 *.config
 Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
-*.config
-*.config
+
+*.force
+*.cache
+*.pdb

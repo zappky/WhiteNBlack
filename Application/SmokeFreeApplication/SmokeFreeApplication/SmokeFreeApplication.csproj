@@ -145,6 +145,10 @@
     <Content Include="App_Data\SmokeFree_log.ldf">
       <DependentUpon>SmokeFree.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\test.mdf" />
+    <Content Include="App_Data\test_log.ldf">
+      <DependentUpon>test.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-lux.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -208,6 +212,7 @@
     <Content Include="Views\Admin\_PostControlRequest.cshtml" />
     <Content Include="Views\Admin\_PostManageReject.cshtml" />
     <Content Include="Views\Admin\_PostControlReject.cshtml" />
+    <Content Include="Views\Test\dbtest.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
