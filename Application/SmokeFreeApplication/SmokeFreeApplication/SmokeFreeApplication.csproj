@@ -126,6 +126,7 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\InterestedPartyController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,6 +218,7 @@
     <Content Include="Views\Account\_SignInLayout.cshtml" />
     <Content Include="Views\Account\SignInDoctor.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
+    <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
