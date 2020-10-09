@@ -50,41 +50,48 @@
 </head>
 <body>
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Request')">Request</button>
-        <button class="tablinks" onclick="openCity(event, 'Accepted')">Accepted</button>
-        <button class="tablinks" onclick="openCity(event, 'Rejected')">Rejected</button>
+        <button class="tablinks" onclick="openCity(event, 'Pending Article')">Pending Article</button>
+        <button class="tablinks" onclick="openCity(event, 'Approved Article')">Approved Article</button>
+        <button class="tablinks" onclick="openCity(event, 'Pending Doctor')">Pending Doctor</button>
+        <button class="tablinks" onclick="openCity(event, 'Approved Doctor')">Approved Doctor</button>
     </div>
 
-    <div id="Request" class="tabcontent">
-        <h3>List of articles to be accepted</h3>
+    <div id="Pending Article" class="tabcontent">
+        <h3>List of articles to be approved</h3>
         @*Need to link to correspodning post view *@
-        @Html.ActionLink("Dame", "RequestView", "Admin")
+        @Html.ActionLink("Dame", "PendingArticleView", "Admin")
     </div>
 
-    <div id="Accepted" class="tabcontent">
-        <h3>List of articles accepted</h3>
-        @Html.ActionLink("Da", "Articles", "Article")
+    <div id="Approved Article" class="tabcontent">
+        <h3>List of articles approved</h3>
+        @Html.ActionLink("Da", "ApprovedArticleView", "Admin")
     </div>
 
-    <div id="Rejected" class="tabcontent">
-        <h3>List of articles rejected</h3>
-        @Html.ActionLink("Ne", "RejectedView", "Admin")
+    <div id="Pending Doctor" class="tabcontent">
+        <h3>List of Doctor to be approved</h3>
+        @*Need to link to correspodning post view *@
+        @Html.ActionLink("Dame", "PendingDoctorView", "Admin")
+    </div>
+
+    <div id="Approved Doctor" class="tabcontent">
+        <h3>List of articles approved</h3>
+        @Html.ActionLink("Da", "ApprovedDoctorView", "Admin")
     </div>
 
     <script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
     </script>
 
 </body>

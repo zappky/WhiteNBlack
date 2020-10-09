@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\BoardcastMessage.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
@@ -204,15 +205,13 @@
     <Content Include="Views\Admin\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\_HorizontalTabsAdmin.cshtml" />
     <Content Include="Views\Admin\_TopBarAdmin.cshtml" />
-    <Content Include="Views\Admin\RequestView.cshtml" />
-    <Content Include="Views\Admin\RejectedView.cshtml" />
+    <Content Include="Views\Admin\PendingArticleView.cshtml" />
     <Content Include="Views\Admin\_PostManageRequest.cshtml" />
     <Content Include="Views\Admin\_PostControlRequest.cshtml" />
-    <Content Include="Views\Admin\_PostManageReject.cshtml" />
-    <Content Include="Views\Admin\_PostControlReject.cshtml" />
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Account\_SignInLayout.cshtml" />
     <Content Include="Views\Account\SignInDoctor.cshtml" />
+    <Content Include="Views\Admin\PendingDoctorView.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

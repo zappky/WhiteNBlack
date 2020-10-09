@@ -21,10 +21,15 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
+        //Default view of the admin interface
+        public ActionResult Manage()
+        {
+            return View();
+        }
 
-        //When i click ManageStories
+        //When i click My Admin
         //Brings me to main admin interface
-        public ActionResult ClickManageArticles()
+        public ActionResult MyAdmin()
         {
             return RedirectToAction("Manage");
         }
@@ -38,59 +43,60 @@ namespace SmokeFreeApplication.Controllers
             return View("../Home/Index");
 
         }
+        private DocEntry CreateDummyDoctor()
+        {
+            DocEntry aUser = new DocBuilder()
+            .UserBio("hahadoc", new DateTime(), "female")
+            .UserMeta("userHahaDoc", "abe@hotmail.com", "kekeke", "something")
+            .DocInfo("ntu", "fake", 999, "999", true)
+            .Build();
+
+            return aUser;
+        }
+        private Article CreateDummyArticle()
+        {
+            //dummy artcile
+
+            Article aArticle = new Article();
+            aArticle.id = 1;
+
+            aArticle.owner = CreateDummyDoctor();
+            aArticle.texts = "Dame Da yo";
+            aArticle.Title = "Baka Mitai";
+
+            return aArticle;
+        }
 
         //When i click on a request
         //View post management
         //probably need some agrgument to be able to get the correct post to view
-        public ActionResult RequestView()
+        public ActionResult PendingArticleView()
         {
-            //dummy artcile
 
-            Article aArticle = new Article();
-            aArticle.id = 1;
-
-            DocEntry aUser = new DocBuilder()
-            .UserBio("hahadoc", new DateTime(), "female")
-            .UserMeta("userHahaDoc", "abe@hotmail.com", "kekeke", "something")
-            .DocInfo("ntu", "fake", 999, "999", true)
-            .Build();
-
-            aArticle.owner = aUser;
-            aArticle.texts = "Dame Da yo";
-            aArticle.Title = "Baka Mitai";
-            return View(aArticle);
+            return View(CreateDummyArticle());
         }
 
-        //When i click on a Rejected
-        //View post managment(rejection)
+
+        //When i click on a request
+        //View post management
         //probably need some agrgument to be able to get the correct post to view
-        public ActionResult RejectedView()
+        public ActionResult PendingDoctorView()
         {
-            //dummy artcile
 
-            Article aArticle = new Article();
-            aArticle.id = 1;
 
-            DocEntry aUser = new DocBuilder()
-            .UserBio("hahadoc", new DateTime(), "female")
-            .UserMeta("userHahaDoc", "abe@hotmail.com", "kekeke", "something")
-            .DocInfo("ntu", "fake", 999, "999", true)
-            .Build();
-
-            aArticle.owner = aUser;
-            aArticle.texts = "Dame Da yo";
-            aArticle.Title = "Baka Mitai";
-            return View(aArticle);
+            return View(CreateDummyDoctor());
         }
 
-        //When click on accepted post
-        //just go to the viewing of the post as per normal. 
-
-
-        //Default view of the admin interface
-        public ActionResult Manage()
+        public ActionResult ApprovedArticleView()
         {
-            return View();
+            //display list of appproved article from db
+            return View(CreateDummyArticle());
+        }
+
+        public ActionResult ApprovedDoctorView()
+        {
+            //display list of appproved doctor from db
+            return View(CreateDummyDoctor());
         }
 
 
@@ -102,10 +108,25 @@ namespace SmokeFreeApplication.Controllers
             return RedirectToAction("Manage");
         }
 
+        //When i click CLOSE, on post management view
+        public ActionResult CloseDoctor()
+        {
+            //discard changes
+            //go back Admin interface
+            return RedirectToAction("Manage");
+        }
+
 
         //FUNCTION BELOW are probably wrong. They are probably needed to be done on the cshtml file itself
 
-
+        //When i click Approve, on post management view
+        public ActionResult ApprovePost()
+        {
+            //pulish the post
+            //add into Content manager?
+            //add into database?
+            return View();
+        }
 
         //When i click Reject, on post management view
         public ActionResult RejectPost()
@@ -114,27 +135,25 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-        //When i click Publish, on post management view
-        public ActionResult PublishPost()
+
+        public ActionResult ApproveDoctor()
         {
-            //pulish the post
-            //add into Content manager?
-            //add into database?
             return View();
         }
 
-        //When i click view retract , on post management view
-        public ActionResult RetractReject()
+        //When i click Reject, on doctor management view
+        public ActionResult RejectDoctor()
         {
-            //Unban the post?
+            //spawn a reject confirmation dialog box
             return View();
         }
 
-        //When i click view reject reason, on post management view
-        public ActionResult ViewRejectReason()
+        public ActionResult BoardcastMessage()
         {
-            //spawn dialog box containing reason for rejected post
+            //spawn a Message dialong box
             return View();
         }
+
+
     }
 }
