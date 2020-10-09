@@ -58,10 +58,10 @@ namespace SmokeFreeApplication.Controllers
             //dummy artcile
 
             Article aArticle = new Article();
-            aArticle.id = 1;
+            aArticle.ArticleID = 1;
 
-            aArticle.owner = CreateDummyDoctor();
-            aArticle.texts = "Dame Da yo";
+            aArticle.UserName = 1;
+            aArticle.Body = "Dame Da yo";
             aArticle.Title = "Baka Mitai";
 
             return aArticle;

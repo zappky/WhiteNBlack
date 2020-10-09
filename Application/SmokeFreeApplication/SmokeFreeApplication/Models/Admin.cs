@@ -13,10 +13,5 @@ namespace SmokeFreeApplication.Models
         {
         
         }
-
-        public bool BanContent(Content aContent)
-        {
-            return aContent.DeleteContent();
-        }
     }
 }

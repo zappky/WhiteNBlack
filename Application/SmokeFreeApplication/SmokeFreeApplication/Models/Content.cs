@@ -18,15 +18,6 @@ namespace SmokeFreeApplication.Models
         public string Body { get; set; }
         public DateTime PostDate { get; set; }
 
-        public bool DeleteContent()
-        {
-            //maybe do a if else to check for the user type first?
-            texts = "--Content has been deleted--";
-            pictures.Clear();
-            //Leave the Owner and post data intact
-
-            return true;
-        }
 
     }
 
@@ -44,10 +35,6 @@ namespace SmokeFreeApplication.Models
 
         public ContentManager() { }
 
-        public bool DeleteContent(Content aContent)
-        {
-            return aContent.DeleteContent();
-        }
 
 
     }
