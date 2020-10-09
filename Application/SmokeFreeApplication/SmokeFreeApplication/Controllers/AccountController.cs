@@ -137,7 +137,9 @@ namespace SmokeFreeApplication.Controllers
 
             var fPassword = GetMD5(accountInfo.password);
             var data = db.GeneralUser.Where(s => s.userName.Equals(accountInfo.userName) && s.password.Equals(fPassword)).ToList();
-            if (data.Count() > 0)
+            var checkDoc = db.Doctor.Where(s => s.userName.Equals(accountInfo.userName)).ToList();
+
+            if (data.Count() > 0 && checkDoc.Count() <= 0)
             {
                 //Store username in session
                 Session["username"] = data.FirstOrDefault().userName;
@@ -158,8 +160,9 @@ namespace SmokeFreeApplication.Controllers
         {
             var fPassword = GetMD5(accountInfo.password);
             var data = db.GeneralUser.Where(s => s.userName.Equals(accountInfo.userName) && s.password.Equals(fPassword)).ToList();
+            var checkDoc = db.Doctor.Where(s => s.userName.Equals(accountInfo.userName)).ToList();
 
-            if (data.Count() > 0)
+            if (data.Count() > 0 && checkDoc.Count() > 0)
             {
                 var username = data.FirstOrDefault().userName;
                 var doctorRecord = db.Doctor.Find(username);
