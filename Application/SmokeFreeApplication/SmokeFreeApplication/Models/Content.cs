@@ -10,13 +10,17 @@ namespace SmokeFreeApplication.Models
     {
         //the person who post the content, genericUser or UserEntry,depending which one survives.
         //From this object we can obatain user profile pic, name
-        public int UserName { get; set; }
+        public UserEntry owner { get; set; }
+        //date of being posted
+        public DateTime postDate { get; set; }
+        //just contain list of url links of pictures to be used in the content
+        List<string> pictures { get; set; }
 
-        //List<string> Pictures { get; set; }
+        public string texts { get; set; }
+
+        public int id { get; set; }
 
         public string Title { get; set; }
-        public string Body { get; set; }
-        public DateTime PostDate { get; set; }
 
         public bool DeleteContent()
         {

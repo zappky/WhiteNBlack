@@ -8,9 +8,8 @@ namespace SmokeFreeApplication.Models
 {
     public class Article :Content
     {
-        public int ArticleID { get; set; }
-        public string ArticlePicture { get; set; }
-        public string ArticleStatus { get; set; }
+
+        //article specific methods goes here
     }
 
 
