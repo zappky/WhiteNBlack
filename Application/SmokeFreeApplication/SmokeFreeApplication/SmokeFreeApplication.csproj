@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticlesTag.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
@@ -142,6 +143,8 @@
     <Compile Include="Models\InterestedParty.cs" />
     <Compile Include="Models\GeneralUser.cs" />
     <Compile Include="Models\Story.cs" />
+    <Compile Include="Models\StoriesTag.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\UserBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
