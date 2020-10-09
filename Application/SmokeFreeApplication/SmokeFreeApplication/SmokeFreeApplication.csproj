@@ -132,9 +132,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010091357232_Initial.cs" />
+    <Compile Include="Migrations\202010091357232_Initial.Designer.cs">
+      <DependentUpon>202010091357232_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlesTag.cs" />
+    <Compile Include="Models\BroadcastMessage.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
@@ -150,10 +156,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SmokeFreeDBContext.mdf" />
-    <Content Include="App_Data\SmokeFreeDBContext_log.ldf">
-      <DependentUpon>SmokeFreeDBContext.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-lux.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -230,7 +232,14 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202010091357232_Initial.resx">
+      <DependentUpon>202010091357232_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

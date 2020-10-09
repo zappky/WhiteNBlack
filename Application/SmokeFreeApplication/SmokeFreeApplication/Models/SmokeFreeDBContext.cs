@@ -17,6 +17,8 @@ namespace SmokeFreeApplication.Models
         public DbSet<Tag> Tag { get; set; }
         public DbSet<ArticlesTag> ArticlesTag { get; set; }
         public DbSet<StoriesTag> StoriesTag { get; set; }
+        public DbSet<Admin> Admin { get; set; }
+        public DbSet<BroadcastMessage> BroadCastMessage { get; set; }
 
     }
 }

@@ -134,3 +134,5 @@ C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApp
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.CopyComplete
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.dll
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.pdb
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.Initial.resources
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.GenerateResource.cache

@@ -5,9 +5,10 @@ using System.Web;
 
 namespace SmokeFreeApplication.Models
 {
-    public class Admin :UserEntry
+    public class Admin
     {
         public string id { get; set; }
+        public string password { get; set; }
 
         public Admin()
         {
