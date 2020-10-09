@@ -35,12 +35,6 @@ namespace SmokeFreeApplication.Controllers
             return View(docModel);
         }
 
-        public ActionResult SignIn()
-        {
-            ViewBag.Message = "Sign in here";
-            return View();
-        }
-
         private string GetMD5(string password)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -147,6 +141,7 @@ namespace SmokeFreeApplication.Controllers
             {
                 //Store username in session
                 Session["username"] = data.FirstOrDefault().userName;
+                Session["docOrMember"] = "member";
                 TempData["loginFailed"] = "";
                 return View("../Story/Stories");
             }
@@ -172,6 +167,7 @@ namespace SmokeFreeApplication.Controllers
                 {
                     //Store username in session
                     Session["username"] = username;
+                    Session["docOrMember"] = "doc";
                     //Set error messages to null
                     TempData["loginFailed"] = "";
                     TempData["notVerified"] = "";
