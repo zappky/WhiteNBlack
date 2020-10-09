@@ -35,12 +35,6 @@ namespace SmokeFreeApplication.Controllers
             return View(docModel);
         }
 
-        public ActionResult SignIn()
-        {
-            ViewBag.Message = "Sign in here";
-            return View();
-        }
-
         private string GetMD5(string password)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
