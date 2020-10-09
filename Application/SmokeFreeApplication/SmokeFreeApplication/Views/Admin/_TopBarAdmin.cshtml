@@ -8,17 +8,20 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor03">
+        
         <ul class="navbar-nav mr-auto">
+            @*
             <li class="nav-item active nav-link">
                 @Html.ActionLink("Home", "Index", "Home")
             </li>
-
+            *@
 
         </ul>
-
+        
         <div class="d-inline">
             <ul class="navbar-nav mr-auto">
-                @Html.ActionLink("Manage Articles", "ClickManageArticles", "Admin")
+                @Html.ActionLink("Boardcast  ", "BoardcastMessage", "Admin")
+                @Html.ActionLink("My Admin  ", "MyAdmin", "Admin")
                 @Html.ActionLink("Logout", "Logout", "Account")
             </ul>
         </div>
