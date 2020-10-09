@@ -219,6 +219,7 @@
     <Content Include="Views\Account\SignInDoctor.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
     <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
+    <Content Include="Views\Doctor\createArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

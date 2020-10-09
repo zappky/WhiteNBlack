@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "createArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <h1>Post an Article</h1>
+    <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" width="150" height="155" alt="ProfileImage" style="float: left; margin-right: 15px;">
+
+    <h2>User's Name</h2>
+    <p class="title">Doctor at </p>
+    <p class="title">NUH </p>
+    <p>Specialised in Lungs</p><br>
+    <form action="/action_page.php" method="post" target="_blank">
+        <label for="fname">Article Title:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="lname">Last name:</label><br><br>
+        <textarea name="paragraph_text" cols="50" rows="10"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+
+    <p>Click on the submit button, and the form will be submittied using the POST method.</p>
