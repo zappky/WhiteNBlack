@@ -18,5 +18,10 @@ namespace SmokeFreeApplication.Controllers
         {
             return View();
         }
+
+        public ActionResult createArticle()
+        {
+            return View();
+        }
     }
 }
