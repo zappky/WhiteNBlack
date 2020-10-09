@@ -33,7 +33,6 @@ C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFr
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\SmokeFreeApplication.pdb
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Antlr3.Runtime.dll
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Newtonsoft.Json.dll
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Helpers.dll
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Mvc.dll
 C:\Users\thein\source\repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Optimization.dll
@@ -98,3 +97,11 @@ D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeAp
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.CopyComplete
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.dll
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.pdb
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.dll
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.xml
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
