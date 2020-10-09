@@ -13,14 +13,14 @@ namespace SmokeFreeApplication.Models
     public class Comment
     {
         [Key, Column(Order = 1)]
-        public int Id { get; set; }
-        public string ParentType { get; set; }
-        public int ParentId { get; set; }
+        public int commentID { get; set; }
+        public string parentType { get; set; }
+        public int parentID { get; set; }
         
         [StringLength(2000)]
-        public string Body { get; set; }
-        public DateTime PostDate { get; set; }
-        public string UserName { get; set; }
+        public string body { get; set; }
+        public DateTime postDate { get; set; }
+        public string userName { get; set; }
 
     }
 }

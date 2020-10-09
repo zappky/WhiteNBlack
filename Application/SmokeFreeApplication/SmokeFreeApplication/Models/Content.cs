@@ -8,22 +8,17 @@ namespace SmokeFreeApplication.Models
 {
     public class Content
     {
-        //the person who post the content, genericUser or UserEntry,depending which one survives.
-        //From this object we can obatain user profile pic, name
-        public int UserName { get; set; }
+        public int userName { get; set; }
 
         //List<string> Pictures { get; set; }
 
-        public string Title { get; set; }
-        public string Body { get; set; }
-        public DateTime PostDate { get; set; }
+        public string title { get; set; }
+        public string body { get; set; }
+        public DateTime postDate { get; set; }
 
         public bool DeleteContent()
         {
-            //maybe do a if else to check for the user type first?
-            texts = "--Content has been deleted--";
-            pictures.Clear();
-            //Leave the Owner and post data intact
+           
 
             return true;
         }
@@ -38,7 +33,7 @@ namespace SmokeFreeApplication.Models
     //Not familar with website coding enough to be certain
     //instantiate this class like
     //ContentManager<Story> a =  new ContentManager<Story>();
-    public class ContentManager<T> where T: class
+    /*public class ContentManager<T> where T : class
     {
         public List<T> contentsList { get; set; }
 
@@ -50,5 +45,5 @@ namespace SmokeFreeApplication.Models
         }
 
 
-    }
+    }*/
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +10,10 @@ namespace SmokeFreeApplication.Models
 {
     public class Article :Content
     {
-        public int ArticleID { get; set; }
-        public string ArticlePicture { get; set; }
-        public string ArticleStatus { get; set; }
+        [Key, Column(Order = 1)]
+        public int articleID { get; set; }
+        public string articlePicture { get; set; }
+        public string articleStatus { get; set; }
     }
 
 

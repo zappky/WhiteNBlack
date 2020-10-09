@@ -222,12 +222,12 @@ public class AdminBuilder
 
     public AdminBuilder UserBio(UserBio bio)
     {
-        userEntry.bio = bio;
+        //userEntry.bio = bio;
         return this;
     }
     public AdminBuilder UserBio(string name, DateTime dob, string gender)
     {
-        userEntry.bio = new UserBio() { name = name, dateOfBirth = dob, gender = gender };
+        //userEntry.bio = new UserBio() { name = name, dateOfBirth = dob, gender = gender };
         return this;
     }
 
@@ -235,13 +235,13 @@ public class AdminBuilder
 
     public AdminBuilder UserMeta(UserMeta meta)
     {
-        userEntry.meta = meta;
+        //userEntry.meta = meta;
         return this;
     }
 
     public AdminBuilder UserMeta(string userName, string email, string password, string profilePicture)
     {
-        userEntry.meta = new UserMeta() { userName = userName, email = email, password = password, profilePicture = profilePicture };
+        //userEntry.meta = new UserMeta() { userName = userName, email = email, password = password, profilePicture = profilePicture };
         return this;
     }
 
