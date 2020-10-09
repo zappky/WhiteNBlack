@@ -9,11 +9,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using System.Data.Entity;
+using System.Web.Hosting;
+using System.Security.Cryptography;
+using System.Text;
+using System.Dynamic;
 
 namespace SmokeFreeApplication.Controllers
 {
     public class AccountController : Controller
     {
+        private SmokeFreeDBContext db = new SmokeFreeDBContext();
         // GET: Login
         public ActionResult SignUpMember()
         {
@@ -23,9 +29,10 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult SignUpDoctor()
         {
-           
+            DoctorCompoundModel docModel = new DoctorCompoundModel();
+
             ViewBag.Message = "Sign up as a doctor here";
-            return View();
+            return View(docModel);
         }
 
         public ActionResult SignIn()
@@ -34,106 +41,162 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult SignUpAsMember(InterestedParty accountInfo)
+        private string GetMD5(string password)
         {
-            string constr = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
-            SqlConnection con = new SqlConnection(constr);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(password);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
 
-          /*  HttpPostedFile postedFile = FileUpload.PostedFile;
-            Stream stream = postedFile.InputStream;
-            BinaryReader binaryReader = new BinaryReader(stream);*/
-            
-            
-            string queryUser = "INSERT INTO GeneralUser(userName, name, email, password, dateOfBirth, gender) VALUES(@userName, @name, @email, @password, @dateOfBirth, @gender)";
-            string queryInterestedParty = "INSERT INTO InterestedParty(userName, smokerOrNot, bio) VALUES(@userName, @smokerOrNot, @bio)";
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
 
-            con.Open();
-            SqlCommand cmdU = new SqlCommand(queryUser, con);
-            cmdU.Parameters.AddWithValue("@userName", accountInfo.userName);
-            cmdU.Parameters.AddWithValue("@name", accountInfo.name);
-            cmdU.Parameters.AddWithValue("@email", accountInfo.email);
-            cmdU.Parameters.AddWithValue("@password", accountInfo.password);
-            cmdU.Parameters.AddWithValue("@dateOfBirth", accountInfo.dateOfBirth);
-            cmdU.Parameters.AddWithValue("@gender", accountInfo.gender);
-/*            cmdU.Parameters.AddWithValue("@profilePicture", null);*/
-            cmdU.ExecuteNonQuery();
-            con.Close();
+            }
+            return byte2String;
+        }
 
-            con.Open();
-            SqlCommand cmdIP = new SqlCommand(queryInterestedParty, con);
-            cmdIP.Parameters.AddWithValue("@userName", accountInfo.userName);
-            cmdIP.Parameters.AddWithValue("@smokerOrNot", Convert.ToBoolean(accountInfo.smokerOrNot));
-            cmdIP.Parameters.AddWithValue("@bio", "");
-            cmdIP.ExecuteNonQuery();
-            con.Close();
+        [HttpPost]
+        public ActionResult SignUpAsMember(GeneralUser accountInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.userName);
+                var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.email);
+                if (checkUsername == null)
+                {
+                    if (checkEmail == null)
+                    {
+                        accountInfo.password = GetMD5(accountInfo.password);
+                        InterestedParty intParty = new InterestedParty(accountInfo.userName, false, "");
 
-            
+                        db.Configuration.ValidateOnSaveEnabled = false;
+                        db.GeneralUser.Add(accountInfo);
+                        db.InterestedParty.Add(intParty);
+                        db.SaveChanges();
+                        return RedirectToAction("SignInMember");
+                    }
+                    else
+                    {
+                        ViewData["EmailExists"] = "Email already exists";
+                    }
+                }
+                else
+                {
+                    ViewData["UsernameExists"] = "Username already exists";
+                }
+            }
             return View("SignUpMember");
         }
 
-        public ActionResult SignUpAsDoctor(Doctor accountInfo)
+        [HttpPost]
+        public ActionResult SignUpAsDoctor(DoctorCompoundModel accountInfo)
         {
-            string constr = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
-            SqlConnection con = new SqlConnection(constr);
+            if (ModelState.IsValid)
+            {
+                var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.GeneralUsers.userName);
+                var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.GeneralUsers.email);
+                if (checkUsername == null)
+                {
+                    if (checkEmail == null)
+                    {
+                        accountInfo.GeneralUsers.password = GetMD5(accountInfo.GeneralUsers.password);
+                        accountInfo.Doctors.adminVerify = false;
+                        accountInfo.Doctors.description = "";
+                        accountInfo.Doctors.userName = accountInfo.GeneralUsers.userName;
 
-
-            string queryUser = "INSERT INTO GeneralUser(userName, name, email, password, dateOfBirth, gender) VALUES(@userName, @name, @email, @password, @dateOfBirth, @gender)";
-            string queryDoctor = "INSERT INTO Doctor(userName, workLocation, description, contactNo, doctorID, adminVerify) VALUES(@userName, @workLocation, @description, @contactNo, @doctorID, @adminVerify)";
-
-            con.Open();
-            SqlCommand cmdU = new SqlCommand(queryUser, con);
-            cmdU.Parameters.AddWithValue("@userName", accountInfo.userName);
-            cmdU.Parameters.AddWithValue("@name", accountInfo.name);
-            cmdU.Parameters.AddWithValue("@email", accountInfo.email);
-            cmdU.Parameters.AddWithValue("@password", accountInfo.password);
-            cmdU.Parameters.AddWithValue("@dateOfBirth", accountInfo.dateOfBirth);
-            cmdU.Parameters.AddWithValue("@gender", accountInfo.gender);
-            /*            cmdU.Parameters.AddWithValue("@profilePicture", null);*/
-            cmdU.ExecuteNonQuery();
-            con.Close();
-
-            con.Open();
-            SqlCommand cmdD = new SqlCommand(queryDoctor, con);
-            cmdD.Parameters.AddWithValue("@userName", accountInfo.userName);
-            cmdD.Parameters.AddWithValue("@workLocation", accountInfo.workLocation);
-            cmdD.Parameters.AddWithValue("@description", "");
-            cmdD.Parameters.AddWithValue("@contactNo", accountInfo.contactNo);
-            cmdD.Parameters.AddWithValue("@doctorID", accountInfo.doctorID);
-            cmdD.Parameters.AddWithValue("@adminVerify", false);
-            cmdD.ExecuteNonQuery();
-            con.Close();
-
+                        db.Configuration.ValidateOnSaveEnabled = false;
+                        db.GeneralUser.Add(accountInfo.GeneralUsers);
+                        db.Doctor.Add(accountInfo.Doctors);
+                        db.SaveChanges();
+                        return RedirectToAction("SignInDoctor");
+                    }
+                    else
+                    {
+                        ViewData["EmailExists"] = "Email already exists";
+                    }
+                }
+                else
+                {
+                    ViewData["UsernameExists"] = "Username already exists";
+                }
+            }
             return View("SignUpDoctor");
         }
 
-        public ActionResult SignInAcc(GeneralUser accountInfo)
+        public ActionResult SignInMember()
         {
-            string constr = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
-            SqlConnection con = new SqlConnection(constr);
+            return View();
+        }
+        public ActionResult SignInDoctor()
+        {
+            return View();
+        }
+        public ActionResult SignInAdmin()
+        {
+            return View();
+        }
 
-            string query = "SELECT * FROM GeneralUser WHERE userName = @userName AND password = @password";
+        [HttpPost]
+        public ActionResult SignInAsMember(GeneralUser accountInfo)
+        {
 
-            con.Open();
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userName", accountInfo.userName);
-            cmd.Parameters.AddWithValue("@password", accountInfo.password);
-
-            object loginVal = cmd.ExecuteScalar();
-
-            if(loginVal != null)
+            var fPassword = GetMD5(accountInfo.password);
+            var data = db.GeneralUser.Where(s => s.userName.Equals(accountInfo.userName) && s.password.Equals(fPassword)).ToList();
+            if (data.Count() > 0)
             {
-                Session["username"] = accountInfo.ToString();
+                //Store username in session
+                Session["username"] = data.FirstOrDefault().userName;
+                TempData["loginFailed"] = "";
                 return View("../Story/Stories");
             }
             else
             {
-                TempData["message"] = "Wrong username/password, please try again";
-                return View("SignIn");
+                TempData["loginFailed"] = "Login Failed";
+                return RedirectToAction("SignInMember");
+            }
+
+
+
+        }
+        public ActionResult SignInAsDoctor(GeneralUser accountInfo)
+        {
+            var fPassword = GetMD5(accountInfo.password);
+            var data = db.GeneralUser.Where(s => s.userName.Equals(accountInfo.userName) && s.password.Equals(fPassword)).ToList();
+
+            if (data.Count() > 0)
+            {
+                var username = data.FirstOrDefault().userName;
+                var doctorRecord = db.Doctor.Find(username);
+                if (doctorRecord.adminVerify == true)
+                {
+                    //Store username in session
+                    Session["username"] = username;
+                    //Set error messages to null
+                    TempData["loginFailed"] = "";
+                    TempData["notVerified"] = "";
+                    return View("../Article/Articles");
+                }
+                else
+                {
+                    TempData["notVerified"] = "Your account has not been verified by an adminstrator yet. Please give it 2 working days.";
+                    return RedirectToAction("SignInDoctor");
+                }
 
             }
-           
+            else
+            {
+                TempData["loginFailed"] = "Login Failed";
+                return RedirectToAction("SignInDoctor");
+            }
         }
+
+        public ActionResult SignInAsAdmin(InterestedParty accountInfo)
+        {
+            TempData["signInAdminMessage"] = "Wrong username/password, please try again";
+            return View();
+        }
+
 
         public ActionResult Logout()
         {

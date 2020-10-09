@@ -1,91 +1,136 @@
 ﻿
 @{
     ViewBag.Title = "SignUpDoctor";
-    Layout = "~/Views/Shared/_SignUpLayout.cshtml";
+    Layout = "~/Views/Account/_SignUpLayout.cshtml";
 }
 
-@model SmokeFreeApplication.Models.Doctor
+@model SmokeFreeApplication.Models.DoctorCompoundModel
 @using (Html.BeginForm("SignUpAsDoctor", "Account", FormMethod.Post))
 {
-    <div class="form-group">
-        <label>User Name</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.userName, new { placeholder = "Username", required = "required" })
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.userName)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.GeneralUsers.userName, "", new { @class = "form-control", @placeholder = "Username" })
+                @Html.ValidationMessageFor(m => m.GeneralUsers.userName, "", new { @class = "badge badge-danger" })
+                @if (ViewData["UsernameExists"] != null)
+                {
+                    <span class="badge badge-danger">@ViewData["UsernameExists"]</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.password)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.PasswordFor(m => m.GeneralUsers.password, new { @class = "form-control", @placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.GeneralUsers.password, "", new { @class = "badge badge-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.confirmPassword)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.PasswordFor(m => m.GeneralUsers.confirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                @Html.ValidationMessageFor(m => m.GeneralUsers.confirmPassword, "", new { @class = "badge badge-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.name)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.GeneralUsers.name, "", new { @class = "form-control", @placeholder = "Name" })
+                @Html.ValidationMessageFor(m => m.GeneralUsers.name, "", new { @class = "badge badge-danger" })
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.email)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.GeneralUsers.email, "", new { @class = "form-control", @placeholder = "abc@gmail.com" })
+                @Html.ValidationMessageFor(m => m.GeneralUsers.email, "", new { @class = "badge badge-danger" })
+                @if (ViewData["EmailExists"] != null)
+                {
+                    <span class="badge badge-danger">@ViewData["EmailExists"]</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.dateOfBirth)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.GeneralUsers.dateOfBirth, new { @class = "form-control", @type = "date" })
+                @Html.ValidationMessageFor(m => m.GeneralUsers.dateOfBirth, "", new { @class = "badge badge-danger" })
+            </p>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Password</label>
-        <div class="form-control">
-            @Html.PasswordFor(m => m.password, new { placeholder = "Password", required = "required" })
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.gender)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.RadioButtonFor(m => m.GeneralUsers.gender, "Male", new { required = "required" })
+                Male
+
+                @Html.RadioButtonFor(m => m.GeneralUsers.gender, "Female", new { required = "required" })
+                Female
+
+                @Html.RadioButtonFor(m => m.GeneralUsers.gender, "Others", new { required = "required" })
+                Prefer not to say
+            </p>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Name</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.name, new { placeholder = "Name", required = "required" })
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.Doctors.workLocation)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.Doctors.workLocation, "", new { @class = "form-control", @placeholder = "e.g. Tan Tock Seng Hospital" })
+                @Html.ValidationMessageFor(m => m.Doctors.workLocation, "", new { @class = "badge badge-danger" })
+            </p>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Email</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.email, new { type = "email", placeholder = "abc@gmail.com", required = "required" })
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.Doctors.contactNo)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.Doctors.contactNo, "", new { @class = "form-control", @placeholder = "e.g. 61234567" })
+                @Html.ValidationMessageFor(m => m.Doctors.contactNo, "", new { @class = "badge badge-danger" })
+            </p>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Date Of Birth</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.dateOfBirth, new { @type = "date", required = "required" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Gender</label>
-        <div class="form-control">
-
-            @Html.RadioButtonFor(m => m.gender, "Male", new { required = "required" })
-            Male
-
-            @Html.RadioButtonFor(m => m.gender, "Female", new { required = "required" })
-            Female
-
-            @Html.RadioButtonFor(m => m.gender, "Others", new { required = "required" })
-            Prefer not to say
-
-
-        </div>
-
-    </div>
-
-    <div class="form-group">
-        <label>Name of practice place</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.workLocation, new { placeholder = "e.g. Tan Tock Seng", required = "required" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Contact Number</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.contactNo, new { type = "number", placeholder = "61234567", required = "required" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Doctor Identification</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.doctorID, new {placeholder = "e.g. M12345A / MP1234A", required = "required" })
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.Doctors.doctorID)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.Doctors.doctorID, "", new { @class = "form-control", @placeholder = "e.g. M12345A/MP1234A" })
+                @Html.ValidationMessageFor(m => m.Doctors.doctorID, "", new { @class = "badge badge-danger" })
+            </p>
         </div>
     </div>
 
 
     <div class="form-group">
-        <label>Profile Picture</label>
-        <input type="file" name="profilePicture" id="fileUpload" />
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.profilePicture)</label>
+        <input type="file" class="form-control-file" name="profilePicture" id="fileUpload" />
     </div>
+    @Html.HiddenFor(m => m.Doctors.adminVerify, new {@Value = false})
+    @Html.HiddenFor(m => m.Doctors.description, new {@Value = "" })
+    @Html.HiddenFor(m => m.Doctors.userName, new{ @Value = "AAAAAAA"})
 
 
 

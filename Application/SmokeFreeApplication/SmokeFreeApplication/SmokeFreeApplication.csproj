@@ -132,6 +132,8 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
+    <Compile Include="Models\DoctorCompoundModel.cs" />
+    <Compile Include="Models\SmokeFreeDBContext.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\InterestedParty.cs" />
     <Compile Include="Models\GeneralUser.cs" />
@@ -141,9 +143,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SmokeFree.mdf" />
-    <Content Include="App_Data\SmokeFree_log.ldf">
-      <DependentUpon>SmokeFree.mdf</DependentUpon>
+    <Content Include="App_Data\SmokeFreeDBContext.mdf" />
+    <Content Include="App_Data\SmokeFreeDBContext_log.ldf">
+      <DependentUpon>SmokeFreeDBContext.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-lux.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -187,10 +189,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Article\Articles.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\SignInMember.cshtml" />
     <Content Include="Views\Account\SignUpMember.cshtml" />
     <Content Include="Views\Story\Stories.cshtml" />
-    <Content Include="Views\Shared\_SignUpLayout.cshtml" />
+    <Content Include="Views\Account\_SignUpLayout.cshtml" />
     <Content Include="Views\Account\SignUpDoctor.cshtml" />
     <Content Include="Views\Shared\_SignedIn.cshtml" />
     <Content Include="Views\Shared\_NotSignedIn.cshtml" />
@@ -208,6 +210,9 @@
     <Content Include="Views\Admin\_PostControlRequest.cshtml" />
     <Content Include="Views\Admin\_PostManageReject.cshtml" />
     <Content Include="Views\Admin\_PostControlReject.cshtml" />
+    <Content Include="Views\Account\SignInAdmin.cshtml" />
+    <Content Include="Views\Account\_SignInLayout.cshtml" />
+    <Content Include="Views\Account\SignInDoctor.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

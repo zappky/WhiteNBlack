@@ -1,83 +1,101 @@
 ﻿@{
     ViewBag.Title = "SignUpMember";
-    Layout = "~/Views/Shared/_SignUpLayout.cshtml";
+    Layout = "~/Views/Account/_SignUpLayout.cshtml";
 }
 
-@model SmokeFreeApplication.Models.InterestedParty
+@model SmokeFreeApplication.Models.GeneralUser
 @using (Html.BeginForm("SignUpAsMember", "Account", FormMethod.Post))
 {
-    <div class="form-group">
-        <label>User Name</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.userName, new { placeholder="Username", required = "required" })
-        </div>
-        
-        
-    </div>
-
-    <div class="form-group">
-        <label>Password</label>
-        <div class="form-control">
-            @Html.PasswordFor(m => m.password, new { placeholder = "Password", required = "required" })
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.userName)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.userName, "", new { @class = "form-control", @placeholder = "Username" })
+                @Html.ValidationMessageFor(m => m.userName, "", new { @class = "badge badge-danger" })
+                @if (ViewData["UsernameExists"] != null)
+                {
+                    <span class="badge badge-danger">@ViewData["UsernameExists"]</span>
+                }
+            </p>
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Name</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.name, new { placeholder = "Name", required = "required" })
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.password)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.password, "", new { @class = "badge badge-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.confirmPassword)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.PasswordFor(m => m.confirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                @Html.ValidationMessageFor(m => m.confirmPassword, "", new { @class = "badge badge-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.name)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.name, "", new { @class = "form-control", @placeholder = "name" })
+                @Html.ValidationMessageFor(m => m.name, "", new { @class = "badge badge-danger" })
+            </p>
+        </div>   
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.email)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.email, "", new { @class = "form-control", @placeholder = "abc@gmail.com" })
+                @Html.ValidationMessageFor(m => m.email, "", new { @class = "badge badge-danger" })
+                @if (ViewData["EmailExists"] != null)
+                {
+                    <span class="badge badge-danger">@ViewData["EmailExists"]</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.dateOfBirth)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.TextBoxFor(m => m.dateOfBirth, new { @class = "form-control", @type = "date" })
+                @Html.ValidationMessageFor(m => m.dateOfBirth, "", new { @class = "badge badge-danger" })
+            </p>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Email</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.email, new { type = "email", placeholder ="abc@gmail.com", required ="required" })
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.gender)</label>
+        <div class="col-sm-10">
+            <p class="form-control-plaintext">
+                @Html.RadioButtonFor(m => m.gender, "Male", new { required = "required" })
+                Male
+
+                @Html.RadioButtonFor(m => m.gender, "Female", new { required = "required" })
+                Female
+
+                @Html.RadioButtonFor(m => m.gender, "Others", new { required = "required" })
+                Prefer not to say
+            </p>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Date Of Birth</label>
-        <div class="form-control">
-            @Html.TextBoxFor(m => m.dateOfBirth, new {@type = "date", required="required"})
-        </div>
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.profilePicture)</label>
+        <input type="file" class ="form-control-file" name="profilePicture" id="fileUpload" />
     </div>
-
-    <div class="form-group">
-        <label>Gender</label>
-        <div class="form-control">
-
-            @Html.RadioButtonFor(m => m.gender, "Male", new { required = "required" })
-            Male
-
-            @Html.RadioButtonFor(m => m.gender, "Female", new { required = "required" })
-            Female
-
-            @Html.RadioButtonFor(m => m.gender, "Others", new { required = "required" })
-            Prefer not to say
-
-
-        </div>
-        
-    </div>
-
-    <div class="form-group">
-        <label>Are you a smoker?</label>
-        @Html.RadioButtonFor(m => m.smokerOrNot, 1, new { required = "required" })
-        Yes
-
-        @Html.RadioButtonFor(m => m.smokerOrNot, 0, new { required = "required" })
-        No
-
-     
-    </div>
-
-    <div class="form-group">
-        <label>Profile Picture</label>
-        <input type="file" name="profilePicture" id="fileUpload"/>
-    </div>
-
-
 
     <div class="form-group">
         <input class="btn btn-primary" type="submit" value="Sign Up" />
