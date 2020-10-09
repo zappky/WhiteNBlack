@@ -8,9 +8,9 @@ namespace SmokeFreeApplication.Models
 {
     public class Article :Content
     {
-        public int ArticleID { get; set; }
-        public string ArticlePicture { get; set; }
-        public string ArticleStatus { get; set; }
+        public int articleID { get; set; }
+        public string articlePicture { get; set; }
+        public string articleStatus { get; set; }
     }
 
 
