@@ -141,6 +141,7 @@ namespace SmokeFreeApplication.Controllers
             {
                 //Store username in session
                 Session["username"] = data.FirstOrDefault().userName;
+                Session["docOrMember"] = "member";
                 TempData["loginFailed"] = "";
                 return View("../Story/Stories");
             }
@@ -166,6 +167,7 @@ namespace SmokeFreeApplication.Controllers
                 {
                     //Store username in session
                     Session["username"] = username;
+                    Session["docOrMember"] = "doc";
                     //Set error messages to null
                     TempData["loginFailed"] = "";
                     TempData["notVerified"] = "";
