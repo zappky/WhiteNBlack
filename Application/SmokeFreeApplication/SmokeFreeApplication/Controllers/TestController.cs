@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
+
 using SmokeFreeApplication.Models;
 
 //just for me to test things out
@@ -13,14 +13,10 @@ namespace SmokeFreeApplication.Controllers
 {
     public class TestController : Controller
     {
-
-        //an object to interact with the database
-        private testDBContext datas = new testDBContext();
-
         // GET: Test
         public ViewResult Test()
         {
-            var test = new Models.Test() { name = "Test",id=1};
+            var test = new Models.Test() { Name = "Test",ID=1};
             
 
 
@@ -48,39 +44,21 @@ namespace SmokeFreeApplication.Controllers
         }
         public ActionResult Index()
         {
-            var test = new Models.Test() { name = "Index", id = 1 };
+            var test = new Models.Test() { Name = "Index", ID = 1 };
             return View(test);
         }
 
         //?id=something&name=something
         public ActionResult para(int id,string name )
         {
-            var test = new Models.Test() { name = name, id = id };
+            var test = new Models.Test() { Name = name, ID = id };
             return View(test);
         }
 
         public ActionResult redirect()
         {
-            var test = new Models.Test() { name = "redirect", id = 1 };
+            var test = new Models.Test() { Name = "redirect", ID = 1 };
             return RedirectToAction("para", "Test",new { id =99, name = "redirected"});
         }
-
-        public ActionResult dbtest()
-        {
-            /*
-             dummy data to try without database first
-            List<Test> dummy = new List<Test>();
-            dummy.Add(new Test());
-            dummy[0].id = 1;
-            dummy[0].name = "hello";
-            dummy[0].number = 1;
-            return View(dummy.ToList());
-            */
-
-            //pass database datas to the view
-            return View(datas.testDatas2.ToList());
-        }
-
-
     }
 }
