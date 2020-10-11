@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SmokeFreeApplication.Models.Comment>
+
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userName)
+            </td>
+            <td>
+                Posted on: @Html.DisplayFor(modelItem => item.postDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.body)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.commentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.commentID })
+            </td>
+        </tr>
+    }
+
+</table>

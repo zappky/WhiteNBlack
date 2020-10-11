@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,8 +21,47 @@ namespace SmokeFreeApplication.Controllers
             return View(db.Comment.ToList());
         }
 
-        // GET: Comments/Details/5
-        public ActionResult Details(int? id)
+        // GET: Comments/Create
+        public ActionResult CreateStoryComment(int? storyID)
+        {
+            return View();
+        }
+
+        // POST: Comments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateStoryComment(int? storyID, [Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                comment.postDate = DateTime.Now;
+                comment.parentType = "S";
+                comment.parentID = (int)storyID;
+                comment.userName = Session["username"].ToString();
+                db.Comment.Add(comment);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(comment);
+        }
+        public ActionResult ViewStoryComment(int? storyID)
+        {
+            var comments = from c in db.Comment
+                           where c.parentID == storyID && c.parentType == "S"
+                           select c;
+            return View(db.Comment.ToList());
+            }
+
+
+
+
+
+            // GET: Comments/Details/5
+            public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -32,30 +72,6 @@ namespace SmokeFreeApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(comment);
-        }
-
-        // GET: Comments/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Comments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
-        {
-
-            if (ModelState.IsValid)
-            {
-                db.Comment.Add(comment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
             return View(comment);
         }
 

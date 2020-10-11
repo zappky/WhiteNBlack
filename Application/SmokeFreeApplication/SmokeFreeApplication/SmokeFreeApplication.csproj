@@ -149,6 +149,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
+    <Compile Include="Models\InitialiseDummyData.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\InterestedParty.cs" />
@@ -230,11 +231,12 @@
     <Content Include="Views\Doctor\DrProfile.cshtml" />
     <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
     <Content Include="Views\Doctor\createArticle.cshtml" />
-    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\CreateStoryComment.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Comments\ViewStoryComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -245,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010091357232_Initial.resx">
