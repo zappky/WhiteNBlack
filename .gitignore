@@ -40,3 +40,4 @@ Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost
 *.config
 *.config
 Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
+*.cache

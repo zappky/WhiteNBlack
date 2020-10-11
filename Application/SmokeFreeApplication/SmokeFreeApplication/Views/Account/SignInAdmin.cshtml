@@ -7,6 +7,7 @@
 @model SmokeFreeApplication.Models.GeneralUser
 @using (Html.BeginForm("SignInAsAdmin", "Account", FormMethod.Post))
 {
+    <h3>Admin Sign In</h3>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.userName)</label>
         <div class="col-sm-10">
