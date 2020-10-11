@@ -137,3 +137,40 @@ C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApp
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.Initial.resources
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.GenerateResource.cache
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.userName.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\SmokeFreeApplication.dll.config
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\SmokeFreeApplication.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\SmokeFreeApplication.pdb
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Antlr3.Runtime.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Helpers.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Mvc.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Optimization.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Razor.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.WebPages.Deployment.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.WebPages.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\WebGrease.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Antlr3.Runtime.pdb
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Helpers.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Mvc.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Optimization.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.Razor.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.WebPages.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.WebPages.Deployment.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.Initial.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.userName.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.GenerateResource.cache
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.CoreCompileInputs.cache
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.CopyComplete
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.pdb
+C:\Users\thein\Desktop\SE Project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csprojAssemblyReference.cache

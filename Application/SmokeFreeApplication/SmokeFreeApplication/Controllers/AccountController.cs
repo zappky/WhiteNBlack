@@ -145,7 +145,7 @@ namespace SmokeFreeApplication.Controllers
                 Session["username"] = data.FirstOrDefault().userName;
                 Session["docOrMember"] = "member";
                 TempData["loginFailed"] = "";
-                return View("../Story/Stories");
+                return RedirectToAction("Stories","Story");
             }
             else
             {
@@ -174,7 +174,7 @@ namespace SmokeFreeApplication.Controllers
                     //Set error messages to null
                     TempData["loginFailed"] = "";
                     TempData["notVerified"] = "";
-                    return View("../Article/Articles");
+                    return RedirectToAction("Articles", "Article");
                 }
                 else
                 {
