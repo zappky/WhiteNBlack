@@ -60,7 +60,7 @@ namespace SmokeFreeApplication.Controllers
             Article aArticle = new Article();
             aArticle.articleID = 1;
 
-            aArticle.userName = 1;
+            aArticle.userName = "1";
             aArticle.body = "Dame Da yo";
             aArticle.title = "Baka Mitai";
 

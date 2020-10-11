@@ -136,6 +136,10 @@
     <Compile Include="Migrations\202010091357232_Initial.Designer.cs">
       <DependentUpon>202010091357232_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010110138056_userName.cs" />
+    <Compile Include="Migrations\202010110138056_userName.Designer.cs">
+      <DependentUpon>202010110138056_userName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -239,6 +243,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010091357232_Initial.resx">
       <DependentUpon>202010091357232_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110138056_userName.resx">
+      <DependentUpon>202010110138056_userName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

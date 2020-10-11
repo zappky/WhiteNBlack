@@ -8,7 +8,7 @@ namespace SmokeFreeApplication.Models
 {
     public class Content
     {
-        public int userName { get; set; }
+        public string userName { get; set; }
 
         //List<string> Pictures { get; set; }
 
