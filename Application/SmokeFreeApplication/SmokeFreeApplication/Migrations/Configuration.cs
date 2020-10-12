@@ -32,23 +32,6 @@ namespace SmokeFreeApplication.Migrations
             }
             return byte2String;
         }
-
-        private byte[] ImageToByte()
-        {
-            var path = getImagePath();
-
-            //Get File size
-            FileInfo fInfo = new FileInfo(path);
-            long numBytes = fInfo.Length;
-
-            //Open Filestream to read file
-            FileStream fStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            //Use binary reader to read file stream into byte array
-            BinaryReader br = new BinaryReader(fStream);
-            byte[] img = br.ReadBytes((int)numBytes);
-            return img;
-        }
-
         private string getImagePath()
         {
             var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath; //was AbsolutePath but didn't work with spaces according to comments
