@@ -247,12 +247,17 @@
     <Content Include="Views\Doctor\DrProfile.cshtml" />
     <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
     <Content Include="Views\Doctor\createArticle.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Views\Comments\CreateStoryComment.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\ViewStoryComment.cshtml" />
+=======
+    <Content Include="Views\InterestedParty\CreateStory.cshtml" />
+    <Content Include="Views\InterestedParty\QuitSmokingTracker.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

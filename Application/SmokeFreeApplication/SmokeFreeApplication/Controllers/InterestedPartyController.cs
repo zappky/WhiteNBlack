@@ -18,5 +18,21 @@ namespace SmokeFreeApplication.Controllers
         {
             return View();
         }
+        public ActionResult CreateStory()
+        {
+            return View();
+        }
+        public ActionResult QuitSmokingTracker()
+        {
+            return View();
+        }
+
+        public ActionResult ClickLogOut()
+        {
+
+            Session.Clear();
+            return View("../Home/Index");
+
+        }
     }
 }
