@@ -72,6 +72,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -141,6 +142,18 @@
     <Compile Include="Migrations\202010110138056_userName.Designer.cs">
       <DependentUpon>202010110138056_userName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010121025045_addingseed.cs" />
+    <Compile Include="Migrations\202010121025045_addingseed.Designer.cs">
+      <DependentUpon>202010121025045_addingseed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010121238073_profiePicture.cs" />
+    <Compile Include="Migrations\202010121238073_profiePicture.Designer.cs">
+      <DependentUpon>202010121238073_profiePicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010121323330_profilPicture2.cs" />
+    <Compile Include="Migrations\202010121323330_profilPicture2.Designer.cs">
+      <DependentUpon>202010121323330_profilPicture2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -149,7 +162,6 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
-    <Compile Include="Models\InitialiseDummyData.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\InterestedParty.cs" />
@@ -180,6 +192,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="images\blank_profile.png" />
+    <Content Include="images\dummy_profile.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -256,6 +270,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010110138056_userName.resx">
       <DependentUpon>202010110138056_userName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010121025045_addingseed.resx">
+      <DependentUpon>202010121025045_addingseed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010121238073_profiePicture.resx">
+      <DependentUpon>202010121238073_profiePicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010121323330_profilPicture2.resx">
+      <DependentUpon>202010121323330_profilPicture2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

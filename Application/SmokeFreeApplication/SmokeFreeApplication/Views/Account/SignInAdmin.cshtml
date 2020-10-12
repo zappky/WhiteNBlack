@@ -1,33 +1,36 @@
 ﻿
 @{
     ViewBag.Title = "SignInAdmin";
-    Layout = "~/Views/Account/_SignInLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model SmokeFreeApplication.Models.GeneralUser
+@model SmokeFreeApplication.Models.Admin
 @using (Html.BeginForm("SignInAsAdmin", "Account", FormMethod.Post))
 {
-    <h3>Admin Sign In</h3>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.userName)</label>
-        <div class="col-sm-10">
-            <p class="form-control-plaintext">
-                @Html.TextBoxFor(m => m.userName, "", new { @class = "form-control", @placeholder = "Username", required = "required" })
-            </p>
+    <div class="col-md-8 offset-md-2">
+        <h3 style="padding-top: 15px;">Admin Sign In</h3>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <span class="badge badge-danger">@TempData["loginFailed"]</span>
+            </div>
         </div>
-    </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.id)</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.id, "", new { @class = "form-control", @placeholder = "Username", required = "required" })
+            </div>
+        </div>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.password)</label>
-        <div class="col-sm-10">
-            <p class="form-control-plaintext">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.password)</label>
+            <div class="col-sm-10">
                 @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password", required = "required" })
-            </p>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group-lg">
-        <input class=" btn btn-primary" type="submit" value="Sign In" />
+        <div class="form-group-lg">
+            <input class=" btn btn-primary" type="submit" value="Sign In" />
+        </div>
     </div>
 }
 

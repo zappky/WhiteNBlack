@@ -24,9 +24,13 @@
                     {
                         @Html.ActionLink("Profile", "DrProfile", "Doctor")
                     }
-                    else
+                    else if(Session["docOrMember"] == "member")
                     {
                         @Html.ActionLink("Profile", "MemberProfile", "InterestedParty")
+                    }
+                    else if(Session["docOrMember"] == "admin")
+                    {
+                        @Html.ActionLink("Manage","Manage","Admin")
                     }
                 </li>
                 <li class="nav-item nav-link">

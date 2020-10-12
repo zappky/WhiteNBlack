@@ -1,40 +1,18 @@
 ﻿using SmokeFreeApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using System.Data.Entity;
-using System.Web.Hosting;
 using System.Security.Cryptography;
 using System.Text;
-using System.Dynamic;
 
 namespace SmokeFreeApplication.Controllers
 {
     public class AccountController : Controller
     {
+
         private SmokeFreeDBContext db = new SmokeFreeDBContext();
-        // GET: Login
-        public ActionResult SignUpMember()
-        {
-            ViewBag.Message = "Sign up as a member here";
-            return View();
-        }
-
-        public ActionResult SignUpDoctor()
-        {
-            DoctorCompoundModel docModel = new DoctorCompoundModel();
-
-            ViewBag.Message = "Sign up as a doctor here";
-            return View(docModel);
-        }
-
         private string GetMD5(string password)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -50,6 +28,22 @@ namespace SmokeFreeApplication.Controllers
             return byte2String;
         }
 
+        public ActionResult SignUpMember()
+        {
+            ViewBag.Message = "Sign up as a member here";
+            return View();
+        }
+
+        public ActionResult SignUpDoctor()
+        {
+            DoctorCompoundModel docModel = new DoctorCompoundModel();
+
+            ViewBag.Message = "Sign up as a doctor here";
+            return View(docModel);
+        }
+
+        
+
         [HttpPost]
         public ActionResult SignUpAsMember(GeneralUser accountInfo)
         {
@@ -57,11 +51,18 @@ namespace SmokeFreeApplication.Controllers
             {
                 var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.userName);
                 var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.email);
+
+                HttpPostedFileBase postedFile = Request.Files["ImageFile"];
+                Stream stream = postedFile.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] img = binaryReader.ReadBytes((int)stream.Length);
+
                 if (checkUsername == null)
                 {
                     if (checkEmail == null)
                     {
                         accountInfo.password = GetMD5(accountInfo.password);
+                        accountInfo.profilePicture = img;
                         InterestedParty intParty = new InterestedParty(accountInfo.userName, false, "");
 
                         db.Configuration.ValidateOnSaveEnabled = false;
@@ -90,11 +91,18 @@ namespace SmokeFreeApplication.Controllers
             {
                 var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.GeneralUsers.userName);
                 var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.GeneralUsers.email);
+
+                HttpPostedFileBase postedFile = Request.Files["ImageFile"];
+                Stream stream = postedFile.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] img = binaryReader.ReadBytes((int)stream.Length);
+
                 if (checkUsername == null)
                 {
                     if (checkEmail == null)
                     {
                         accountInfo.GeneralUsers.password = GetMD5(accountInfo.GeneralUsers.password);
+                        accountInfo.GeneralUsers.profilePicture = img;
                         accountInfo.Doctors.adminVerify = false;
                         accountInfo.Doctors.description = "";
                         accountInfo.Doctors.userName = accountInfo.GeneralUsers.userName;
@@ -120,14 +128,17 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult SignInMember()
         {
+
             return View();
         }
         public ActionResult SignInDoctor()
         {
+
             return View();
         }
         public ActionResult SignInAdmin()
         {
+
             return View();
         }
 
@@ -152,7 +163,6 @@ namespace SmokeFreeApplication.Controllers
                 TempData["loginFailed"] = "Login Failed";
                 return RedirectToAction("SignInMember");
             }
-
 
 
         }
@@ -190,17 +200,37 @@ namespace SmokeFreeApplication.Controllers
             }
         }
 
-        public ActionResult SignInAsAdmin(InterestedParty accountInfo)
+        public ActionResult SignInAsAdmin(Admin accountInfo)
         {
-            TempData["signInAdminMessage"] = "Wrong username/password, please try again";
-            return View();
+            var fPassword = GetMD5(accountInfo.password);
+            var data = db.Admin.Where(s => s.id.Equals(accountInfo.id) && s.password.Equals(fPassword)).ToList();
+
+            if (data.Count() > 0)
+            {
+                var username = data.FirstOrDefault().id;
+
+                //Store username in session
+                Session["username"] = username;
+                Session["docOrMember"] = "admin";
+
+                //Set error messages to null
+                TempData["loginFailed"] = "";
+                TempData["notVerified"] = "";
+                return RedirectToAction("Manage", "Admin");
+            }
+            else
+            {
+                TempData["loginFailed"] = "Wrong username/password, please try again";
+                return RedirectToAction("SignInAdmin");
+            }
+
         }
 
 
         public ActionResult Logout()
         {
             Session.Clear();
-            return View("../Home/Index");
+            return RedirectToAction("Index", "Home");
 
         }
     }

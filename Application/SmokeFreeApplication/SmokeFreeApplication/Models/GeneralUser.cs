@@ -41,14 +41,14 @@ namespace SmokeFreeApplication.Models
         [DisplayName("Gender")]
         public string gender { get; set; }
         [DisplayName("Profile Picture")]
-        public string profilePicture { get; set; }
+        public byte[] profilePicture { get; set; }
 
         public GeneralUser()
         {
             
         }
 
-        public GeneralUser(string userName, string name, string email, string password, DateTime dateOfBirth, string gender, string profilePicture)
+        public GeneralUser(string userName, string name, string email, string password, DateTime dateOfBirth, string gender, byte[] profilePicture)
         {
             this.userName = userName;
             this.name = name;
@@ -62,10 +62,4 @@ namespace SmokeFreeApplication.Models
         
     }
 
-    /*public class SmokeFreeDBContext : DbContext
-    {
-        public DbSet<GeneralUser> GeneralUser { get; set; }
-        public DbSet<InterestedParty> InterestedParty{ get; set; }
-        public DbSet<Doctor> Doctor { get; set; }
-    }*/
 }

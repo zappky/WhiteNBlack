@@ -1,33 +1,39 @@
-﻿@{ 
+﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .nav-item {
+        text-decoration: none;
+        padding: 15px;
+    }
+
+        .nav-item:hover {
+            background-color: #ddd;
+            text-decoration: none;
+        }
+
+    .tab-content{
+        padding: 10px;
+    }
+
+</style>
+
+
 <div class="row">
     <div class="col-md-8 offset-md-2">
-        <div class="card-header login-logout-tab">
-            <div class="card-header">
-                <ul class="nav nav-tabs ">
-                    <li class="nav-item">
-                        @Html.ActionLink("Sign in as Member", "SignInMember", "Account")
+        <ul class="nav nav-tabs ">
+            <li class="nav-item">
+                @Html.ActionLink("Sign in as Member", "SignInMember", "Account")
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Sign in as Doctor", "SignInDoctor", "Account")
+            </li>
+        </ul>
 
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Sign in as Doctor", "SignInDoctor", "Account")
-
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Sign in as Admin", "SignInAdmin", "Account")
-
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @RenderBody()
-                    </div>
-                </div>
-
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade show active">
+                @RenderBody()
             </div>
         </div>
     </div>
