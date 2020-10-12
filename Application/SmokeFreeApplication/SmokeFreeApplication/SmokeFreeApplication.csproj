@@ -207,6 +207,8 @@
     <Content Include="Views\Account\SignInMember.cshtml" />
     <Content Include="Views\Account\SignUpMember.cshtml" />
     <Content Include="Views\Story\Stories.cshtml" />
+    <Content Include="Views\Story\CreateStory.cshtml" />
+    <Content Include="Views\Story\ViewStory.cshtml" />
     <Content Include="Views\Account\_SignUpLayout.cshtml" />
     <Content Include="Views\Account\SignUpDoctor.cshtml" />
     <Content Include="Views\Shared\_SignedIn.cshtml" />
