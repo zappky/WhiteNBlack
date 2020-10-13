@@ -19,6 +19,8 @@ namespace SmokeFreeApplication.Models
         public DbSet<StoriesTag> StoriesTag { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<BroadcastMessage> BroadCastMessage { get; set; }
+        public DbSet<Progress> Progress { get; set; }
+        public DbSet<CheckInDate> CheckInDate { get; set; }
 
     }
 }

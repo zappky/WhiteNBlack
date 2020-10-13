@@ -154,14 +154,20 @@
     <Compile Include="Migrations\202010121323330_profilPicture2.Designer.cs">
       <DependentUpon>202010121323330_profilPicture2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010130215146_progress.cs" />
+    <Compile Include="Migrations\202010130215146_progress.Designer.cs">
+      <DependentUpon>202010130215146_progress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlesTag.cs" />
     <Compile Include="Models\BroadcastMessage.cs" />
+    <Compile Include="Models\CheckInDate.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
+    <Compile Include="Models\Progress.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\InterestedParty.cs" />
@@ -279,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010121323330_profilPicture2.resx">
       <DependentUpon>202010121323330_profilPicture2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130215146_progress.resx">
+      <DependentUpon>202010130215146_progress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
