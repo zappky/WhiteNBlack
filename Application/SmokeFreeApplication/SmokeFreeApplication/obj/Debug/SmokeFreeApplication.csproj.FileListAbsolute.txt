@@ -215,3 +215,8 @@ D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeAp
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.profiePicture.resources
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.profilPicture2.resources
 D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.progress.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\Newtonsoft.Json.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.addingseed.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.profiePicture.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.profilPicture2.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.progress.resources

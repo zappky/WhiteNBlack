@@ -15,7 +15,7 @@
     <div class="card" style="width: 70rem;">
         <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID})" style="text-decoration: none;">
             <div class="card-header">
-                <img src="../../images/blank_profile.png" style="width:5rem; height:5rem; float:left;">
+                <img src="@Url.Action("retrieveUserPic", "Story", new { username = item.userName })" style="width:5rem; height:5rem; float:left;"alt="Image"/>
                 <div style="height:5rem; padding-top:30px; padding-left:100px;">
                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>

@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using System.Net;
 using System;
 using System.Linq;
+using SmokeFreeApplication.Migrations;
+using Microsoft.SqlServer.Server;
 
 namespace SmokeFreeApplication.Controllers
 {
@@ -20,6 +22,18 @@ namespace SmokeFreeApplication.Controllers
 
 
             return View(smokeFreeDB.Story.ToList());
+        }
+        public FileContentResult retrieveUserPic(string username)
+        {
+            byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
+            if(imgByteArray != null)
+            {
+                return new FileContentResult(imgByteArray, "image/jpeg");
+            }
+            else
+            {
+                return null;
+            }
         }
         public ActionResult ViewStory(int? id)
         {
