@@ -225,3 +225,7 @@ C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\Smo
 C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.profiePicture.resources
 C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.profilPicture2.resources
 C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.progress.resources
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.dll
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.xml
+C:\Users\thein\Desktop\SE project\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.xml

@@ -6,6 +6,7 @@ using System.Linq;
 using SmokeFreeApplication.Migrations;
 using Microsoft.SqlServer.Server;
 using System.Collections.Generic;
+using PagedList;
 
 namespace SmokeFreeApplication.Controllers
 {
@@ -14,15 +15,16 @@ namespace SmokeFreeApplication.Controllers
         private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
 
         // GET: Story
-        public ActionResult Stories()
+        public ActionResult Stories(int? page)
         {
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignInMember", "Account");
             }
 
-
-            return View(smokeFreeDB.Story.ToList());
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(smokeFreeDB.Story.ToList().ToPagedList(pageNumber, pageSize));
         }
         public FileContentResult retrieveUserPic(string username)
         {

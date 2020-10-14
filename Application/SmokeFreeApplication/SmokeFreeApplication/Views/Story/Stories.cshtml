@@ -1,4 +1,6 @@
-﻿@model IEnumerable<SmokeFreeApplication.Models.Story>
+﻿@model PagedList.IPagedList<SmokeFreeApplication.Models.Story>
+@using PagedList.Mvc;
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Stories";
@@ -15,7 +17,7 @@
     <div class="card" style="width: 70rem;">
         <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID})" style="text-decoration: none;">
             <div class="card-header">
-                <img src="@Url.Action("retrieveUserPic", "Story", new { username = item.userName })" style="width:5rem; height:5rem; float:left;"alt="Image"/>
+                <img src="@Url.Action("retrieveUserPic", "Story", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
                 <div style="height:5rem; padding-top:30px; padding-left:100px;">
                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
@@ -36,5 +38,8 @@
     <br />
 
 }
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Stories", new { page }))
+
 
 
