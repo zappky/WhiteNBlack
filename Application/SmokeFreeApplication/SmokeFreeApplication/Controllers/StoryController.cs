@@ -108,11 +108,5 @@ namespace SmokeFreeApplication.Controllers
 
         }
 
-        public ActionResult PostComment(int? id)
-        {
-            // Calls CommentsController to make a story comment with some variables provided
-            Story story = smokeFreeDB.Story.Find(id);
-            return View(story);
-        }
     }
 }
