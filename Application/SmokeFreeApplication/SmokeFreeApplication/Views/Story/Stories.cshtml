@@ -26,7 +26,7 @@
                 <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
             </div>
             <div class="card-footer">
-                <a href="@Url.Action("CreateStoryComment", "Comments", new {id = item.storyID})" class="card-link">Comment</a>
+                <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID})" style="text-decoration: none;">Read More</a>
                 <a href="#" class="card-link">Share</a>
             </div>
         </a>

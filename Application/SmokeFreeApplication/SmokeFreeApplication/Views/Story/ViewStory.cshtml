@@ -14,3 +14,11 @@
     <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
     <p>@Html.DisplayFor(model => model.body)</p>
 </div>
+
+<button type="button" class="btn btn-secondary">
+    @Html.ActionLink("Post a comment", "CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"), null)
+</button>
+
+<div class="jumbotron">
+    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
+</div>
