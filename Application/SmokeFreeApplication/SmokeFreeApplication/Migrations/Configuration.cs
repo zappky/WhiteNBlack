@@ -36,7 +36,7 @@ namespace SmokeFreeApplication.Migrations
         {
             var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath; //was AbsolutePath but didn't work with spaces according to comments
             var directoryName = Path.GetDirectoryName(absolutePath);
-            var path = Path.Combine(directoryName, ".." + "~/images/blank_profile.png".TrimStart('~').Replace('/', '\\'));
+            var path = Path.Combine(directoryName, ".." + "~/images/dummy_profile.png".TrimStart('~').Replace('/', '\\'));
             return path;
         }
 

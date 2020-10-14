@@ -160,7 +160,7 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-                TempData["loginFailed"] = "Login Failed";
+                TempData["loginFailed"] = "Wrong username/password, please try again";
                 return RedirectToAction("SignInMember");
             }
 
@@ -195,7 +195,7 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-                TempData["loginFailed"] = "Login Failed";
+                TempData["loginFailed"] = "Wrong username/password, please try again";
                 return RedirectToAction("SignInDoctor");
             }
         }
@@ -220,7 +220,7 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-                TempData["loginFailed"] = "Wrong username/password, please try again";
+                TempData["loginFailed"] = "Wrong username/password, please try again!";
                 return RedirectToAction("SignInAdmin");
             }
 
