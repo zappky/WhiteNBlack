@@ -6,8 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-
-//Feel free to change it, just placeholder for now - kee yang
 namespace SmokeFreeApplication.Models
 {
     public class Comment
@@ -18,6 +16,7 @@ namespace SmokeFreeApplication.Models
         public int parentID { get; set; }
         
         [StringLength(2000)]
+        [DisplayName("Comment")]
         public string body { get; set; }
         public DateTime postDate { get; set; }
         public string userName { get; set; }

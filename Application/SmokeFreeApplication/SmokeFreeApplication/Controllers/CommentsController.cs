@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using SmokeFreeApplication.Models;
 
 namespace SmokeFreeApplication.Controllers
@@ -22,9 +23,11 @@ namespace SmokeFreeApplication.Controllers
         }
 
         // GET: Comments/Create
-        public ActionResult CreateStoryComment(int? storyID)
+        public ActionResult CreateComment(CommentQuery c)
         {
-            return View();
+            Comment comment = new Comment();
+            comment.parentID = c.id;
+            return View(comment);
         }
 
         // POST: Comments/Create
@@ -32,32 +35,31 @@ namespace SmokeFreeApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateStoryComment(int? storyID, [Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
+        public ActionResult CreateComment(CommentQuery c, [Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
         {
             
             if (ModelState.IsValid)
             {
                 comment.postDate = DateTime.Now;
-                comment.parentType = "S";
-                comment.parentID = (int)storyID;
+                comment.parentType = c.pType;
+                comment.parentID = c.id;
                 comment.userName = Session["username"].ToString();
                 db.Comment.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewStory/"+c.id.ToString(), "Story");
             }
 
             return View(comment);
         }
-        public ActionResult ViewStoryComment(int? storyID)
+        public ActionResult ViewComment(CommentQuery q)
         {
             var comments = from c in db.Comment
-                           where c.parentID == storyID && c.parentType == "S"
+                           where c.parentID == q.id
+                           where c.parentType == q.pType
                            select c;
-            return View(db.Comment.ToList());
+
+            return View(comments.ToList());
             }
-
-
-
 
 
             // GET: Comments/Details/5
@@ -139,6 +141,26 @@ namespace SmokeFreeApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+    }
+
+    // For easier passing of comment data
+    // Allows display of comments by story/article/comments
+    // Allows creation of comments by story/article/comments
+    public class CommentQuery
+    {
+        public int id { get; set; }
+        public string pType { get; set; }
+
+        public CommentQuery(int i, string p)
+        {
+            id = i; 
+            pType = p;
+        }
+        public CommentQuery()
+        {
+            id = 999;
+            pType = "X";
         }
     }
 }
