@@ -45,116 +45,88 @@ namespace SmokeFreeApplication.Controllers
             return View("../Home/Index");
 
         }
-        private DocEntry CreateDummyDoctor()
+
+
+        public ActionResult ArticleManage(ArticleQuery q)
         {
-            DocEntry aUser = new DocBuilder()
-            .UserBio("hahadoc", new DateTime(), "female")
-            .UserMeta("userHahaDoc", "abe@hotmail.com", "kekeke", "something")
-            .DocInfo("ntu", "fake", 999, "999", true)
-            .Build();
-
-            return aUser;
-        }
-        private Article CreateDummyArticle()
-        {
-            //dummy artcile
-
-            Article aArticle = new Article();
-            aArticle.articleID = 1;
-
-            aArticle.userName = "1";
-            aArticle.body = "Dame Da yo";
-            aArticle.title = "Baka Mitai";
-
-            return aArticle;
+            //var article = from c in smokeFreeDB.Article
+            //               where c.articleID == q.id
+            //               select c;
+            //return View(article.ToList()[0]);
+            var article = smokeFreeDB.Article.Find(q.id);
+            return View(article);
         }
 
-        //When i click on a request
-        //View post management
-        //probably need some agrgument to be able to get the correct post to view
-        public ActionResult PendingArticleView()
+        public ActionResult DoctorManage(DocQuery q)
         {
-            /*
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("SignInMember", "Account");
-            }
-            */
-
-            return View(smokeFreeDB.Article.ToList());
+            //Primary key seems to be not doctorID somehow?
+            var doctor = from c in smokeFreeDB.Doctor
+                           where c.doctorID == q.id
+                           select c;
+            return View(doctor.ToList()[0]);
+            //var doctor = smokeFreeDB.Doctor.Find(q.id);
+            //return View(doctor);
         }
 
-
-        //When i click on a request
-        //View post management
-        //probably need some agrgument to be able to get the correct post to view
-        public ActionResult PendingDoctorView()
+        public ActionResult ClosePost(ArticleQuery q)
         {
-
-
-            return View(CreateDummyDoctor());
-        }
-
-        public ActionResult ApprovedArticleView()
-        {
-            //display list of appproved article from db
-            return View(CreateDummyArticle());
-        }
-
-        public ActionResult ApprovedDoctorView()
-        {
-            //display list of appproved doctor from db
-            return View(CreateDummyDoctor());
-        }
-
-
-        //When i click CLOSE, on post management view
-        public ActionResult ClosePost()
-        {
-            //discard changes
-            //go back Admin interface
             return RedirectToAction("Manage");
         }
-
-        //When i click CLOSE, on post management view
-        public ActionResult CloseDoctor()
+        public ActionResult ApprovePost(ArticleQuery q)
         {
-            //discard changes
-            //go back Admin interface
+            var article = smokeFreeDB.Article.Find(q.id);
+            smokeFreeDB.Article.Remove(article);
+            article.articleStatus = "approved";
+            smokeFreeDB.Article.Add(article);
+            smokeFreeDB.SaveChanges();
+
+            return RedirectToAction("Manage");
+        }
+        public ActionResult RejectPost(ArticleQuery q)
+        {
+            var article = smokeFreeDB.Article.Find(q.id);
+            article.articleStatus = "approved";
+            smokeFreeDB.Article.Remove(article);
+            smokeFreeDB.SaveChanges();
             return RedirectToAction("Manage");
         }
 
 
-        //FUNCTION BELOW are probably wrong. They are probably needed to be done on the cshtml file itself
-
-        //When i click Approve, on post management view
-        public ActionResult ApprovePost()
+        public ActionResult CloseDoc(DocQuery q)
         {
-            //pulish the post
-            //add into Content manager?
-            //add into database?
-            return View();
+            return RedirectToAction("Manage");
+        }
+        public ActionResult ApproveDoc(DocQuery q)
+        {
+            //Primary key violation,so not working
+            var doctor = from c in smokeFreeDB.Doctor
+                         where c.doctorID == q.id
+                         select c;
+            var aDoc = doctor.ToList()[0];
+
+            smokeFreeDB.Doctor.Remove(aDoc);
+            aDoc.adminVerify = true;
+            smokeFreeDB.Doctor.Add(aDoc);
+            smokeFreeDB.SaveChanges();
+
+            return RedirectToAction("Manage");
+        }
+        public ActionResult RejectDoc(DocQuery q)
+        {
+            //Primary key violation,so not working
+            var doctor = from c in smokeFreeDB.Doctor
+                         where c.doctorID == q.id
+                         select c;
+            var aDoc = doctor.ToList()[0];
+
+            aDoc.adminVerify = false;
+            smokeFreeDB.Doctor.Remove(aDoc);
+            smokeFreeDB.SaveChanges();
+            return RedirectToAction("Manage");
         }
 
-        //When i click Reject, on post management view
-        public ActionResult RejectPost()
-        {
-            //spawn a reject confirmation dialog box
-            return View();
-        }
 
 
-        public ActionResult ApproveDoctor()
-        {
-            return View();
-        }
-
-        //When i click Reject, on doctor management view
-        public ActionResult RejectDoctor()
-        {
-            //spawn a reject confirmation dialog box
-            return View();
-        }
 
         public ActionResult BoardcastMessage()
         {
@@ -162,8 +134,49 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
+        public FileContentResult retrieveUserPic(string username)
+        {
+            /*
+            byte[] imgByteArray = smokeFreeDB.Article.Find(username).articlePicture;
+            if (imgByteArray != null)
+            {
+                return new FileContentResult(imgByteArray, "image/jpeg");
+            }
+            else
+            {
+                return null;
+            }
+            */
+            return null;
+        }
 
-  
+    }
 
+    public class ArticleQuery
+    {
+        public int id { get; set; }
+
+        public ArticleQuery(int i)
+        {
+            id = i;
+        }
+        public ArticleQuery()
+        {
+            id = 0;
+        }
+    }
+
+    public class DocQuery
+    {
+        public string id { get; set; }
+
+        public DocQuery(string i)
+        {
+            id = i;
+        }
+        public DocQuery()
+        {
+            id = "";
+        }
     }
 }

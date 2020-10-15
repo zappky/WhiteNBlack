@@ -191,7 +191,6 @@
     <Compile Include="Models\StoriesTag.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Test.cs" />
-    <Compile Include="Models\UserBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -256,10 +255,7 @@
     <Content Include="Views\Admin\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\_HorizontalTabsAdmin.cshtml" />
     <Content Include="Views\Admin\_TopBarAdmin.cshtml" />
-    <Content Include="Views\Admin\_PostManageRequest.cshtml" />
-    <Content Include="Views\Admin\_PostControlRequest.cshtml" />
-    <Content Include="Views\Admin\_PostManageReject.cshtml" />
-    <Content Include="Views\Admin\_PostControlReject.cshtml" />
+    <Content Include="Views\Admin\_postControl.cshtml" />
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Account\_SignInLayout.cshtml" />
     <Content Include="Views\Account\SignInDoctor.cshtml" />
@@ -276,6 +272,13 @@
     <Content Include="Views\Admin\_pendingDoctors.cshtml" />
     <Content Include="Views\Admin\_approvedDoctors.cshtml" />
     <Content Include="Views\Admin\_approvedArticles.cshtml" />
+    <Content Include="Views\Admin\ArticleManage.cshtml" />
+    <Content Include="Views\Admin\DoctorManage.cshtml" />
+    <Content Include="Views\Admin\_LayoutViewArticle.cshtml" />
+    <Content Include="Views\Admin\_ViewArticle.cshtml" />
+    <Content Include="Views\Admin\_doctorControl.cshtml" />
+    <Content Include="Views\Admin\_LayoutViewDoctor.cshtml" />
+    <Content Include="Views\Admin\_ViewDoctor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

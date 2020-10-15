@@ -19,6 +19,7 @@
                     <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
                     <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
+                    @Html.ActionLink("Manage", "DoctorManage", "Admin", new SmokeFreeApplication.Controllers.DocQuery(item.doctorID), null)
                 </div>
             </div>
         }
