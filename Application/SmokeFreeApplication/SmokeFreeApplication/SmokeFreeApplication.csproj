@@ -164,6 +164,14 @@
     <Compile Include="Migrations\202010130215146_progress.Designer.cs">
       <DependentUpon>202010130215146_progress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010150208588_storieTagKey.cs" />
+    <Compile Include="Migrations\202010150208588_storieTagKey.Designer.cs">
+      <DependentUpon>202010150208588_storieTagKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010150225373_articleTagKey.cs" />
+    <Compile Include="Migrations\202010150225373_articleTagKey.Designer.cs">
+      <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Article.cs" />
@@ -294,6 +302,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010130215146_progress.resx">
       <DependentUpon>202010130215146_progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150208588_storieTagKey.resx">
+      <DependentUpon>202010150208588_storieTagKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150225373_articleTagKey.resx">
+      <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
