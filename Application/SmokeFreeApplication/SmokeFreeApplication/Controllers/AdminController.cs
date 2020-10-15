@@ -15,6 +15,7 @@ namespace SmokeFreeApplication.Controllers
 {
     public class AdminController : Controller
     {
+        private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
         // GET: Admin
         public ActionResult Index()
         {
@@ -24,7 +25,8 @@ namespace SmokeFreeApplication.Controllers
         //Default view of the admin interface
         public ActionResult Manage()
         {
-            return View();
+            //return View();
+            return View( new AdminManageDataPacket() { list1 = smokeFreeDB.Article.ToList(), list2 = smokeFreeDB.Doctor.ToList() });
         }
 
         //When i click My Admin
@@ -72,8 +74,14 @@ namespace SmokeFreeApplication.Controllers
         //probably need some agrgument to be able to get the correct post to view
         public ActionResult PendingArticleView()
         {
+            /*
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignInMember", "Account");
+            }
+            */
 
-            return View(CreateDummyArticle());
+            return View(smokeFreeDB.Article.ToList());
         }
 
 
@@ -154,6 +162,8 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
+
+  
 
     }
 }

@@ -174,6 +174,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminManageDataPacket.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlesTag.cs" />
     <Compile Include="Models\BroadcastMessage.cs" />
@@ -255,8 +256,6 @@
     <Content Include="Views\Admin\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\_HorizontalTabsAdmin.cshtml" />
     <Content Include="Views\Admin\_TopBarAdmin.cshtml" />
-    <Content Include="Views\Admin\RequestView.cshtml" />
-    <Content Include="Views\Admin\RejectedView.cshtml" />
     <Content Include="Views\Admin\_PostManageRequest.cshtml" />
     <Content Include="Views\Admin\_PostControlRequest.cshtml" />
     <Content Include="Views\Admin\_PostManageReject.cshtml" />
@@ -273,6 +272,10 @@
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\ViewComment.cshtml" />
+    <Content Include="Views\Admin\_pendingArticles.cshtml" />
+    <Content Include="Views\Admin\_pendingDoctors.cshtml" />
+    <Content Include="Views\Admin\_approvedDoctors.cshtml" />
+    <Content Include="Views\Admin\_approvedArticles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
