@@ -25,6 +25,7 @@ namespace SmokeFreeApplication.Controllers
         }
         public ActionResult printTest()
         {
+            /*
             DocEntry aUser = new DocBuilder()
             .UserBio("hahadoc", new DateTime(), "femaleDoc")
             .UserMeta("userHahaDoc", "abe@hotmail.com", "kekeke", "something")
@@ -38,9 +39,11 @@ namespace SmokeFreeApplication.Controllers
                 .UserMeta(genericUserMeta)
                 .AdminInfo("1")
                 .Build();
+            */
 
 
-            return View(aUser);
+            // return View(aUser);
+            return View();
         }
         public ActionResult Index()
         {

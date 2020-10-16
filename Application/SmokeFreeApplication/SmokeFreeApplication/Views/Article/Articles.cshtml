@@ -1,17 +1,29 @@
-﻿@model IEnumerable<SmokeFreeApplication.Models.Article>
+﻿@model PagedList.IPagedList<SmokeFreeApplication.Models.Article>
+@using PagedList.Mvc;
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Articles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<h2>Stories</h2>
 
+@*I have copied ray's code to kick start the articles page --Daniel*@
+
+<h2>Articles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateStory") @*Edit this to link to create articles page if you need*@
+</p>
 @foreach (var item in Model)
 {
     <div class="card" style="width: 70rem;">
-        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">
+        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
+            @*Edit this to link to view a single article page*@
+
+
             <div class="card-header">
+                @*Implement retrieveUserPic or borrow from ray again*@
                 <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
                 <div style="height:5rem; padding-top:30px; padding-left:100px;">
                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
@@ -23,7 +35,9 @@
                 <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
             </div>
             <div class="card-footer">
-                <a href="@Url.Action("CreateArticleComment", "Comments", new { id = item.articleID })" class="card-link">Comment</a>
+
+                @*Edit this to link to view a single article page*@
+                <a href="@Url.Action("ViewArticle", "Article", new { id = item.storyID})" style="text-decoration: none;">Read More</a>
                 <a href="#" class="card-link">Share</a>
             </div>
         </a>
@@ -31,4 +45,10 @@
 
 
     <br />
+
 }
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Articles", new { page }))
+
+
+

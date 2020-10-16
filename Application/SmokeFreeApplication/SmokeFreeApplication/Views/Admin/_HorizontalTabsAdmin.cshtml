@@ -59,41 +59,42 @@
     <div id="Pending Article" class="tabcontent">
         <h3>List of articles to be approved</h3>
         @*Need to link to correspodning post view *@
-        @Html.ActionLink("Dame", "PendingArticleView", "Admin")
+        @*@Html.ActionLink("Dame", "PendingArticleView", "Admin") *@
+        @Html.Partial("_pendingArticles");
     </div>
 
     <div id="Approved Article" class="tabcontent">
         <h3>List of articles approved</h3>
-        @Html.ActionLink("Da", "ApprovedArticleView", "Admin")
-    </div>
+        @Html.Partial("_approvedArticles");
+        </div>
 
     <div id="Pending Doctor" class="tabcontent">
         <h3>List of Doctor to be approved</h3>
         @*Need to link to correspodning post view *@
-        @Html.ActionLink("Dame", "PendingDoctorView", "Admin")
-    </div>
+        @Html.Partial("_pendingDoctors");
+        </div>
 
     <div id="Approved Doctor" class="tabcontent">
-        <h3>List of articles approved</h3>
-        @Html.ActionLink("Da", "ApprovedDoctorView", "Admin")
-    </div>
+        <h3>List of Doctor approved</h3>
+        @Html.Partial("_approvedDoctors");
+        </div>
 
-    <script>
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script>
+                <script>
+                    function openCity(evt, cityName) {
+                        var i, tabcontent, tablinks;
+                        tabcontent = document.getElementsByClassName("tabcontent");
+                        for (i = 0; i < tabcontent.length; i++) {
+                            tabcontent[i].style.display = "none";
+                        }
+                        tablinks = document.getElementsByClassName("tablinks");
+                        for (i = 0; i < tablinks.length; i++) {
+                            tablinks[i].className = tablinks[i].className.replace(" active", "");
+                        }
+                        document.getElementById(cityName).style.display = "block";
+                        evt.currentTarget.className += " active";
+                    }
+                </script>
 
-</body>
-</html>
+            </body>
+            </html>
 

@@ -12,6 +12,7 @@ namespace SmokeFreeApplication.Models
     {
         [Key, Column(Order = 1)]
         public int tagID { get; set; }
+        [Key, Column(Order = 2)]
         public int storyID { get; set; }
     }
 }

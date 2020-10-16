@@ -69,6 +69,12 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -158,8 +164,17 @@
     <Compile Include="Migrations\202010130215146_progress.Designer.cs">
       <DependentUpon>202010130215146_progress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010150208588_storieTagKey.cs" />
+    <Compile Include="Migrations\202010150208588_storieTagKey.Designer.cs">
+      <DependentUpon>202010150208588_storieTagKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010150225373_articleTagKey.cs" />
+    <Compile Include="Migrations\202010150225373_articleTagKey.Designer.cs">
+      <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminManageDataPacket.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlesTag.cs" />
     <Compile Include="Models\BroadcastMessage.cs" />
@@ -176,7 +191,6 @@
     <Compile Include="Models\StoriesTag.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Test.cs" />
-    <Compile Include="Models\UserBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +199,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -240,24 +255,31 @@
     <Content Include="Views\Admin\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\_HorizontalTabsAdmin.cshtml" />
     <Content Include="Views\Admin\_TopBarAdmin.cshtml" />
-    <Content Include="Views\Admin\RequestView.cshtml" />
-    <Content Include="Views\Admin\RejectedView.cshtml" />
-    <Content Include="Views\Admin\_PostManageRequest.cshtml" />
-    <Content Include="Views\Admin\_PostControlRequest.cshtml" />
-    <Content Include="Views\Admin\_PostManageReject.cshtml" />
-    <Content Include="Views\Admin\_PostControlReject.cshtml" />
+    <Content Include="Views\Admin\_postControl.cshtml" />
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Account\_SignInLayout.cshtml" />
     <Content Include="Views\Account\SignInDoctor.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
     <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
     <Content Include="Views\Doctor\createArticle.cshtml" />
-    <Content Include="Views\Comments\CreateStoryComment.cshtml" />
+    <Content Include="Views\Comments\CreateComment.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
-    <Content Include="Views\Comments\ViewStoryComment.cshtml" />
+    <Content Include="Views\Comments\ViewComment.cshtml" />
+    <Content Include="Views\Admin\_pendingArticles.cshtml" />
+    <Content Include="Views\Admin\_pendingDoctors.cshtml" />
+    <Content Include="Views\Admin\_approvedDoctors.cshtml" />
+    <Content Include="Views\Admin\_approvedArticles.cshtml" />
+    <Content Include="Views\Admin\ArticleManage.cshtml" />
+    <Content Include="Views\Admin\DoctorManage.cshtml" />
+    <Content Include="Views\Admin\_LayoutViewArticle.cshtml" />
+    <Content Include="Views\Admin\_ViewArticle.cshtml" />
+    <Content Include="Views\Admin\_doctorControl.cshtml" />
+    <Content Include="Views\Admin\_LayoutViewDoctor.cshtml" />
+    <Content Include="Views\Admin\_ViewDoctor.cshtml" />
+    <Content Include="Views\Article\ViewArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -287,6 +309,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010130215146_progress.resx">
       <DependentUpon>202010130215146_progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150208588_storieTagKey.resx">
+      <DependentUpon>202010150208588_storieTagKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150225373_articleTagKey.resx">
+      <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

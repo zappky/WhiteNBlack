@@ -22,6 +22,8 @@ namespace SmokeFreeApplication.Controllers
 
             return View(smokeFreeDB.Article.ToList());
         }
+
+        // Borrow code from ray!
     }
 
     }
