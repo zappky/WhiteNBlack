@@ -245,3 +245,10 @@ C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApp
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.xml
 C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.storieTagKey.resources
 C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.articleTagKey.resources
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.storieTagKey.resources
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.articleTagKey.resources
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.dll
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.dll
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.xml
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.xml
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.articlePicture.resources

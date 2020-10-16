@@ -172,6 +172,10 @@
     <Compile Include="Migrations\202010150225373_articleTagKey.Designer.cs">
       <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010160703093_articlePicture.cs" />
+    <Compile Include="Migrations\202010160703093_articlePicture.Designer.cs">
+      <DependentUpon>202010160703093_articlePicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminManageDataPacket.cs" />
@@ -315,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010150225373_articleTagKey.resx">
       <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010160703093_articlePicture.resx">
+      <DependentUpon>202010160703093_articlePicture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
