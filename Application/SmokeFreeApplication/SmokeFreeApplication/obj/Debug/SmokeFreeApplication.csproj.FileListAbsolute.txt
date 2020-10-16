@@ -243,3 +243,5 @@ C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApp
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.dll
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.xml
 C:\Users\pang_\Desktop\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\bin\PagedList.Mvc.xml
+C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.storieTagKey.resources
+C:\Users\nakur\Documents\GitHub\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.articleTagKey.resources
