@@ -45,12 +45,12 @@ namespace SmokeFreeApplication.Controllers
         
 
         [HttpPost]
-        public ActionResult SignUpAsMember(GeneralUser accountInfo)
+        public ActionResult SignUpAsMember(InterestedPartyCompoundModel accountInfo)
         {
             if (ModelState.IsValid)
             {
-                var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.userName);
-                var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.email);
+                var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.GeneralUsers.userName);
+                var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.GeneralUsers.email);
 
                 HttpPostedFileBase postedFile = Request.Files["ImageFile"];
                 Stream stream = postedFile.InputStream;
@@ -61,13 +61,14 @@ namespace SmokeFreeApplication.Controllers
                 {
                     if (checkEmail == null)
                     {
-                        accountInfo.password = GetMD5(accountInfo.password);
-                        accountInfo.profilePicture = img;
-                        InterestedParty intParty = new InterestedParty(accountInfo.userName, false, "");
+                        accountInfo.GeneralUsers.password = GetMD5(accountInfo.GeneralUsers.password);
+                        accountInfo.GeneralUsers.profilePicture = img;
+                        accountInfo.InterestedParties.userName = accountInfo.GeneralUsers.userName;
+                        accountInfo.InterestedParties.bio = "";
 
                         db.Configuration.ValidateOnSaveEnabled = false;
-                        db.GeneralUser.Add(accountInfo);
-                        db.InterestedParty.Add(intParty);
+                        db.GeneralUser.Add(accountInfo.GeneralUsers);
+                        db.InterestedParty.Add(accountInfo.InterestedParties);
                         db.SaveChanges();
                         return RedirectToAction("SignInMember");
                     }
