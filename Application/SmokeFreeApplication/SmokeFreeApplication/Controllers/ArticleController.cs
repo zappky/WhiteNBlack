@@ -14,5 +14,7 @@ namespace SmokeFreeApplication.Controllers
             ViewBag.Message = "View articles written by certified doctors";
             return View();
         }
+
+        // Borrow code from ray!
     }
 }

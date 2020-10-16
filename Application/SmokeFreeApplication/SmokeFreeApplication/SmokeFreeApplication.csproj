@@ -279,6 +279,7 @@
     <Content Include="Views\Admin\_doctorControl.cshtml" />
     <Content Include="Views\Admin\_LayoutViewDoctor.cshtml" />
     <Content Include="Views\Admin\_ViewDoctor.cshtml" />
+    <Content Include="Views\Article\ViewArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
