@@ -59,13 +59,16 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult DoctorManage(DocQuery q)
         {
+            /*
             //Primary key seems to be not doctorID somehow?
             var doctor = from c in smokeFreeDB.Doctor
-                           where c.doctorID == q.id
+                           where c.userName == q.id
                            select c;
             return View(doctor.ToList()[0]);
+            */
             //var doctor = smokeFreeDB.Doctor.Find(q.id);
-            //return View(doctor);
+            var aDoc = smokeFreeDB.Doctor.Find(q.id);
+            return View(aDoc);
         }
 
         public ActionResult ClosePost(ArticleQuery q)
@@ -75,9 +78,9 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult ApprovePost(ArticleQuery q)
         {
             var article = smokeFreeDB.Article.Find(q.id);
-            smokeFreeDB.Article.Remove(article);
+            //smokeFreeDB.Article.Remove(article);
             article.articleStatus = "approved";
-            smokeFreeDB.Article.Add(article);
+            //smokeFreeDB.Article.Add(article);
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("Manage");
@@ -85,7 +88,7 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult RejectPost(ArticleQuery q)
         {
             var article = smokeFreeDB.Article.Find(q.id);
-            article.articleStatus = "approved";
+            //article.articleStatus = "rejected";
             smokeFreeDB.Article.Remove(article);
             smokeFreeDB.SaveChanges();
             return RedirectToAction("Manage");
@@ -98,29 +101,34 @@ namespace SmokeFreeApplication.Controllers
         }
         public ActionResult ApproveDoc(DocQuery q)
         {
+            /*
             //Primary key violation,so not working
             var doctor = from c in smokeFreeDB.Doctor
-                         where c.doctorID == q.id
+                         where c.userName == q.id
                          select c;
             var aDoc = doctor.ToList()[0];
+            */
+            var aDoc = smokeFreeDB.Doctor.Find(q.id);
 
-            smokeFreeDB.Doctor.Remove(aDoc);
+            //smokeFreeDB.Doctor.Remove(aDoc);
             aDoc.adminVerify = true;
-            smokeFreeDB.Doctor.Add(aDoc);
+            //smokeFreeDB.Doctor.Add(aDoc);
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("Manage");
         }
         public ActionResult RejectDoc(DocQuery q)
         {
+            /*
             //Primary key violation,so not working
             var doctor = from c in smokeFreeDB.Doctor
                          where c.doctorID == q.id
                          select c;
             var aDoc = doctor.ToList()[0];
-
+            */
+            var aDoc = smokeFreeDB.Doctor.Find(q.id);
             aDoc.adminVerify = false;
-            smokeFreeDB.Doctor.Remove(aDoc);
+            //smokeFreeDB.Doctor.Remove(aDoc);
             smokeFreeDB.SaveChanges();
             return RedirectToAction("Manage");
         }
