@@ -1,0 +1,17 @@
+﻿@model SmokeFreeApplication.Models.Article
+
+@{
+    ViewBag.Title = "ViewArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+</br>
+<p>
+    @Html.ActionLink("Back to List", "Articles")
+</p>
+
+<div class="mx-auto" style="width: 70rem;">
+    <h3> @Html.DisplayFor(model => model.title)</h3>
+    <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
+    <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
+    <p>@Html.DisplayFor(model => model.body)</p>
+</div>

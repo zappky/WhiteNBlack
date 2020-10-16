@@ -1,10 +1,34 @@
-﻿@{
+﻿@model IEnumerable<SmokeFreeApplication.Models.Article>
+
+@{
     ViewBag.Title = "Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<br />
+<h2>Stories</h2>
 
-<div>
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 70rem;">
+        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">
+            <div class="card-header">
+                <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("CreateArticleComment", "Comments", new { id = item.articleID })" class="card-link">Comment</a>
+                <a href="#" class="card-link">Share</a>
+            </div>
+        </a>
+    </div>
 
 
-</div>
+    <br />
+}
