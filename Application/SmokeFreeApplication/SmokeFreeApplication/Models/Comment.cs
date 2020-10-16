@@ -16,7 +16,7 @@ namespace SmokeFreeApplication.Models
         public int parentID { get; set; }
         
         [StringLength(2000)]
-        [DisplayName("Comment")]
+        [DisplayName("Post Comment")]
         public string body { get; set; }
         public DateTime postDate { get; set; }
         public string userName { get; set; }
