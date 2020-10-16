@@ -8,9 +8,9 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active nav-link">
-                @Html.ActionLink("Close", "CloseDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.doctorID), null)
-                @Html.ActionLink("Approve", "ApproveDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.doctorID), null)
-                @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.doctorID), null)
+                @Html.ActionLink("Close", "CloseDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                @Html.ActionLink("Approve", "ApproveDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
             </li>
 
 
