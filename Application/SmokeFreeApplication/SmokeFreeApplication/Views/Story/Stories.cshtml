@@ -9,6 +9,16 @@
 <br />
 <h2>Stories</h2>
 
+@using (Html.BeginForm("Stories", "Story", FormMethod.Get, new { onsubmit = "return false;" }))
+{
+    //the following are search options
+    <b> Search By: </b>
+    @Html.RadioButton("option", "Name", new { @checked = "checked", id="nameRad"}) <text>Name</text>
+    @Html.RadioButton("option", "Tags", new {id = "tagRad" })<text> Tags </text>
+    <input name="search" id="searchBar" type="text" data-role= "tagsinput" />
+    <input type="button" onclick="this.form.submit();" value="Search" class="btn btn-default" />
+
+}
 <p>
     @Html.ActionLink("Create New", "CreateStory")
 </p>
@@ -39,7 +49,18 @@
 
 }
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Stories", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("Stories", new { page, search = ViewBag.search }))
+<script>
 
+    $("#nameRad").click(function () {
+        if (this.checked)
+            $("#searchBar").attr("data-role", "none");
+    });
+
+    $("#tagRad").click(function () {
+        if (this.checked)
+            $("#searchBar").attr("data-role", "tagsinput");
+    });
+</script>
 
 

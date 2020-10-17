@@ -13,6 +13,10 @@
     <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
     <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
     <p>@Html.DisplayFor(model => model.body)</p>
+    @foreach (var tag in ViewBag.tagList)
+    {
+        @Html.Raw(tag); <br />
+    }
 </div>
 
 <button type="button" class="btn btn-secondary">

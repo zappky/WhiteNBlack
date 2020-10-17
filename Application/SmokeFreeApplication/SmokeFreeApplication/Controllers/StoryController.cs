@@ -15,16 +15,79 @@ namespace SmokeFreeApplication.Controllers
         private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
 
         // GET: Story
-        public ActionResult Stories(int? page)
+        public ActionResult Stories(string option,string search, int? page)
         {
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            List<Story> displayList = new List<Story>();
+            ViewBag.search = search;
+
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignInMember", "Account");
             }
+            if (option == "Name")
+            {
+                ViewBag.searchType = "None";
+            }
+            else if (option == "Tags")
+            {
+                ViewBag.searchType = "tagsinput";
+            }
+            if (!String.IsNullOrEmpty(search))
+            {
+                if (option == "Name")
+                {
+                    displayList = smokeFreeDB.Story.Where(x => x.title.Contains(search) || search == null).ToList();
+                }
+                else if (option == "Tags")
+                {
+                    displayList = searchTags(search);
+                }
 
-            int pageSize = 1;
-            int pageNumber = (page ?? 1);
-            return View(smokeFreeDB.Story.ToList().ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                displayList = smokeFreeDB.Story.ToList();
+            }
+
+
+            return View(displayList.ToPagedList(pageNumber, pageSize));
+
+        }
+        public void setSearchBar()
+        {
+
+        }
+        public List<Story> searchTags(string inputTags)
+        {
+            string[] tagArray = inputTags.Split(',');
+            string tempTagName;
+            int tempId;
+            StoriesTag story;
+            int[] tagIdArray= new int[tagArray.Length];
+            List<Story> displayList = new List<Story>();
+            for (int i = 0; i < tagArray.Length; i++)
+            {
+                tempTagName = tagArray[i];
+                Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tempTagName).FirstOrDefault();
+                if(tag != null)
+                {
+                    tagIdArray[i] = tag.tagID;
+                }
+            }
+            for (int i = 0; i < tagIdArray.Length; i++)
+            {
+                tempId = tagIdArray[i];
+                List<StoriesTag> storyTags = smokeFreeDB.StoriesTag.Where(x => x.tagID == tempId).ToList();
+                for(int j=0; j< storyTags.Count; j++)
+                {
+                    tempId = storyTags[j].storyID;
+                    displayList.Add(smokeFreeDB.Story.Where(x => x.storyID == tempId).FirstOrDefault());
+                }
+
+            }
+            return displayList;
         }
         public FileContentResult retrieveUserPic(string username)
         {
@@ -40,11 +103,16 @@ namespace SmokeFreeApplication.Controllers
         }
         public ActionResult ViewStory(int? id)
         {
- 
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignInMember", "Account");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }
+            ViewBag.tagList = getTags(id);
             Story story = smokeFreeDB.Story.Find(id);
             if (story == null)
             {
@@ -52,6 +120,21 @@ namespace SmokeFreeApplication.Controllers
             }
             return View(story);
         }
+        public List<String> getTags(int? id)
+        {
+            List<StoriesTag> storyTags = smokeFreeDB.StoriesTag.Where(x => x.storyID == id).ToList();
+            List<String> displayList = new List<string>();
+            Tag tagItem;
+            int temp;
+            for(int i = 0; i < storyTags.Count; i++)
+            {
+                temp = storyTags[i].tagID;
+                tagItem = smokeFreeDB.Tag.Where(x => x.tagID == temp).FirstOrDefault();
+                displayList.Add(tagItem.tagName);
+            }
+            return displayList;
+        }
+
         public ActionResult CreateStory()
         {
             return View();
@@ -60,6 +143,10 @@ namespace SmokeFreeApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateStory([Bind(Include = "storyID,userName,title, body,postDate")] Models.Story story)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignInMember", "Account");
+            }
             if (ModelState.IsValid)
             {
                 story.postDate = DateTime.Now;
