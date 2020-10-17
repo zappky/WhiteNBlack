@@ -16,6 +16,9 @@ namespace SmokeFreeApplication.Models
         [StringLength(50, MinimumLength = 5)]
         [DisplayName("Username")]
         public string userName { get; set; }
+
+        [DisplayName("Are you a smoker or not")]
+        [Required]
         public bool smokerOrNot { get; set; }
         public string bio { get; set; }
 

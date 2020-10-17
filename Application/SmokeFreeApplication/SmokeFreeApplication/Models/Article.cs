@@ -12,7 +12,7 @@ namespace SmokeFreeApplication.Models
     {
         [Key, Column(Order = 1)]
         public int articleID { get; set; }
-        public string articlePicture { get; set; }
+        public byte[] articlePicture { get; set; }
         public string articleStatus { get; set; }
     }
 

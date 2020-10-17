@@ -172,6 +172,10 @@
     <Compile Include="Migrations\202010150225373_articleTagKey.Designer.cs">
       <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010160703093_articlePicture.cs" />
+    <Compile Include="Migrations\202010160703093_articlePicture.Designer.cs">
+      <DependentUpon>202010160703093_articlePicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminManageDataPacket.cs" />
@@ -182,6 +186,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
+    <Compile Include="Models\InterestedPartyCompoundModel.cs" />
     <Compile Include="Models\Progress.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
     <Compile Include="Models\Doctor.cs" />
@@ -279,6 +284,7 @@
     <Content Include="Views\Admin\_doctorControl.cshtml" />
     <Content Include="Views\Admin\_LayoutViewDoctor.cshtml" />
     <Content Include="Views\Admin\_ViewDoctor.cshtml" />
+    <Content Include="Views\Article\ViewArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -314,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010150225373_articleTagKey.resx">
       <DependentUpon>202010150225373_articleTagKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010160703093_articlePicture.resx">
+      <DependentUpon>202010160703093_articlePicture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
