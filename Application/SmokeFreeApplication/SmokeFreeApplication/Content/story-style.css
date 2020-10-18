@@ -1,2 +1,9 @@
-﻿body {
+﻿.create-story-field {
+    width: 100% !important;
+}
+input {
+    resize: none;
+}
+input {
+    resize: vertical;
 }

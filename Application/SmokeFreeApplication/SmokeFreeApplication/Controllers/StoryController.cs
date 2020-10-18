@@ -21,18 +21,11 @@ namespace SmokeFreeApplication.Controllers
             int pageNumber = (page ?? 1);
             List<Story> displayList = new List<Story>();
             ViewBag.search = search;
+            ViewBag.option = option;
 
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignInMember", "Account");
-            }
-            if (option == "Name")
-            {
-                ViewBag.searchType = "None";
-            }
-            else if (option == "Tags")
-            {
-                ViewBag.searchType = "tagsinput";
             }
             if (!String.IsNullOrEmpty(search))
             {
@@ -53,10 +46,6 @@ namespace SmokeFreeApplication.Controllers
 
 
             return View(displayList.ToPagedList(pageNumber, pageSize));
-
-        }
-        public void setSearchBar()
-        {
 
         }
         public List<Story> searchTags(string inputTags)

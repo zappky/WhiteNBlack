@@ -15,7 +15,7 @@
     <p>@Html.DisplayFor(model => model.body)</p>
     @foreach (var tag in ViewBag.tagList)
     {
-        @Html.Raw(tag); <br />
+        <span class="badge badge-dark"> @Html.Raw(tag) </span>
     }
 </div>
 
