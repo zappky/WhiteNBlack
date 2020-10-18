@@ -14,7 +14,7 @@ namespace SmokeFreeApplication.Controllers
     {
         private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
 
-        // GET: Story
+        // search is implement at index method, stories (in this case)
         public ActionResult Stories(string option,string search, int? page)
         {
             int pageSize = 1;
@@ -48,6 +48,7 @@ namespace SmokeFreeApplication.Controllers
             return View(displayList.ToPagedList(pageNumber, pageSize));
 
         }
+        //search with tags
         public List<Story> searchTags(string inputTags)
         {
             string[] tagArray = inputTags.Split(',');
@@ -78,6 +79,7 @@ namespace SmokeFreeApplication.Controllers
             }
             return displayList;
         }
+
         public FileContentResult retrieveUserPic(string username)
         {
             byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
