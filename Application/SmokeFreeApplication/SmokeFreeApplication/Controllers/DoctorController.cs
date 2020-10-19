@@ -19,15 +19,7 @@ namespace SmokeFreeApplication.Controllers
         // GET: Doctor
         public ActionResult DrProfile()
         {
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("SignInDoctor", "Account");
-            }
-            else
-            {
-                return View();
-            }
-            // return View();
+            return View();
         }
 
         public FileContentResult retrieveUserPic(string username)
