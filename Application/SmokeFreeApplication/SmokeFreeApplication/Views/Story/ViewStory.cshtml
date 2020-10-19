@@ -4,7 +4,7 @@
     ViewBag.Title = "ViewStory";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-</br>
+<br/>
 <p>
     @Html.ActionLink("Back to List", "Stories")
 </p>
@@ -18,6 +18,8 @@
         <span class="badge badge-dark"> @Html.Raw(tag) </span>
     }
 </div>
+<br/>
+
 
 <div>
     @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
