@@ -12,7 +12,7 @@
     <h3> @Html.DisplayFor(model => model.title)</h3>
     <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
     <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
-    <p>@Html.DisplayFor(model => model.body)</p>
+    <div>@Html.Raw(ViewBag.storyDetails)</div>
     @foreach (var tag in ViewBag.tagList)
     {
         <span class="badge badge-dark"> @Html.Raw(tag) </span>
