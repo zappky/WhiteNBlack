@@ -22,15 +22,15 @@
                 <li class="nav-item nav-link">
                     @if (Session["docOrMember"] == "doc")
                     {
-                        @Html.ActionLink("Profile", "DrProfile", "Doctor")
+                        @Html.ActionLink("Profile", "DrProfile", "Doctor", new { viewUsername = Session["username"].ToString()}, new { page = 1})
                     }
-                    else if(Session["docOrMember"] == "member")
+                    else if (Session["docOrMember"] == "member")
                     {
                         @Html.ActionLink("Profile", "MemberProfile", "InterestedParty")
                     }
-                    else if(Session["docOrMember"] == "admin")
+                    else if (Session["docOrMember"] == "admin")
                     {
-                        @Html.ActionLink("Manage","Manage","Admin")
+                        @Html.ActionLink("Manage", "Manage", "Admin")
                     }
                 </li>
                 <li class="nav-item nav-link">

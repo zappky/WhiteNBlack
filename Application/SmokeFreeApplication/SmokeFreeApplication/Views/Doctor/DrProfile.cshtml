@@ -6,20 +6,35 @@
     ViewBag.Title = "DrProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Doctor Profile</h2>
-@*
-<img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
- *@
 
-<h1>Bio</h1>
-<p class="title">Doctor at </p>
-<p class="title">NUH </p>
-<p>Specialised in Lungs</p>
+<div style="margin-left: 5px;">
+    <img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
+    
 
-<p>
-    @Html.ActionLink("Create Article", "createArticle")
-</p>
+    <div>
+        <h3>@ViewBag.docName</h3>
+        <p>Bio</p>
+        <p class="title">Doctor at @ViewBag.workLocation</p>
+        <p>@ViewBag.description</p>
+    </div>
 
+
+</div>
+
+<div>
+        @if (ViewBag.ownAccount == true)
+        {
+            <button class="btn btn-secondary">@Html.ActionLink("Create Article", "createArticle", "Article")</button>
+        }
+
+    
+        @if (ViewBag.ownAccount == true)
+        {
+            <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditDrProfile", "Doctor")</button>
+        }
+</div>
+
+<h2>Articles</h2>
 @foreach (var item in Model)
 {
     <div class="card" style="width: 70rem;">

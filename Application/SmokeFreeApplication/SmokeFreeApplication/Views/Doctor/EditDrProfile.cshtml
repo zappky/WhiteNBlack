@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "EditDrProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SmokeFreeApplication.Models.DoctorCompoundModel
+@using (Html.BeginForm("EdittedDrProfile", "Doctor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <style>
+        .btnSignUp {
+            margin: 10px;
+        }
+    </style>
+    <h4>Edit Profile</h4>
+
+    <div class="form-group row">
+        <img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.profilePicture)</label>
+        <input type="file" class="form-control-file" name="ImageFile" id="ImageFile" />
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.Doctors.workLocation)</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Doctors.workLocation, "", new { @class = "form-control", @Value = ViewBag.workLocation })
+            @Html.ValidationMessageFor(m => m.Doctors.workLocation, "", new { @class = "badge badge-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.Doctors.contactNo)</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Doctors.contactNo, "", new { @class = "form-control", @Value = ViewBag.contactNo })
+            @Html.ValidationMessageFor(m => m.Doctors.contactNo, "", new { @class = "badge badge-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.Doctors.description)</label>
+        <div class="col-sm-10">
+            @Html.TextAreaFor(m => m.Doctors.description, new { @class = "form-control", @Value = ViewBag.description })
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <input class="btn btn-primary btnSignUp" type="submit" value="Edit" />
+    </div>
+}

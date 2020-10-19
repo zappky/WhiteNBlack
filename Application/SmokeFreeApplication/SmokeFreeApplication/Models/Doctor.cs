@@ -18,6 +18,7 @@ namespace SmokeFreeApplication.Models
         [Required]
         [DisplayName("Name of practice place")]
         public string workLocation { get; set; }
+        [DisplayName("Description")]
         public string description { get; set; }
         [Required]
         [DisplayName("Contact Number")]
