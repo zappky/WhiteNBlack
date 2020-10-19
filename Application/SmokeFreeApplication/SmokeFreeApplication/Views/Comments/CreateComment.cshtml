@@ -4,7 +4,7 @@
     Layout = "";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateComment", "Comments", new { id = Model.parentID, pType = Model.parentType}, FormMethod.Post,new { @id ="CreateCmtForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -22,9 +22,25 @@
     </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-                <a href="@Url.Action("ViewStory/"+Model.parentID.ToString(), "Story")" style="text-decoration: none;">BACK</a>
+                <input type="submit" value="Create" class="btn btn-default" id="submitBtn" onclick="test()"/>
+                @*<a href="@Url.Action("ViewStory/"+Model.parentID.ToString(), "Story")" style="text-decoration: none;">BACK</a>*@
             </div>
         </div>
     </div>
+
+    <script>
+        //$(document).ready(function () {
+        //    $('#submitBtn').submit(function () {
+        //        alert("refreshing");
+        //        location.reload();
+        //        console.log();
+        //    });
+        //});
+
+        //function test() {
+        //    location.reload();
+        //    alert("create comment")
+        //}
+
+    </script>
 }

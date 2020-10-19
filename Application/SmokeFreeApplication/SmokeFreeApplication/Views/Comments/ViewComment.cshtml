@@ -5,21 +5,42 @@
     int n = Model.Count();
 }
 
-<div class="list-group">
+<script>
+    //function showHide(divID) {
+    //    var x = document.getElementById(divID);
+    //    if (x.style.display === "none") {
+    //        x.style.display = "block";
+    //    } else {
+    //        x.style.display = "none";
+    //    }
+    //    x.style.display = "block";
+    //}
 
-    @foreach (var item in Model)
-    {
-        <div class="card">
-            <div class="card-body" style="padding-left:37px">
-                <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
-                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                @Html.ActionLink("Reply", "CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"), null)
-            </div>
-        </div>
-        if (n > 0)
-        {
-            @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
-        }
-    }
-</div>
+</script>
+
+@if (n > 0)
+{
+    <div class="list-group">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li class="list-inline">
+                    <div class="card">
+                        <div class="card-body" style="padding-left:37px">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+
+                            @*<button type="button" class="btn btn-default" onclick="showHide(@item.commentID.ToString())">Reply</button>*@
+                            <div>@*id="@item.commentID.ToString()" style="display:none">*@
+                                @Html.Action("CreateComment", "Comments", new { id = item.commentID, pType = "C" })
+                            </div>
+                        </div>
+                    </div>
+
+                    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
+                </li>
+            }
+        </ul>
+    </div>
+}
