@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+</head>
+<body>
+    <form id="myform" action="CreateComment" method="post">
+        @*@using (Html.BeginForm(new { htmlAttributes = new { @id = formID } }))*@
+        @Html.AntiForgeryToken()
+        <div class="card">
+            <div class="card-body">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control", @placeholder = "What's on your mind?" } })
+                            @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input id="postCmt" type="submit" value="Post" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

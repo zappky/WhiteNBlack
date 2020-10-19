@@ -23,11 +23,12 @@ namespace SmokeFreeApplication.Controllers
         }
 
         // GET: Comments/Create
-        public ActionResult CreateComment(CommentQuery c)
+        public ActionResult CreateComment()
         {
-            Comment comment = new Comment();
-            comment.parentID = c.id;
-            return View(comment);
+            //Comment c = new Comment();
+            //c.parentID = comment.parentID;
+            //c.parentType = comment.parentType;
+            return View();
         }
 
         // POST: Comments/Create
@@ -35,27 +36,49 @@ namespace SmokeFreeApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(CommentQuery c, [Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
+        public ActionResult CreateComment([Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
         {
             
             if (ModelState.IsValid)
             {
-                comment.postDate = DateTime.Now;
-                comment.parentType = c.pType;
-                comment.parentID = c.id;
+                //comment.parentType = pType;
+                //comment.parentID = id;
+
                 comment.userName = Session["username"].ToString();
+                comment.postDate = DateTime.Now;
                 db.Comment.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("ViewStory/"+c.id.ToString(), "Story");
-            }
 
-            return View(comment);
+                
+                //var newComment = new Comment();
+
+                // Passing back control to the ViewStory
+                //var controller = DependencyResolver.Current.GetService<StoryController>();
+                //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+                //int? id = 1;
+                
+                //Story story = db.Story.Find(1);
+                //ViewBag.tagList = StoryController.getTags(1);
+                //if (story == null)
+                //{
+                //    return HttpNotFound();
+                //}
+
+                //return RedirectToAction("~/Views/Story/ViewStory.cshtml", story);
+            }
+            // Something went wrong
+            // Reset comment
+            Comment nextComment = new Comment();
+            nextComment.parentID = comment.parentID;
+            nextComment.parentType = comment.parentType;
+            return View(nextComment);
         }
         public ActionResult ViewComment(CommentQuery q)
         {
             var comments = from c in db.Comment
                            where c.parentID == q.id
                            where c.parentType == q.pType
+                           orderby c.postDate descending
                            select c;
 
             return View(comments.ToList());
@@ -105,6 +128,7 @@ namespace SmokeFreeApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            comment.body = null;
             return View(comment);
         }
 
