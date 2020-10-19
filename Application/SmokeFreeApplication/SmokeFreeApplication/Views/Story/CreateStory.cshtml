@@ -15,36 +15,43 @@
 {
     @Html.AntiForgeryToken()
 
-<form onsubmit="return false;">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <form onsubmit="return false;">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        <p>Title: </p>
-        <div>
-            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p>Title: </p>
+            <div>
+                @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control create-story-field" } })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <p>Description: </p>
-        <div>
-            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p>Description: </p>
+            <div>
+                @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control create-story-field" } })
+                @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <p>Tags: </p>
-        <div>
-            <input name="tagsinput" type="text" data-role="tagsinput"/>
+        <div class="form-group">
+            <p>Tags: </p>
+            <div>
+                <input name="tagsinput" type="text" data-role="tagsinput" class="create-story-field" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="button" onclick="this.form.submit();" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="this.form.submit();" value="Create" class="btn btn-default" />
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+}
+@section Scripts
+{
+    <link href="~/Content/story-style.css" rel="stylesheet">
+    <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
+    <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
+    <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 //Feel free to change it, just placeholder for now - kee yang
 namespace SmokeFreeApplication.Models
 {
@@ -13,6 +10,7 @@ namespace SmokeFreeApplication.Models
         //List<string> Pictures { get; set; }
 
         public string title { get; set; }
+        [AllowHtml]
         public string body { get; set; }
         public DateTime postDate { get; set; }
 
