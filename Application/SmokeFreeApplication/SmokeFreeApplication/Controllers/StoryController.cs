@@ -105,6 +105,7 @@ namespace SmokeFreeApplication.Controllers
              }
             ViewBag.tagList = getTags(id);
             Story story = smokeFreeDB.Story.Find(id);
+            ViewBag.storyDetails = story.body;
             if (story == null)
             {
                 return HttpNotFound();
