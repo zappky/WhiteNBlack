@@ -25,9 +25,9 @@
 </div>
 
 <div>
-    @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
+    @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
 </div>
 
 <div class="jumbotron">
-    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
+    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
 </div>

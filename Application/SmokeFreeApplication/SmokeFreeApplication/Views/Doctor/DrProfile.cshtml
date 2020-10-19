@@ -7,17 +7,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Doctor Profile</h2>
-
+@*
 <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
-
+ *@
 
 <h1>Bio</h1>
 <p class="title">Doctor at </p>
 <p class="title">NUH </p>
 <p>Specialised in Lungs</p>
+
 <p>
     @Html.ActionLink("Create Article", "createArticle")
 </p>
+
 @foreach (var item in Model)
 {
     <div class="card" style="width: 70rem;">
@@ -46,7 +48,7 @@
 }
 <!---linking pager to search display-->
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Articles", new { page, option = ViewBag.option, search = ViewBag.search }))
+@Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, option = ViewBag.option, search = ViewBag.search }))
 
 <!--Search script-->
 @section Scripts
