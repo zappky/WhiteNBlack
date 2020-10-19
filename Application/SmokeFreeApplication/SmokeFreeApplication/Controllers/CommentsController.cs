@@ -23,12 +23,12 @@ namespace SmokeFreeApplication.Controllers
         }
 
         // GET: Comments/Create
-        public ActionResult CreateComment()
+        public ActionResult CreateComment(CommentQuery q)
         {
-            //Comment c = new Comment();
-            //c.parentID = comment.parentID;
-            //c.parentType = comment.parentType;
-            return View();
+            Comment c = new Comment();
+            c.parentID = q.id;
+            c.parentType = q.pType;
+            return View(c);
         }
 
         // POST: Comments/Create
@@ -36,13 +36,13 @@ namespace SmokeFreeApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment([Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
+        public ActionResult CreateComment(CommentQuery c,[Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
         {
             
             if (ModelState.IsValid)
             {
-                //comment.parentType = pType;
-                //comment.parentID = id;
+                comment.parentType = c.pType;
+                comment.parentID = c.id;
 
                 comment.userName = Session["username"].ToString();
                 comment.postDate = DateTime.Now;
@@ -67,11 +67,12 @@ namespace SmokeFreeApplication.Controllers
                 //return RedirectToAction("~/Views/Story/ViewStory.cshtml", story);
             }
             // Something went wrong
-            // Reset comment
-            Comment nextComment = new Comment();
-            nextComment.parentID = comment.parentID;
-            nextComment.parentType = comment.parentType;
-            return View(nextComment);
+            // Reset comment?
+            //Comment nextComment = new Comment();
+            //nextComment.parentID = comment.parentID;
+            //nextComment.parentType = comment.parentType;
+            
+            return View(comment);
         }
         public ActionResult ViewComment(CommentQuery q)
         {

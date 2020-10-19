@@ -4,7 +4,7 @@
     Layout = "";
 }
 
-@using (Html.BeginForm("CreateComment", "Comments", new { id = Model.parentID, pType = Model.parentType}, FormMethod.Post,new { @id ="CreateCmtForm" }))
+@using (Html.BeginForm("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.parentID, Model.parentType), FormMethod.Post,new { @id ="CreateCmtForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <script>
+    <script src="~/Scripts/jquery-3.4.1.min.js">
         //$(document).ready(function () {
         //    $('#submitBtn').submit(function () {
         //        alert("refreshing");
@@ -37,10 +37,10 @@
         //    });
         //});
 
-        //function test() {
-        //    location.reload();
-        //    alert("create comment")
-        //}
+        function test() {
+            window.history.go(-1);
+            //alert("create comment")
+        }
 
     </script>
 }

@@ -33,7 +33,7 @@
 
                             @*<button type="button" class="btn btn-default" onclick="showHide(@item.commentID.ToString())">Reply</button>*@
                             <div>@*id="@item.commentID.ToString()" style="display:none">*@
-                                @Html.Action("CreateComment", "Comments", new { id = item.commentID, pType = "C" })
+                                @Html.ActionLink("Reply","CreateComment","Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"),null)
                             </div>
                         </div>
                     </div>
