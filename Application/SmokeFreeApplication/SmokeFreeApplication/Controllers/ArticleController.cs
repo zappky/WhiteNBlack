@@ -128,13 +128,13 @@ namespace SmokeFreeApplication.Controllers
             return displayList;
         }
 
-        public ActionResult CreateArticle()
+        public ActionResult createArticle()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateArticle([Bind(Include = "articleID,userName,title, body,postDate")] Models.Article article)
+        public ActionResult createArticle([Bind(Include = "articleID,userName,title, body,postDate")] Models.Article article)
         {
             if (Session["username"] == null)
             {
