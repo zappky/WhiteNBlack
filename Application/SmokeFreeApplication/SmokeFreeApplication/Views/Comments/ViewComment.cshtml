@@ -32,9 +32,11 @@
                             <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
 
                             @*<button type="button" class="btn btn-default" onclick="showHide(@item.commentID.ToString())">Reply</button>*@
-                            <div>@*id="@item.commentID.ToString()" style="display:none">*@
-                                @Html.ActionLink("Reply","CreateComment","Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"),null)
-                            </div>
+                            @*id="@item.commentID.ToString()" style="display:none">*@
+
+                                  @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
+ 
+
                         </div>
                     </div>
 
@@ -44,3 +46,15 @@
         </ul>
     </div>
 }
+<script>
+    //function showHide(divID) {
+    //    var x = document.getElementById(divID);
+    //    if (x.style.display === "none") {
+    //        x.style.display = "block";
+    //    } else {
+    //        x.style.display = "none";
+    //    }
+    //    x.style.display = "block";
+    //}
+
+</script>

@@ -38,7 +38,7 @@ namespace SmokeFreeApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment(CommentQuery c,[Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
         {
-            
+            Story story;
             if (ModelState.IsValid)
             {
                 comment.parentType = c.pType;
@@ -48,22 +48,41 @@ namespace SmokeFreeApplication.Controllers
                 comment.postDate = DateTime.Now;
                 db.Comment.Add(comment);
                 db.SaveChanges();
+                db.Entry(comment).Reload();
+                if (c.pType == "S")
+                {
 
-                
+                    story = db.Story.Find(comment.parentID);
+
+                }
+                else
+                {
+                    int temp = comment.parentID;
+                    Comment parentC = db.Comment.Where(x => x.commentID == temp).FirstOrDefault();
+                    while(parentC.parentType != "S")
+                    {
+                        parentC = db.Comment.Where(x => x.commentID == temp).FirstOrDefault();
+                        temp = parentC.parentID;
+                    }
+                    story = db.Story.Find(parentC.parentID);
+
+                }
+               // return RedirectToAction("~/Views/Story/ViewStory/" + story.storyID);
+                return Redirect("~/Story/ViewStory/" + story.storyID);
+                //return RedirectToAction(path);
                 //var newComment = new Comment();
 
                 // Passing back control to the ViewStory
                 //var controller = DependencyResolver.Current.GetService<StoryController>();
                 //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
                 //int? id = 1;
-                
+
                 //Story story = db.Story.Find(1);
                 //ViewBag.tagList = StoryController.getTags(1);
                 //if (story == null)
                 //{
                 //    return HttpNotFound();
                 //}
-
                 //return RedirectToAction("~/Views/Story/ViewStory.cshtml", story);
             }
             // Something went wrong
@@ -71,7 +90,6 @@ namespace SmokeFreeApplication.Controllers
             //Comment nextComment = new Comment();
             //nextComment.parentID = comment.parentID;
             //nextComment.parentType = comment.parentType;
-            
             return View(comment);
         }
         public ActionResult ViewComment(CommentQuery q)
