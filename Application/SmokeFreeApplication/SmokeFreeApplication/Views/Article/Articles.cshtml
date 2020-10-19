@@ -12,36 +12,34 @@
 
 <h2>Articles</h2>
 
-<p>
-    @Html.ActionLink("Create New", "CreateStory") @*Edit this to link to create articles page if you need*@
-</p>
+
 @foreach (var item in Model)
 {
-    <div class="card" style="width: 70rem;">
-        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
+<div class="card" style="width: 70rem;">
+    <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
+        @*Edit this to link to view a single article page*@
+
+
+        <div class="card-header">
+            @*Implement retrieveUserPic or borrow from ray again*@
+            <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+            <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
+                <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
+            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+        </div>
+        <div class="card-footer">
+
             @*Edit this to link to view a single article page*@
-
-
-            <div class="card-header">
-                @*Implement retrieveUserPic or borrow from ray again*@
-                <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
-                <div style="height:5rem; padding-top:30px; padding-left:100px;">
-                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-            </div>
-            <div class="card-footer">
-
-                @*Edit this to link to view a single article page*@
-                <a href="@Url.Action("ViewArticle", "Article", new { id = item.storyID})" style="text-decoration: none;">Read More</a>
-                <a href="#" class="card-link">Share</a>
-            </div>
-        </a>
-    </div>
+            <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">Read More</a>
+            <a href="#" class="card-link">Share</a>
+        </div>
+    </a>
+</div>
 
 
     <br />

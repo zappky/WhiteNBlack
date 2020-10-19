@@ -1,22 +1,56 @@
-﻿
+﻿@model PagedList.IPagedList<SmokeFreeApplication.Models.Article>
+@using PagedList.Mvc;
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
-    ViewBag.Title = "My Doctor Profile";
+    ViewBag.Title = "DrProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Doctor Profile</h2>
-<img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" width="155" height="165" alt="Sunflower" style="float: left; margin-right: 15px;">
+
+<img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
 
 
 <h1>Bio</h1>
 <p class="title">Doctor at </p>
 <p class="title">NUH </p>
 <p>Specialised in Lungs</p>
+<p>
+    @Html.ActionLink("Create Article", "createArticle")
+</p>
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 70rem;">
+        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
+            <div class="card-header">
+                <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
+                <p class="card-text">@Html.Raw(item.body)</p>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">Read More</a>
+                <a href="#" class="card-link">Share</a>
+            </div>
+        </a>
+    </div>
 
-<div class="u-container">
-    <ul class="app-featured-row">
-        <li class=" ="app-featured-row__item">
-        </li>"
 
-    </ul>
-</div>
+    <br />
+
+}
+<!---linking pager to search display-->
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Articles", new { page, option = ViewBag.option, search = ViewBag.search }))
+
+<!--Search script-->
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/search.js"></script>
+}
+

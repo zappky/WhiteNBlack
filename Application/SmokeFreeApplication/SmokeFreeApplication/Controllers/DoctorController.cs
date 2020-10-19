@@ -3,25 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SmokeFreeApplication.Models;
+
 
 namespace SmokeFreeApplication.Controllers
 {
     public class DoctorController : Controller
     {
-        // GET: Doctor
+        private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
         public ActionResult Index()
         {
             return View();
         }
 
+        // GET: Doctor
         public ActionResult DrProfile()
         {
-            return View();
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignInDoctor", "Account");
+            }
+            else
+            {
+                return View();
+            }
+            // return View();
         }
 
-        public ActionResult createArticle()
+        public FileContentResult retrieveUserPic(string username)
         {
-            return View();
+            byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
+            if (imgByteArray != null)
+            {
+                return new FileContentResult(imgByteArray, "image/jpeg");
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
