@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
 //Feel free to change it, just placeholder for now - kee yang
 namespace SmokeFreeApplication.Models
