@@ -36,10 +36,8 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult SignUpDoctor()
         {
-            DoctorCompoundModel docModel = new DoctorCompoundModel();
-
             ViewBag.Message = "Sign up as a doctor here";
-            return View(docModel);
+            return View();
         }
 
         
@@ -70,7 +68,7 @@ namespace SmokeFreeApplication.Controllers
                         db.GeneralUser.Add(accountInfo.GeneralUsers);
                         db.InterestedParty.Add(accountInfo.InterestedParties);
                         db.SaveChanges();
-                        return RedirectToAction("SignInMember");
+                        return RedirectToAction("SignUpSuccessMember");
                     }
                     else
                     {
@@ -112,7 +110,7 @@ namespace SmokeFreeApplication.Controllers
                         db.GeneralUser.Add(accountInfo.GeneralUsers);
                         db.Doctor.Add(accountInfo.Doctors);
                         db.SaveChanges();
-                        return RedirectToAction("SignInDoctor");
+                        return RedirectToAction("SignUpSuccessDoctor");
                     }
                     else
                     {
@@ -126,6 +124,19 @@ namespace SmokeFreeApplication.Controllers
             }
             return View("SignUpDoctor");
         }
+
+        public ActionResult SignUpSuccessMember()
+        {
+
+            return View();
+        }
+
+        public ActionResult SignUpSuccessDoctor()
+        {
+
+            return View();
+        }
+
 
         public ActionResult SignInMember()
         {
