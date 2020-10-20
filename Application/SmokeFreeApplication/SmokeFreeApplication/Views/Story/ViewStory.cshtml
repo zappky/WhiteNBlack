@@ -4,27 +4,32 @@
     ViewBag.Title = "ViewStory";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<br/>
+<br />
 <p>
     @Html.ActionLink("Back to List", "Stories")
 </p>
-<div class="mx-auto" style="width: 70rem;">
-    <h3> @Html.DisplayFor(model => model.title)</h3>
-    <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
-    <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
+<div class="mx-auto" style="max-width: 70rem;">
+    <h2> @Html.DisplayFor(model => model.title)</h2>
+    <span class="font-weight-light">@Html.DisplayFor(model => model.postDate)  |  </span>
+    <span class="font-weight-light">@Html.DisplayFor(model => model.userName)</span>
+    <br />
+    <br />
     <div>@Html.Raw(ViewBag.storyDetails)</div>
+    <br />
     @foreach (var tag in ViewBag.tagList)
     {
         <span class="badge badge-dark"> @Html.Raw(tag) </span>
     }
 </div>
-<br/>
+<br />
+<br />
+<br />
 
-
-<div>
+<h2>Comments</h2>
+<hr />
+<div class="jumbotron" style="padding:10px">
     @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
 </div>
-
-<div class="jumbotron">
+<div>
     @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
 </div>

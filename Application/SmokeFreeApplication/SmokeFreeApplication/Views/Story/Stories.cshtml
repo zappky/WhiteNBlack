@@ -30,7 +30,7 @@
 </p>
 @foreach (var item in Model)
 {
-    <div class="card" style="width: 70rem;">
+    <div class="card" style="max-width: 70rem;">
         <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID})" style="text-decoration: none;">
             <div class="card-header">
                 <img src="@Url.Action("retrieveUserPic", "Story", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />

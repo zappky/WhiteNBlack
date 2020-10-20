@@ -46,9 +46,13 @@ namespace SmokeFreeApplication.Controllers
 
                 comment.userName = Session["username"].ToString();
                 comment.postDate = DateTime.Now;
-                db.Comment.Add(comment);
-                db.SaveChanges();
-                db.Entry(comment).Reload();
+                if(comment.body != "")
+                {
+                    db.Comment.Add(comment);
+                    db.SaveChanges();
+                    db.Entry(comment).Reload();
+                }
+                
                 if (c.pType == "S")
                 {
 
@@ -59,6 +63,7 @@ namespace SmokeFreeApplication.Controllers
                 {
                     int temp = comment.parentID;
                     Comment parentC = db.Comment.Where(x => x.commentID == temp).FirstOrDefault();
+                    // Searches for the parent storyID (ie the root)
                     while(parentC.parentType != "S")
                     {
                         parentC = db.Comment.Where(x => x.commentID == temp).FirstOrDefault();
@@ -67,29 +72,9 @@ namespace SmokeFreeApplication.Controllers
                     story = db.Story.Find(parentC.parentID);
 
                 }
-               // return RedirectToAction("~/Views/Story/ViewStory/" + story.storyID);
+                // using Redirect to refresh the page
                 return Redirect("~/Story/ViewStory/" + story.storyID);
-                //return RedirectToAction(path);
-                //var newComment = new Comment();
-
-                // Passing back control to the ViewStory
-                //var controller = DependencyResolver.Current.GetService<StoryController>();
-                //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
-                //int? id = 1;
-
-                //Story story = db.Story.Find(1);
-                //ViewBag.tagList = StoryController.getTags(1);
-                //if (story == null)
-                //{
-                //    return HttpNotFound();
-                //}
-                //return RedirectToAction("~/Views/Story/ViewStory.cshtml", story);
             }
-            // Something went wrong
-            // Reset comment?
-            //Comment nextComment = new Comment();
-            //nextComment.parentID = comment.parentID;
-            //nextComment.parentType = comment.parentType;
             return View(comment);
         }
         public ActionResult ViewComment(CommentQuery q)
