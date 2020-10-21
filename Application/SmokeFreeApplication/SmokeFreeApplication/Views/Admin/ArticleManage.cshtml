@@ -21,14 +21,18 @@
     </a>
 </div>
 
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active nav-link">
                 @Html.ActionLink("Close", "ClosePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
-                @Html.ActionLink("Approve", "ApprovePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
-                @Html.ActionLink("Reject", "RejectPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                @if (Model.articleStatus == "pending")
+                {
+                    @Html.ActionLink("Approve", "ApprovePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                    @Html.ActionLink("Reject", "RejectPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                }
             </li>
 
 
@@ -36,3 +40,8 @@
 
     </div>
 </nav>
+
+@*
+    <p>@Model.articleStatus</p>
+
+*@
