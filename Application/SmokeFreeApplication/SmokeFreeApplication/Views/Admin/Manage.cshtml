@@ -1,6 +1,135 @@
-﻿
+﻿@model SmokeFreeApplication.Models.AdminManageDataPacket
+
 @{
     ViewBag.Title = "My Admin";
-    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<SmokeFreeApplication.Models.Article> articleList = Model.list1;
+    IEnumerable<SmokeFreeApplication.Models.Doctor> doctorList = Model.list2;
 }
 
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Pending Article')">Pending Article</button>
+    <button class="tablinks" onclick="openCity(event, 'Approved Article')">Approved Article</button>
+    <button class="tablinks" onclick="openCity(event, 'Pending Doctor')">Pending Doctor</button>
+    <button class="tablinks" onclick="openCity(event, 'Approved Doctor')">Approved Doctor</button>
+</div>
+<p>@articleList.Count()</p>
+<p>@doctorList.Count()</p>
+
+<div id="Pending Article" class="tabcontent">
+    <div class="list-group">
+
+
+        @foreach (var item in articleList)
+        {
+            if ("pending" == item.articleStatus)
+            {
+                <div class="card">
+
+                    <div class="card-body" style="padding-left:37px">
+
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+                        @Html.ActionLink("Manage", "ArticleManage", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(item.articleID), null)
+                    </div>
+                </div>
+            }
+        }
+
+
+        }
+
+    </div>
+
+
+</div>
+
+<div id="Approved Article" class="tabcontent">
+
+    <div class="list-group">
+
+        @foreach (var item in articleList)
+        {
+            if ("approved" == item.articleStatus)
+            {
+                <div class="card">
+                    <div class="card-body" style="padding-left:37px">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+                    </div>
+                </div>
+            }
+
+
+        }
+
+    </div>
+
+</div>
+
+<div id="Pending Doctor" class="tabcontent">
+
+    <div class="list-group">
+
+        @foreach (var item in doctorList)
+        {
+            if (!item.adminVerify)
+            {
+                <div class="card">
+                    <div class="card-body" style="padding-left:37px">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
+                        @Html.ActionLink("Manage", "DoctorManage", "Admin", new SmokeFreeApplication.Controllers.DocQuery(item.userName), null)
+                    </div>
+                </div>
+            }
+
+
+        }
+
+    </div>
+</div>
+
+<div id="Approved Doctor" class="tabcontent">
+    <div class="list-group">
+
+        @foreach (var item in doctorList)
+        {
+            if (item.adminVerify)
+            {
+                <div class="card">
+                    <div class="card-body" style="padding-left:37px">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
+                    </div>
+                </div>
+            }
+
+
+        }
+
+    </div>
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<p>Admin Interface</p>

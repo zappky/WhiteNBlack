@@ -15,6 +15,16 @@ namespace SmokeFreeApplication.Controllers
 {
     public class AdminController : Controller
     {
+
+        private ActionResult ValidateAdminLogin()
+        {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignInMember", "Account");
+            }
+
+            return View();
+        }
         private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
         // GET: Admin
         public ActionResult Index()
@@ -25,7 +35,8 @@ namespace SmokeFreeApplication.Controllers
         //Default view of the admin interface
         public ActionResult Manage()
         {
-            //return View();
+            //ValidateAdminLogin();
+
             return View( new AdminManageDataPacket() { list1 = smokeFreeDB.Article.ToList(), list2 = smokeFreeDB.Doctor.ToList() });
         }
 
