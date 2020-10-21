@@ -28,14 +28,16 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active nav-link">
                 @Html.ActionLink("Close", "ClosePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
-                @if (Model.articleStatus == "pending")
-                {
-                    @Html.ActionLink("Approve", "ApprovePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
-                    @Html.ActionLink("Reject", "RejectPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
-                }
             </li>
-
-
+            @if (Model.articleStatus == "pending")
+            {
+                <li class="nav-item active nav-link">
+                    @Html.ActionLink("Approve", "ApprovePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                </li>
+                <li class="nav-item active nav-link">
+                    @Html.ActionLink("Reject", "RejectPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                </li>
+            }
         </ul>
 
     </div>
