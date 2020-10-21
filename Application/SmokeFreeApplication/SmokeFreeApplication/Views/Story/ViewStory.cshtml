@@ -30,6 +30,6 @@
 <div class="jumbotron" style="padding:10px">
     @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
 </div>
-<div>
+<div id="accordion">
     @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
 </div>

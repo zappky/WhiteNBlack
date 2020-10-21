@@ -5,48 +5,72 @@
     int n = Model.Count();
 }
 
-<script>
-    //function showHide(divID) {
-    //    var x = document.getElementById(divID);
-    //    if (x.style.display === "none") {
-    //        x.style.display = "block";
-    //    } else {
-    //        x.style.display = "none";
-    //    }
-    //    x.style.display = "block";
-    //}
-
-</script>
-
 @if (n > 0)
 {
     <div class="list-group">
         <ul>
             @foreach (var item in Model)
             {
+                string cmtToDiv = "cmt"+item.commentID.ToString();
+                string cmtToDataTarg = "#" + cmtToDiv;
+                string cmtToDivModal = "modal_cmt" + item.commentID.ToString();
+                string cmtToDataTargModal = "#" + cmtToDivModal;
+            <li class="list-inline">
                 <br />
-                <li class="list-inline">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex">
-                                <div class="mr-auto p-2">
-                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h5>
-                                </div>
-                                <div class="p-2">
-                                    <p class="text-muted">@Html.DisplayFor(modelItem => item.postDate)</p>
-                                </div>
+                <div class="card" style="padding: 12px">
+                    <div class="card-body" style="padding:10px">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h6>@Html.DisplayFor(modelItem => item.userName) says</h6>
+                            </div>
+                            <div>
+                                <p class="text-muted">@Html.DisplayFor(modelItem => item.postDate)</p>
                             </div>
                         </div>
-                        <div class="card-body" style="padding-left:37px">
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                            <hr />
-                            @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
+                        <hr />
+
+                        @if (item.status == "visible")
+                        {
+                            <p class="card-text" style="margin-left:2rem;">
+                                @Html.DisplayFor(modelItem => item.body)
+                            </p>
+                        }
+                        else if (item.status == "del")
+                        {
+                            <p class="card-text" style="margin-left:2rem;">
+                                This comment has been removed by the author.
+                            </p>
+                        }
+
+
+
+                        @*Button actions for comment card*@
+                        <div class="d-flex">
+                            <button class="btn btn-primary collapsed mr-auto" data-toggle="collapse" data-target="@cmtToDataTarg" aria-expanded="false" aria-controls="collapseTwo">
+                                Reply
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="@cmtToDataTargModal">
+                                Delete
+                            </button>
                         </div>
 
+                        @*Reply box*@
+                        <div id="@cmtToDiv" class="collapse" data-parent="#accordion">
+                            <br />
+                            <div>
+                                @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
+                            </div>
+                        </div>
+
+                        @*Delete modal dialog*@
+                        @Html.Action("Delete", "Comments", new { id = item.commentID })
                     </div>
 
-                    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
-                </li>
+                </div>
+
+                @*Recursively load next comment*@
+                @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
+            </li>
             }
         </ul>
     </div>
