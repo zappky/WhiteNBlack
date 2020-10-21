@@ -36,9 +36,8 @@ namespace SmokeFreeApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(CommentQuery c,[Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
+        public ActionResult CreateComment(CommentQuery c,[Bind(Include = "commentID,parentType,parentID,body,postDate,userName,status")] Comment comment)
         {
-            Story story;
             if (ModelState.IsValid)
             {
                 comment.parentType = c.pType;
@@ -46,51 +45,48 @@ namespace SmokeFreeApplication.Controllers
 
                 comment.userName = Session["username"].ToString();
                 comment.postDate = DateTime.Now;
-                db.Comment.Add(comment);
-                db.SaveChanges();
-                db.Entry(comment).Reload();
-                if (c.pType == "S")
+                comment.status = "visible";
+
+                
+                if (comment.body != "")
                 {
-
-                    story = db.Story.Find(comment.parentID);
-
+                    db.Comment.Add(comment);
+                    db.SaveChanges();
+                    db.Entry(comment).Reload();
                 }
-                else
-                {
-                    int temp = comment.parentID;
-                    Comment parentC = db.Comment.Where(x => x.commentID == temp).FirstOrDefault();
-                    while(parentC.parentType != "S")
-                    {
-                        parentC = db.Comment.Where(x => x.commentID == temp).FirstOrDefault();
-                        temp = parentC.parentID;
-                    }
-                    story = db.Story.Find(parentC.parentID);
 
-                }
-               // return RedirectToAction("~/Views/Story/ViewStory/" + story.storyID);
-                return Redirect("~/Story/ViewStory/" + story.storyID);
-                //return RedirectToAction(path);
-                //var newComment = new Comment();
-
-                // Passing back control to the ViewStory
-                //var controller = DependencyResolver.Current.GetService<StoryController>();
-                //controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
-                //int? id = 1;
-
-                //Story story = db.Story.Find(1);
-                //ViewBag.tagList = StoryController.getTags(1);
-                //if (story == null)
-                //{
-                //    return HttpNotFound();
-                //}
-                //return RedirectToAction("~/Views/Story/ViewStory.cshtml", story);
+                return findParent(comment);
             }
-            // Something went wrong
-            // Reset comment?
-            //Comment nextComment = new Comment();
-            //nextComment.parentID = comment.parentID;
-            //nextComment.parentType = comment.parentType;
             return View(comment);
+        }
+
+        public ActionResult findParent (Comment curr)
+        {
+            // Take the current comment being modified/created as a parameter to find the root story or article
+            int currParent = curr.parentID;
+            Comment parentC = db.Comment.Where(x => x.commentID == currParent).FirstOrDefault();
+            while (parentC.parentType == "C")
+            {
+                currParent = parentC.parentID;
+                parentC = db.Comment.Where(x => x.commentID == currParent).FirstOrDefault();
+            }
+            
+            // Depending on the root of the comment, redirect to appropriate location
+            if (parentC.parentType == "S")
+            {
+                Story story;
+                story = db.Story.Find(parentC.parentID);
+                return Redirect("~/Story/ViewStory/" + story.storyID); 
+            }
+            else if (parentC.parentType == "A")
+            {
+                Article article;
+                article = db.Article.Find(parentC.parentID);
+                return Redirect("~/Article/ViewArticle/" + article.articleID); 
+            }
+
+            // Something went wrong, could not find root
+            return Redirect("~/Home/");
         }
         public ActionResult ViewComment(CommentQuery q)
         {
@@ -139,7 +135,7 @@ namespace SmokeFreeApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "commentID,parentType,parentID,body,postDate,userName")] Comment comment)
+        public ActionResult Edit([Bind(Include = "commentID,parentType,parentID,body,postDate,userName,status")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -154,6 +150,7 @@ namespace SmokeFreeApplication.Controllers
         // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -172,9 +169,12 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comment.Find(id);
-            db.Comment.Remove(comment);
+            //db.Comment.Remove(comment);
+            comment.status = "del"; // Update the status so that we don't display
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return findParent(comment);
+
+            //return View(comment);
         }
 
         protected override void Dispose(bool disposing)

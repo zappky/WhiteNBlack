@@ -176,6 +176,10 @@
     <Compile Include="Migrations\202010160703093_articlePicture.Designer.cs">
       <DependentUpon>202010160703093_articlePicture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010201121357_commentstatus.cs" />
+    <Compile Include="Migrations\202010201121357_commentstatus.Designer.cs">
+      <DependentUpon>202010201121357_commentstatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminManageDataPacket.cs" />
@@ -437,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010160703093_articlePicture.resx">
       <DependentUpon>202010160703093_articlePicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010201121357_commentstatus.resx">
+      <DependentUpon>202010201121357_commentstatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
