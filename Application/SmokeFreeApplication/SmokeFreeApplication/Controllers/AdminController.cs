@@ -60,26 +60,38 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult ArticleManage(ArticleQuery q)
         {
-            //var article = from c in smokeFreeDB.Article
-            //               where c.articleID == q.id
-            //               select c;
-            //return View(article.ToList()[0]);
             var article = smokeFreeDB.Article.Find(q.id);
             return View(article);
         }
 
         public ActionResult DoctorManage(DocQuery q)
         {
-            /*
-            //Primary key seems to be not doctorID somehow?
-            var doctor = from c in smokeFreeDB.Doctor
-                           where c.userName == q.id
-                           select c;
-            return View(doctor.ToList()[0]);
-            */
-            //var doctor = smokeFreeDB.Doctor.Find(q.id);
             var aDoc = smokeFreeDB.Doctor.Find(q.id);
             return View(aDoc);
+        }
+        public ActionResult PrevPost(ArticleQuery q)
+        {
+            var article = smokeFreeDB.Article.Find(q.id);
+            var nextarticle = smokeFreeDB.Article.Find(q.id - 1);
+            if (nextarticle != null)
+            {
+                if (nextarticle.articleStatus == article.articleStatus)
+                    return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
+            }
+
+            return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(article.articleID));
+        }
+        public ActionResult NextPost(ArticleQuery q)
+        {
+            var article = smokeFreeDB.Article.Find(q.id);
+            var nextarticle = smokeFreeDB.Article.Find(q.id + 1);
+            if (nextarticle != null)
+            {
+                if (nextarticle.articleStatus == article.articleStatus)
+                    return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
+            }
+
+            return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(article.articleID));
         }
 
         public ActionResult ClosePost(ArticleQuery q)
@@ -89,9 +101,7 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult ApprovePost(ArticleQuery q)
         {
             var article = smokeFreeDB.Article.Find(q.id);
-            //smokeFreeDB.Article.Remove(article);
             article.articleStatus = "approved";
-            //smokeFreeDB.Article.Add(article);
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("Manage");
@@ -99,9 +109,9 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult RejectPost(ArticleQuery q)
         {
             var article = smokeFreeDB.Article.Find(q.id);
-            //article.articleStatus = "rejected";
             smokeFreeDB.Article.Remove(article);
             smokeFreeDB.SaveChanges();
+
             return RedirectToAction("Manage");
         }
 
@@ -112,40 +122,54 @@ namespace SmokeFreeApplication.Controllers
         }
         public ActionResult ApproveDoc(DocQuery q)
         {
-            /*
-            //Primary key violation,so not working
-            var doctor = from c in smokeFreeDB.Doctor
-                         where c.userName == q.id
-                         select c;
-            var aDoc = doctor.ToList()[0];
-            */
             var aDoc = smokeFreeDB.Doctor.Find(q.id);
-
-            //smokeFreeDB.Doctor.Remove(aDoc);
             aDoc.adminVerify = true;
-            //smokeFreeDB.Doctor.Add(aDoc);
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("Manage");
         }
+
         public ActionResult RejectDoc(DocQuery q)
         {
-            /*
-            //Primary key violation,so not working
-            var doctor = from c in smokeFreeDB.Doctor
-                         where c.doctorID == q.id
-                         select c;
-            var aDoc = doctor.ToList()[0];
-            */
             var aDoc = smokeFreeDB.Doctor.Find(q.id);
             aDoc.adminVerify = false;
-            //smokeFreeDB.Doctor.Remove(aDoc);
             smokeFreeDB.SaveChanges();
+
             return RedirectToAction("Manage");
         }
+        public ActionResult PrevDoc(DocQuery q)
+        {
+            var doc = smokeFreeDB.Doctor.Find(q.id);
+            Doctor nextdoc = doc;
+            var docList = smokeFreeDB.Doctor.ToList();
+            var docIndex  = docList.IndexOf(doc);
+            if(docIndex - 1 >= 0)
+               nextdoc = docList[docIndex - 1];
 
+            if (nextdoc != null)
+            {
+                if (nextdoc.adminVerify == doc.adminVerify)
+                    return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
+            }
 
+            return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(doc.userName));
+        }
+        public ActionResult NextDoc(DocQuery q)
+        {
+            var doc = smokeFreeDB.Doctor.Find(q.id);
+            Doctor nextdoc = doc;
+            var docList = smokeFreeDB.Doctor.ToList();
+            var docIndex = docList.IndexOf(doc);
+            if (docIndex + 1 < docList.Count())
+                nextdoc = docList[docIndex + 1];
+            if (nextdoc != null)
+            {
+                if (nextdoc.adminVerify == doc.adminVerify)
+                    return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
+            }
 
+            return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(doc.userName));
+        }
 
         public ActionResult BoardcastMessage()
         {
@@ -169,6 +193,8 @@ namespace SmokeFreeApplication.Controllers
             return null;
         }
 
+
+
     }
 
     public class ArticleQuery
@@ -189,9 +215,10 @@ namespace SmokeFreeApplication.Controllers
     {
         public string id { get; set; }
 
-        public DocQuery(string i)
+        public DocQuery(string i="")
         {
             id = i;
+
         }
         public DocQuery()
         {

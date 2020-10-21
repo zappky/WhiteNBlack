@@ -39,9 +39,14 @@
                     @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
                 </li>
             }
-
-
-
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active justify-content-end">
+                @Html.ActionLink("Previous", "PrevDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+            </li>
+            <li class="nav-item active justify-content-end">
+                @Html.ActionLink("Next", "NextDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+            </li>
         </ul>
 
     </div>

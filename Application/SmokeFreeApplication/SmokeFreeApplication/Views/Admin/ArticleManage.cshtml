@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="card" style="width: 70rem;">
 
     <div class="card-header">
@@ -40,8 +42,18 @@
             }
         </ul>
 
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active justify-content-end">
+                @Html.ActionLink("Previous", "PrevPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+            </li>
+            <li class="nav-item active justify-content-end">
+                @Html.ActionLink("Next", "NextPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+            </li>
+       </ul>
     </div>
 </nav>
+
+
 
 @*
     <p>@Model.articleStatus</p>
