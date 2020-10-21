@@ -14,11 +14,9 @@
     <button class="tablinks" onclick="openCity(event, 'Pending Doctor')">Pending Doctor</button>
     <button class="tablinks" onclick="openCity(event, 'Approved Doctor')">Approved Doctor</button>
 </div>
-<p>@articleList.Count()</p>
-<p>@doctorList.Count()</p>
 
-<div id="Pending Article" class="tabcontent">
-    <div class="list-group">
+<div id="Pending Article" class="tabcontent" >
+    <div class="list-group" >
 
 
         @foreach (var item in articleList)
@@ -29,7 +27,7 @@
 
                     <div class="card-body" style="padding-left:37px">
 
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
                         <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
                         @Html.ActionLink("Manage", "ArticleManage", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(item.articleID), null)
@@ -38,25 +36,21 @@
             }
         }
 
-
-        }
-
     </div>
 
 
 </div>
 
-<div id="Approved Article" class="tabcontent">
+<div id="Approved Article" class="tabcontent" style="display: none;">
 
-    <div class="list-group">
-
+    <div class="list-group" >
         @foreach (var item in articleList)
         {
             if ("approved" == item.articleStatus)
             {
                 <div class="card">
                     <div class="card-body" style="padding-left:37px">
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
                         <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
                     </div>
@@ -70,9 +64,9 @@
 
 </div>
 
-<div id="Pending Doctor" class="tabcontent">
+<div id="Pending Doctor" class="tabcontent" style="display: none;">
 
-    <div class="list-group">
+    <div class="list-group" >
 
         @foreach (var item in doctorList)
         {
@@ -94,8 +88,8 @@
     </div>
 </div>
 
-<div id="Approved Doctor" class="tabcontent">
-    <div class="list-group">
+<div id="Approved Doctor" class="tabcontent" style="display: none;">
+    <div class="list-group" >
 
         @foreach (var item in doctorList)
         {
@@ -119,6 +113,7 @@
 <script>
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
+        
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
@@ -132,4 +127,9 @@
     }
 </script>
 
-<p>Admin Interface</p>
+
+@*
+    <p>Admin Interface</p>
+    <p>@articleList.Count()</p>
+    <p>@doctorList.Count()</p>
+*@
