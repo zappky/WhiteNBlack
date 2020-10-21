@@ -40,8 +40,6 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-        
-
         [HttpPost]
         public ActionResult SignUpAsMember(InterestedPartyCompoundModel accountInfo)
         {
@@ -50,20 +48,24 @@ namespace SmokeFreeApplication.Controllers
                 var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.GeneralUsers.userName);
                 var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.GeneralUsers.email);
 
+                //Convert uploaded file to byte[]
                 HttpPostedFileBase postedFile = Request.Files["ImageFile"];
                 Stream stream = postedFile.InputStream;
                 BinaryReader binaryReader = new BinaryReader(stream);
                 byte[] img = binaryReader.ReadBytes((int)stream.Length);
 
+                //Check if username & email already exists
                 if (checkUsername == null)
                 {
                     if (checkEmail == null)
                     {
+                        //Set details
                         accountInfo.GeneralUsers.password = GetMD5(accountInfo.GeneralUsers.password);
                         accountInfo.GeneralUsers.profilePicture = img;
                         accountInfo.InterestedParties.userName = accountInfo.GeneralUsers.userName;
                         accountInfo.InterestedParties.bio = "";
 
+                        //Insert into database
                         db.Configuration.ValidateOnSaveEnabled = false;
                         db.GeneralUser.Add(accountInfo.GeneralUsers);
                         db.InterestedParty.Add(accountInfo.InterestedParties);
@@ -91,21 +93,25 @@ namespace SmokeFreeApplication.Controllers
                 var checkUsername = db.GeneralUser.FirstOrDefault(m => m.userName == accountInfo.GeneralUsers.userName);
                 var checkEmail = db.GeneralUser.FirstOrDefault(m => m.email == accountInfo.GeneralUsers.email);
 
+                //Convert uploaded file to byte[]
                 HttpPostedFileBase postedFile = Request.Files["ImageFile"];
                 Stream stream = postedFile.InputStream;
                 BinaryReader binaryReader = new BinaryReader(stream);
                 byte[] img = binaryReader.ReadBytes((int)stream.Length);
 
+                //Check if username & email already exists
                 if (checkUsername == null)
                 {
                     if (checkEmail == null)
                     {
+                        //Set details
                         accountInfo.GeneralUsers.password = GetMD5(accountInfo.GeneralUsers.password);
                         accountInfo.GeneralUsers.profilePicture = img;
                         accountInfo.Doctors.adminVerify = false;
                         accountInfo.Doctors.description = "";
                         accountInfo.Doctors.userName = accountInfo.GeneralUsers.userName;
 
+                        //Insert into database
                         db.Configuration.ValidateOnSaveEnabled = false;
                         db.GeneralUser.Add(accountInfo.GeneralUsers);
                         db.Doctor.Add(accountInfo.Doctors);
@@ -137,7 +143,6 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-
         public ActionResult SignIn()
         {
 
@@ -166,7 +171,7 @@ namespace SmokeFreeApplication.Controllers
                 //Check if it is a doctor account
                 if (checkDoc.Count() > 0)
                 {
-                    //If doctor account has been verified
+                    //Check if doctor account has been verified
                     if (doctorRecord.adminVerify == true)
                     {
                         //Store username in session
@@ -180,7 +185,7 @@ namespace SmokeFreeApplication.Controllers
                     //Else display error message
                     else
                     {
-                        TempData["notVerified"] = "Your account has not been verified by an adminstrator yet. Please give it 2 working days.";
+                        TempData["notVerified"] = "Your account has not been verified by an adminstrator yet. Please give it at least 2 working days.";
                         return RedirectToAction("SignIn");
                     }
 
@@ -191,9 +196,9 @@ namespace SmokeFreeApplication.Controllers
                     //Store username in session
                     Session["username"] = data.FirstOrDefault().userName;
                     Session["docOrMember"] = "member";
+                    //Set error messages to null
                     TempData["loginFailed"] = "";
                     return RedirectToAction("Stories", "Story");
-
                 }
             }
             else
@@ -201,7 +206,6 @@ namespace SmokeFreeApplication.Controllers
                 TempData["loginFailed"] = "Wrong username/password, please try again";
                 return RedirectToAction("SignIn");
             }
-
 
         }
        
@@ -231,12 +235,12 @@ namespace SmokeFreeApplication.Controllers
 
         }
 
-
         public ActionResult Logout()
         {
+            //Clear Session
             Session.Clear();
+            //Return to homepage
             return RedirectToAction("Index", "Home");
-
         }
     }
 }
