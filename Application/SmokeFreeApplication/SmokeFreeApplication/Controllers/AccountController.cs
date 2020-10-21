@@ -138,16 +138,12 @@ namespace SmokeFreeApplication.Controllers
         }
 
 
-        public ActionResult SignInMember()
+        public ActionResult SignIn()
         {
 
             return View();
         }
-        public ActionResult SignInDoctor()
-        {
 
-            return View();
-        }
         public ActionResult SignInAdmin()
         {
 
@@ -155,63 +151,60 @@ namespace SmokeFreeApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignInAsMember(GeneralUser accountInfo)
+        public ActionResult SignningIn(GeneralUser accountInfo)
         {
 
             var fPassword = GetMD5(accountInfo.password);
             var data = db.GeneralUser.Where(s => s.userName.Equals(accountInfo.userName) && s.password.Equals(fPassword)).ToList();
             var checkDoc = db.Doctor.Where(s => s.userName.Equals(accountInfo.userName)).ToList();
 
-            if (data.Count() > 0 && checkDoc.Count() <= 0)
-            {
-                //Store username in session
-                Session["username"] = data.FirstOrDefault().userName;
-                Session["docOrMember"] = "member";
-                TempData["loginFailed"] = "";
-                return RedirectToAction("Stories","Story");
-            }
-            else
-            {
-                TempData["loginFailed"] = "Wrong username/password, please try again";
-                return RedirectToAction("SignInMember");
-            }
-
-
-        }
-        public ActionResult SignInAsDoctor(GeneralUser accountInfo)
-        {
-            var fPassword = GetMD5(accountInfo.password);
-            var data = db.GeneralUser.Where(s => s.userName.Equals(accountInfo.userName) && s.password.Equals(fPassword)).ToList();
-            var checkDoc = db.Doctor.Where(s => s.userName.Equals(accountInfo.userName)).ToList();
-
-            if (data.Count() > 0 && checkDoc.Count() > 0)
+            if (data.Count() > 0)
             {
                 var username = data.FirstOrDefault().userName;
                 var doctorRecord = db.Doctor.Find(username);
-                if (doctorRecord.adminVerify == true)
+
+                //Check if it is a doctor account
+                if (checkDoc.Count() > 0)
                 {
-                    //Store username in session
-                    Session["username"] = username;
-                    Session["docOrMember"] = "doc";
-                    //Set error messages to null
-                    TempData["loginFailed"] = "";
-                    TempData["notVerified"] = "";
-                    return RedirectToAction("Articles", "Article");
+                    //If doctor account has been verified
+                    if (doctorRecord.adminVerify == true)
+                    {
+                        //Store username in session
+                        Session["username"] = username;
+                        Session["docOrMember"] = "doc";
+                        //Set error messages to null
+                        TempData["loginFailed"] = "";
+                        TempData["notVerified"] = "";
+                        return RedirectToAction("Articles", "Article");
+                    }
+                    //Else display error message
+                    else
+                    {
+                        TempData["notVerified"] = "Your account has not been verified by an adminstrator yet. Please give it 2 working days.";
+                        return RedirectToAction("SignIn");
+                    }
+
                 }
+                //Else if interested party account
                 else
                 {
-                    TempData["notVerified"] = "Your account has not been verified by an adminstrator yet. Please give it 2 working days.";
-                    return RedirectToAction("SignInDoctor");
-                }
+                    //Store username in session
+                    Session["username"] = data.FirstOrDefault().userName;
+                    Session["docOrMember"] = "member";
+                    TempData["loginFailed"] = "";
+                    return RedirectToAction("Stories", "Story");
 
+                }
             }
             else
             {
                 TempData["loginFailed"] = "Wrong username/password, please try again";
-                return RedirectToAction("SignInDoctor");
+                return RedirectToAction("SignIn");
             }
-        }
 
+
+        }
+       
         public ActionResult SignInAsAdmin(Admin accountInfo)
         {
             var fPassword = GetMD5(accountInfo.password);

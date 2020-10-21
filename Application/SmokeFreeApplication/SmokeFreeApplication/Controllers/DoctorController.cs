@@ -27,7 +27,7 @@ namespace SmokeFreeApplication.Controllers
             //If null, redirect user back to sign in page
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else
             {
@@ -79,7 +79,7 @@ namespace SmokeFreeApplication.Controllers
             DoctorCompoundModel docModel = new DoctorCompoundModel();
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else
             {
