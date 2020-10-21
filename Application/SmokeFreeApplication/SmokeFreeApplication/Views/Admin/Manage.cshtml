@@ -70,12 +70,12 @@
                 <div class="card">
 
                     <div class="card-body" style="padding-left:37px">
+                        <a href="@Url.Action("ArticleManage", "Admin", new { id = item.articleID})" style="text-decoration: none;">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
 
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                        @Html.ActionLink("Manage", "ArticleManage", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(item.articleID), null)
-                    </div>
+</div>
                 </div>
             }
         }
@@ -118,11 +118,11 @@
             {
                 <div class="card">
                     <div class="card-body" style="padding-left:37px">
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
-                        @Html.ActionLink("Manage", "DoctorManage", "Admin", new SmokeFreeApplication.Controllers.DocQuery(item.userName), null)
-                    </div>
+                        <a href="@Url.Action("DoctorManage", "Admin", new { id = item.userName})" style="text-decoration: none;">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
+</div>
                 </div>
             }
 
