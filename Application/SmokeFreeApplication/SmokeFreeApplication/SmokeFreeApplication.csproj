@@ -358,9 +358,6 @@
     <Content Include="Views\Test\para.cshtml" />
     <Content Include="Views\Test\printTest.cshtml" />
     <Content Include="Views\Admin\Manage.cshtml" />
-    <Content Include="Views\Admin\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Admin\_HorizontalTabsAdmin.cshtml" />
-    <Content Include="Views\Admin\_TopBarAdmin.cshtml" />
     <Content Include="Views\Admin\_postControl.cshtml" />
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
@@ -372,16 +369,10 @@
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\ViewComment.cshtml" />
-    <Content Include="Views\Admin\_pendingArticles.cshtml" />
-    <Content Include="Views\Admin\_pendingDoctors.cshtml" />
-    <Content Include="Views\Admin\_approvedDoctors.cshtml" />
-    <Content Include="Views\Admin\_approvedArticles.cshtml" />
     <Content Include="Views\Admin\ArticleManage.cshtml" />
     <Content Include="Views\Admin\DoctorManage.cshtml" />
-    <Content Include="Views\Admin\_LayoutViewArticle.cshtml" />
     <Content Include="Views\Admin\_ViewArticle.cshtml" />
     <Content Include="Views\Admin\_doctorControl.cshtml" />
-    <Content Include="Views\Admin\_LayoutViewDoctor.cshtml" />
     <Content Include="Views\Admin\_ViewDoctor.cshtml" />
     <Content Include="Views\Article\ViewArticle.cshtml" />
     <Content Include="Summernote\font\summernote.eot" />
