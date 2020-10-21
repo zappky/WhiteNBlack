@@ -75,7 +75,11 @@ namespace SmokeFreeApplication.Controllers
             var nextarticle = smokeFreeDB.Article.Find(q.id - 1);
             if (nextarticle != null)
             {
-                if (nextarticle.articleStatus == article.articleStatus)
+                while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus) )
+                {
+                    nextarticle = smokeFreeDB.Article.Find(nextarticle.articleID - 1);
+                }
+                if ((nextarticle != null) && (nextarticle.articleStatus == article.articleStatus))
                     return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
             }
 
@@ -87,7 +91,11 @@ namespace SmokeFreeApplication.Controllers
             var nextarticle = smokeFreeDB.Article.Find(q.id + 1);
             if (nextarticle != null)
             {
-                if (nextarticle.articleStatus == article.articleStatus)
+                while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus)  )
+                {
+                    nextarticle = smokeFreeDB.Article.Find(nextarticle.articleID + 1);
+                }
+                if ((nextarticle != null) && (nextarticle.articleStatus == article.articleStatus))
                     return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
             }
 
@@ -148,6 +156,12 @@ namespace SmokeFreeApplication.Controllers
 
             if (nextdoc != null)
             {
+                while ((nextdoc.adminVerify != doc.adminVerify) && (docIndex - 1 >= 0))
+                {
+                    docIndex--;
+                    nextdoc = docList[docIndex];
+
+                }
                 if (nextdoc.adminVerify == doc.adminVerify)
                     return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
             }
@@ -164,6 +178,12 @@ namespace SmokeFreeApplication.Controllers
                 nextdoc = docList[docIndex + 1];
             if (nextdoc != null)
             {
+                while ((nextdoc.adminVerify != doc.adminVerify) && (docIndex + 1 < docList.Count()))
+                {
+                    docIndex++;
+                    nextdoc = docList[docIndex];
+
+                }
                 if (nextdoc.adminVerify == doc.adminVerify)
                     return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
             }
