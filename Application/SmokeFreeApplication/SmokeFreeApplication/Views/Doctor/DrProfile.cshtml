@@ -8,12 +8,12 @@
 }
 
 <div style="margin-left: 5px;">
-    <img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
+    <img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:8rem; height:9rem; float:left; margin-right:10px;" alt="Image" />
     
 
     <div>
         <h3>@ViewBag.docName</h3>
-        <p>Bio</p>
+        <p><b>Bio</b></p>
         <p class="title">Doctor at @ViewBag.workLocation</p>
         <p>@ViewBag.description</p>
     </div>
@@ -24,7 +24,7 @@
 <div>
         @if (ViewBag.ownAccount == true)
         {
-            <button class="btn btn-secondary">@Html.ActionLink("Create Article", "createArticle", "Article")</button>
+            <button class="btn btn-secondary">@Html.ActionLink("Create Article", "createArticle", "Article") </button>
         }
 
     

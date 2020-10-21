@@ -8,13 +8,14 @@
 
 
 <h1>Create an Article</h1>
-<img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" width="150" height="155" alt="ProfileImage" style="float: left; margin-right: 15px;">
 
-<h2>Tang Kok Kee</h2>
-<p class="title">Doctor at </p>
-<p class="title">NUH </p>
-<p>Specialised in Lungs</p>
+<img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:8rem; height:9rem; float:left; margin-right:10px;" alt="Image" />
+
 <br>
+<div>
+    <h3>@ViewBag.docName</h3>
+    <p class="title">Doctor at @ViewBag.workLocation</p>
+</div>
 
 <form>
     <hr />
@@ -39,7 +40,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" style = "background-color: #e7e7e7; color: black;"} />
+            <input type="submit" value="Create" class="btn btn-default" style="background-color: #e7e7e7; color: black;" } />
         </div>
     </div>
 </form>
