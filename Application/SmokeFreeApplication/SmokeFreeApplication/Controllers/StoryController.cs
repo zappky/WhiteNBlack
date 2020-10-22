@@ -3,8 +3,6 @@ using System.Web.Mvc;
 using System.Net;
 using System;
 using System.Linq;
-using SmokeFreeApplication.Migrations;
-using Microsoft.SqlServer.Server;
 using System.Collections.Generic;
 using PagedList;
 

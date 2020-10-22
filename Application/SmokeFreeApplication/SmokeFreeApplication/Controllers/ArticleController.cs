@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SmokeFreeApplication.Migrations;
-using Microsoft.SqlServer.Server;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using SmokeFreeApplication.Models;
 using PagedList;
 using System.Net;
+using System.IO;
 
 namespace SmokeFreeApplication.Controllers
 {
@@ -133,22 +134,31 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult createArticle([Bind(Include = "articleID,userName,title, body,postDate")] Models.Article article)
+        public ActionResult createArticle([Bind(Include = "articleID, articleStatus, userName, title, body,postDate")] Models.Article article)
         {
+
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignInDoctor", "Account");
             }
             if (ModelState.IsValid)
             {
+                //Convert uploaded file to byte[]
+                HttpPostedFileBase postedFile = Request.Files["ImageFile"];
+                Stream stream = postedFile.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] img = binaryReader.ReadBytes((int)stream.Length);
+
                 article.postDate = DateTime.Now;
                 article.userName = Session["username"].ToString();
+                article.articleStatus = "pending";
                 string tags = Request["tagsinput"].ToString();
+                smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
                 smokeFreeDB.Article.Add(article);
                 smokeFreeDB.SaveChanges();
                 smokeFreeDB.Entry(article).Reload();
                 saveTags(tags, article.articleID);
+                //System.Diagnostics.Debug.WriteLine(Request.Files["ImageFile"].ToString());
                 return RedirectToAction("Articles");
             }
 
