@@ -10,17 +10,19 @@
     <tr>
         <td>Title: </td>
         <td>@Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "title", required = "required" })</td>
+        @Html.ValidationMessageFor(m => m.title, "", new { @class = "badge badge-danger" })
     </tr>
     <tr>
         <td>Content: </td>
         <td>@Html.TextAreaFor(m => m.content, new { @class = "form-control", @placeholder = "message", required = "required", @cols = "100", @rows = "8", @style = "width:100%;" })</td>
+        @Html.ValidationMessageFor(m => m.content, "", new { @class = "badge badge-danger" })
     </tr>
 
     <tr>
         <td>
             @Html.LabelFor(m => m.expiresTime, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.TextBoxFor(m => m.expiresTime, new { @type = "date", @class = "form-control datepicker" })
-            @Html.ValidationMessageFor(m => m.expiresTime, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(m => m.expiresTime, "", new { @class = "badge badge-danger" })
         </td>
 
     </tr>

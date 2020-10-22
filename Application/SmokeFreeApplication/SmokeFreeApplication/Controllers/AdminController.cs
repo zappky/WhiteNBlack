@@ -200,8 +200,15 @@ namespace SmokeFreeApplication.Controllers
         [HttpPost]
         public ActionResult BroadcastForm(Models.BroadcastMessage m)
         {
-            m.neverShowAgain = true;
-            
+            m.ownerName = Session["username"].ToString();
+            m.postTime = DateTime.Now;
+            m.neverShowAgain = false;
+            //not sure if need to set id
+            m.id = 10;
+
+            smokeFreeDB.BroadCastMessage.Add(m);
+            smokeFreeDB.SaveChanges();
+
             return RedirectToAction("Manage");
         }
 
