@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Boardcast";
+}
+@model SmokeFreeApplication.Models.BroadcastMessage
+<title>@ViewBag.Title</title>
+
+@using (Html.BeginForm("broadcastForm", "Admin", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Title: </td>
+            <td>@Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "title", required = "required" })</td>
+        </tr>
+        <tr>
+            <td>Content: </td>
+            <td>@Html.TextAreaFor(m => m.content, new { @class = "form-control", @placeholder = "message", required = "required",@cols = "100", @rows = "8", @style = "width:100%;" })</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+}
+

@@ -193,7 +193,20 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult BoardcastMessage()
         {
-            //spawn a Message dialong box
+            //spawn a boardcast form
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BroadcastForm(Models.BroadcastMessage m)
+        {
+            m.neverShowAgain = true;
+            
+            return RedirectToAction("Manage");
+        }
+
+        public ActionResult popuptest()
+        {
             return View();
         }
 

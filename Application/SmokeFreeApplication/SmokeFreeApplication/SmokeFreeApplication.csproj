@@ -389,6 +389,7 @@
     <Content Include="Views\Account\SignUpSuccessDoctor.cshtml" />
     <Content Include="Views\Account\SignUpSuccessMember.cshtml" />
     <Content Include="Views\Doctor\EditDrProfile.cshtml" />
+    <Content Include="Views\Admin\BoardcastMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
