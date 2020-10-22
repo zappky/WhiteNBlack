@@ -4,13 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using SmokeFreeApplication.Models;
+
 namespace SmokeFreeApplication.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            HttpCookie aCookie = new HttpCookie("popup", "true");
+            Response.Cookies.Add(aCookie);
+
+            //private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
+            SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
+            var msg = smokeFreeDB.BroadCastMessage.First();
+
+            return View(msg);
         }
 
         public ActionResult About()
@@ -20,9 +29,6 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-
-
-   
 
     }
 }

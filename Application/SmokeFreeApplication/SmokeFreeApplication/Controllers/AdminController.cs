@@ -205,17 +205,15 @@ namespace SmokeFreeApplication.Controllers
             m.neverShowAgain = false;
             //not sure if need to set id
             m.id = 10;
-
+            //Bug: DB doesnt seems to save the new entry
+            //EDIT: it does appear in db table, but only after i went on to do other stuff
+            //Not sure what is going on
             smokeFreeDB.BroadCastMessage.Add(m);
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("Manage");
         }
 
-        public ActionResult popuptest()
-        {
-            return View();
-        }
 
         public FileContentResult retrieveUserPic(string username)
         {
@@ -232,7 +230,6 @@ namespace SmokeFreeApplication.Controllers
             */
             return null;
         }
-
 
 
     }
