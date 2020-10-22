@@ -29,6 +29,12 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
+        public ActionResult QuitCentres()
+        {
+
+            return View();
+        }
+
 
     }
 }

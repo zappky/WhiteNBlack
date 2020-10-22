@@ -243,6 +243,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\quit-centres-geojson.geojson" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -392,6 +393,7 @@
     <Content Include="Views\Doctor\EditDrProfile.cshtml" />
     <Content Include="Views\Admin\BoardcastMessage.cshtml" />
     <Content Include="Views\Home\_PopUp.cshtml" />
+    <Content Include="Views\Home\QuitCentres.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
