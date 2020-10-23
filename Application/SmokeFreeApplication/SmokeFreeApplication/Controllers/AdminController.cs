@@ -84,22 +84,8 @@ namespace SmokeFreeApplication.Controllers
             {
                 nextarticle = articlesList.ElementAt(--index);
             }
-            if (nextarticle != null)
-            {
-                while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus) )
-                {
 
-                    if (index - 1 >= 0)
-                    {
-                        nextarticle = articlesList.ElementAt(--index);
-                    }
-
-                }
-                if ((nextarticle != null) && (nextarticle.articleStatus == article.articleStatus))
-                    return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
-            }
-
-            return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(article.articleID));
+            return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
         }
         public ActionResult NextPost(ArticleQuery q)
         {
@@ -116,21 +102,8 @@ namespace SmokeFreeApplication.Controllers
                 nextarticle = articlesList.ElementAt(++index);
             }
 
-            if (nextarticle != null)
-            {
-                while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus))
-                {
-                    if (index + 1 < articlesList.Count())
-                    {
-                        nextarticle = articlesList.ElementAt(++index);
-                    }
 
-                }
-                if ((nextarticle != null) && (nextarticle.articleStatus == article.articleStatus))
-                    return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
-            }
-
-            return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(article.articleID));
+            return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
         }
 
         public ActionResult ClosePost(ArticleQuery q)
