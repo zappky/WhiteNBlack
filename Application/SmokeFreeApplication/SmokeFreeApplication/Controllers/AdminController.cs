@@ -72,12 +72,28 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult PrevPost(ArticleQuery q)
         {
             var article = smokeFreeDB.Article.Find(q.id);
-            var nextarticle = smokeFreeDB.Article.Find(q.id - 1);
+            var articles = from a in smokeFreeDB.Article
+                           where a.articleStatus == article.articleStatus
+                           select a;
+
+           var articlesList =  articles.ToList();
+            int index = articlesList.FindIndex(a => a.articleID == q.id);
+
+            var nextarticle = article;
+            if (index - 1 >= 0)
+            {
+                nextarticle = articlesList.ElementAt(--index);
+            }
             if (nextarticle != null)
             {
                 while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus) )
                 {
-                    nextarticle = smokeFreeDB.Article.Find(nextarticle.articleID - 1);
+
+                    if (index - 1 >= 0)
+                    {
+                        nextarticle = articlesList.ElementAt(--index);
+                    }
+
                 }
                 if ((nextarticle != null) && (nextarticle.articleStatus == article.articleStatus))
                     return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
@@ -88,12 +104,27 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult NextPost(ArticleQuery q)
         {
             var article = smokeFreeDB.Article.Find(q.id);
-            var nextarticle = smokeFreeDB.Article.Find(q.id + 1);
+            var articles = from a in smokeFreeDB.Article
+                           where a.articleStatus == article.articleStatus
+                           select a;
+
+            var articlesList = articles.ToList();
+            int index = articlesList.FindIndex(a => a.articleID == q.id);
+            var nextarticle = article;
+            if (index + 1 < articlesList.Count())
+            {
+                nextarticle = articlesList.ElementAt(++index);
+            }
+
             if (nextarticle != null)
             {
-                while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus)  )
+                while ((nextarticle != null) && (nextarticle.articleStatus != article.articleStatus))
                 {
-                    nextarticle = smokeFreeDB.Article.Find(nextarticle.articleID + 1);
+                    if (index + 1 < articlesList.Count())
+                    {
+                        nextarticle = articlesList.ElementAt(++index);
+                    }
+
                 }
                 if ((nextarticle != null) && (nextarticle.articleStatus == article.articleStatus))
                     return RedirectToAction("ArticleManage", new SmokeFreeApplication.Controllers.ArticleQuery(nextarticle.articleID));
