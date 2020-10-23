@@ -362,6 +362,7 @@
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
     <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
+    <Content Include="Views\InterestedParty\EditMemberProfile.cshtml" />
     <Content Include="Views\Article\createArticle.cshtml" />
     <Content Include="Views\Comments\CreateComment.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
