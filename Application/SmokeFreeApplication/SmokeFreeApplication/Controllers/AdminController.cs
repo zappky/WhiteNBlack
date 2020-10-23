@@ -153,47 +153,34 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult PrevDoc(DocQuery q)
         {
             var doc = smokeFreeDB.Doctor.Find(q.id);
-            Doctor nextdoc = doc;
-            var docList = smokeFreeDB.Doctor.ToList();
+            var docs = from a in smokeFreeDB.Doctor
+                           where a.adminVerify == doc.adminVerify
+                           select a;
+            var docList = docs.ToList();
+
+
             var docIndex  = docList.IndexOf(doc);
-            if(docIndex - 1 >= 0)
-               nextdoc = docList[docIndex - 1];
+            Doctor nextdoc = doc;
+            if (docIndex - 1 >= 0)
+               nextdoc = docList[--docIndex];
 
-            if (nextdoc != null)
-            {
-                while ((nextdoc.adminVerify != doc.adminVerify) && (docIndex - 1 >= 0))
-                {
-                    docIndex--;
-                    nextdoc = docList[docIndex];
-
-                }
-                if (nextdoc.adminVerify == doc.adminVerify)
-                    return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
-            }
-
-            return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(doc.userName));
+            return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
         }
         public ActionResult NextDoc(DocQuery q)
         {
             var doc = smokeFreeDB.Doctor.Find(q.id);
-            Doctor nextdoc = doc;
-            var docList = smokeFreeDB.Doctor.ToList();
+            var docs = from a in smokeFreeDB.Doctor
+                       where a.adminVerify == doc.adminVerify
+                       select a;
+            var docList = docs.ToList();
+
+
             var docIndex = docList.IndexOf(doc);
+            Doctor nextdoc = doc;
             if (docIndex + 1 < docList.Count())
-                nextdoc = docList[docIndex + 1];
-            if (nextdoc != null)
-            {
-                while ((nextdoc.adminVerify != doc.adminVerify) && (docIndex + 1 < docList.Count()))
-                {
-                    docIndex++;
-                    nextdoc = docList[docIndex];
+                nextdoc = docList[++docIndex];
 
-                }
-                if (nextdoc.adminVerify == doc.adminVerify)
-                    return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
-            }
-
-            return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(doc.userName));
+            return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
         }
 
         public ActionResult BoardcastMessage()
