@@ -12,5 +12,6 @@ namespace SmokeFreeApplication.Models
         [Key, Column(Order = 1)]
         public string checkInId { get; set; }
         public DateTime checkInDate { get; set; }
+        public string userName { get; set; }
     }
 }

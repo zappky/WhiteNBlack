@@ -180,6 +180,10 @@
     <Compile Include="Migrations\202010201121357_commentstatus.Designer.cs">
       <DependentUpon>202010201121357_commentstatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010230705406_checkInDateUsername.cs" />
+    <Compile Include="Migrations\202010230705406_checkInDateUsername.Designer.cs">
+      <DependentUpon>202010230705406_checkInDateUsername.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminManageDataPacket.cs" />
@@ -358,6 +362,7 @@
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
     <Content Include="Views\InterestedParty\MemberProfile.cshtml" />
+    <Content Include="Views\InterestedParty\EditMemberProfile.cshtml" />
     <Content Include="Views\Article\createArticle.cshtml" />
     <Content Include="Views\Comments\CreateComment.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
@@ -431,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010201121357_commentstatus.resx">
       <DependentUpon>202010201121357_commentstatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010230705406_checkInDateUsername.resx">
+      <DependentUpon>202010230705406_checkInDateUsername.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
