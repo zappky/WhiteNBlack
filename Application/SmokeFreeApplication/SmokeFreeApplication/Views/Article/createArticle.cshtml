@@ -8,39 +8,47 @@
 
 
 <h1>Create an Article</h1>
-<img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" width="150" height="155" alt="ProfileImage" style="float: left; margin-right: 15px;">
 
-<h2>Tang Kok Kee</h2>
-<p class="title">Doctor at </p>
-<p class="title">NUH </p>
-<p>Specialised in Lungs</p>
-<br>
 
-<form>
+@using (Html.BeginForm("createArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<form onsubmit="return false;">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        <p>Article Title: </p>
-        <div class="col-sm-12">
-            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control" }, style = "width:300px;" })
+        <p>Title: </p>
+        <div>
+            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control create-article-field" } })
             @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         <p>Description: </p>
-        <div class="col-sm-12">
-            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" }, style = "width:100%; height:200px;" })
+        <div>
+            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control create-article-field" } })
             @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.articlePicture)</label>
+        <input type="file" class="form-control-file" name="ImageFile" id="ImageFile" />
+    </div>
+    @Html.Partial("~/Views/Shared/_TagField.cshtml")
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" style = "background-color: #e7e7e7; color: black;"} />
+            <input type="button" onclick="this.form.submit();" value="Create" class="btn btn-default" />
         </div>
     </div>
 </form>
-
+}
+@section Scripts
+{
+    <link href="~/Content/article-style.css" rel="stylesheet">
+    <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
+    <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
+    <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
+}

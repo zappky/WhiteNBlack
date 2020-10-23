@@ -1,9 +1,61 @@
-﻿@{
+﻿@model SmokeFreeApplication.Models.Article
+@{
     ViewBag.Title = "Article Manage";
-    Layout = "~/Views/Admin/_LayoutViewArticle.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
+<div class="card" style="width: 70rem;">
+
+    <div class="card-header">
+        <img src="@Url.Action("retrieveUserPic", "Admin", new { username = Model.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+        <div style="height:5rem; padding-top:30px; padding-left:100px;">
+            <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => Model.postDate)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => Model.userName)</h6>
+        </div>
+    </div>
+    <div class="card-body">
+        <h3 class="card-title">@Html.DisplayFor(modelItem => Model.title)</h3>
+        <p class="card-text">@Html.DisplayFor(modelItem => Model.body)</p>
+    </div>
+
+    </a>
+</div>
 
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active nav-link">
+                @Html.ActionLink("Close", "ClosePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+            </li>
+            @if (Model.articleStatus == "pending")
+            {
+                <li class="nav-item active nav-link">
+                    @Html.ActionLink("Approve", "ApprovePost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                </li>
+                <li class="nav-item active nav-link">
+                    @Html.ActionLink("Reject", "RejectPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+                </li>
+            }
+        </ul>
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active justify-content-end">
+                @Html.ActionLink("Previous", "PrevPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+            </li>
+            <li class="nav-item active justify-content-end">
+                @Html.ActionLink("Next", "NextPost", "Admin", new SmokeFreeApplication.Controllers.ArticleQuery(Model.articleID), null)
+            </li>
+       </ul>
+    </div>
+</nav>
+
+
+
+@*
+    <p>@Model.articleStatus</p>
+
+*@

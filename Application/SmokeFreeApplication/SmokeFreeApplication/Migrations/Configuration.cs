@@ -147,9 +147,73 @@ namespace SmokeFreeApplication.Migrations
                     contactNo = 61112222,
                     doctorID = "M54553P",
                     adminVerify = true
+                }, 
+                new Doctor
+                {
+                    userName = "doctor3",
+                    workLocation = "Weed Hospital",
+                    description = "smoke weed everyday",
+                    contactNo = 61235555,
+                    doctorID = "M69123A",
+                    adminVerify = false
                 }
-                );
 
+                );
+            
+            context.Article.AddOrUpdate(
+                p => p.userName,
+                new Article
+                {
+                    userName = "doctor1",
+                    title = "Dummy Title1",
+                    articleStatus = "pending",
+                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    postDate = DateTime.Parse("2020-10-11")
+
+                }, 
+                new Article
+                {
+                    userName = "doctor1",
+                    title = "Dummy Title2",
+                    articleStatus = "approved",
+                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    postDate = DateTime.Parse("2020-10-11")
+                }, 
+                new Article
+                {
+                    userName = "doctor2",
+                    title = "Dummy Title3",
+                    articleStatus = "pending",
+                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    postDate = DateTime.Parse("2020-10-11")
+                }, 
+                new Article
+                {
+                    userName = "doctor2",
+                    title = "Dummy Title4",
+                    articleStatus = "pending",
+                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    postDate = DateTime.Parse("2020-10-11")
+                }
+
+                );
+            
+            /*
+            context.BroadCastMessage.AddOrUpdate(
+               p => p.id,
+               new BroadcastMessage
+               {
+                   id = 1,
+                   neverShowAgain = false,
+                   content = "test Boardcast message",
+                   ownerName = "adminAcc",
+                   title = "Test Title",
+                   postTime = DateTime.Parse("1990-1-11"),
+                   expiresTime = DateTime.Parse("1990-1-11")
+               }
+               );
+            
+            */
         }
     }
 }

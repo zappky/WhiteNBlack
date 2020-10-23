@@ -1,6 +1,182 @@
-﻿
+﻿@model SmokeFreeApplication.Models.AdminManageDataPacket
+
 @{
     ViewBag.Title = "My Admin";
-    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<SmokeFreeApplication.Models.Article> articleList = Model.list1;
+    IEnumerable<SmokeFreeApplication.Models.Doctor> doctorList = Model.list2;
 }
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial;
+        }
 
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Pending Article')">Pending Article</button>
+    <button class="tablinks" onclick="openCity(event, 'Approved Article')">Approved Article</button>
+    <button class="tablinks" onclick="openCity(event, 'Pending Doctor')">Pending Doctor</button>
+    <button class="tablinks" onclick="openCity(event, 'Approved Doctor')">Approved Doctor</button>
+</div>
+
+<div id="Pending Article" class="tabcontent">
+    <div class="list-group">
+
+
+        @foreach (var item in articleList)
+        {
+            if ("pending" == item.articleStatus)
+            {
+                <div class="card">
+
+                    <div class="card-body" style="padding-left:37px">
+                        <a href="@Url.Action("ArticleManage", "Admin", new { id = item.articleID})" style="text-decoration: none;">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+
+</div>
+
+<div id="Approved Article" class="tabcontent" style="display: none;">
+
+    <div class="list-group">
+        @foreach (var item in articleList)
+        {
+            if ("approved" == item.articleStatus)
+            {
+                <div class="card">
+                    <div class="card-body" style="padding-left:37px">
+                        <a href="@Url.Action("ArticleManage", "Admin", new { id = item.articleID})" style="text-decoration: none;">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+                    </div>
+                </div>
+            }
+
+
+        }
+
+    </div>
+
+</div>
+
+<div id="Pending Doctor" class="tabcontent" style="display: none;">
+
+    <div class="list-group">
+
+        @foreach (var item in doctorList)
+        {
+            if (!item.adminVerify)
+            {
+                <div class="card">
+                    <div class="card-body" style="padding-left:37px">
+                        <a href="@Url.Action("DoctorManage", "Admin", new { id = item.userName})" style="text-decoration: none;">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
+                    </div>
+                </div>
+            }
+
+
+        }
+
+    </div>
+</div>
+
+<div id="Approved Doctor" class="tabcontent" style="display: none;">
+    <div class="list-group">
+
+        @foreach (var item in doctorList)
+        {
+            if (item.adminVerify)
+            {
+                <div class="card">
+                    <div class="card-body" style="padding-left:37px">
+                        <a href="@Url.Action("DoctorManage", "Admin", new { id = item.userName})" style="text-decoration: none;">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
+                    </div>
+                </div>
+            }
+
+
+        }
+
+    </div>
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+
+
+@*
+    <p>Admin Interface</p>
+    <p>@articleList.Count()</p>
+    <p>@doctorList.Count()</p>
+*@

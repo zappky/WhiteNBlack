@@ -21,5 +21,7 @@ namespace SmokeFreeApplication.Models
         public DateTime postDate { get; set; }
         public string userName { get; set; }
 
+        public string status { get; set; }
+
     }
 }

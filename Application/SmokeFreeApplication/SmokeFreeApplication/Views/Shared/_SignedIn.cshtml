@@ -10,19 +10,30 @@
                 <li class="nav-item active nav-link">
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
-                <li class="nav-item nav-link">
-                    @Html.ActionLink("Articles", "Articles", "Article")
-                </li>
-                <li class="nav-item nav-link">
-                    @Html.ActionLink("Stories", "Stories", "Story")
-                </li>
-                <li class="nav-item nav-link">
-                    @Html.ActionLink("About Us", "About", "Home")
-                </li>
+                @if (Session["docOrMember"] != "admin")
+                {
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Articles", "Articles", "Article")
+                    </li>
+                }
+                @if (Session["docOrMember"] != "admin")
+                {
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Stories", "Stories", "Story")
+                    </li>
+                }
+                @if (Session["docOrMember"] != "admin")
+                {
+                    <li class="nav-item nav-link">
+
+                        @Html.ActionLink("About Us", "About", "Home")
+
+                    </li>
+                }
                 <li class="nav-item nav-link">
                     @if (Session["docOrMember"] == "doc")
                     {
-                        @Html.ActionLink("Profile", "DrProfile", "Doctor", new { viewUsername = Session["username"].ToString()}, new { page = 1})
+                        @Html.ActionLink("Profile", "DrProfile", "Doctor", new { viewUsername = Session["username"].ToString() }, new { page = 1 })
                     }
                     else if (Session["docOrMember"] == "member")
                     {
@@ -33,11 +44,18 @@
                         @Html.ActionLink("Manage", "Manage", "Admin")
                     }
                 </li>
-                <li class="nav-item nav-link">
-                    @Html.ActionLink("Logout", "Logout", "Account")
-                </li>
+                @if (Session["docOrMember"] == "admin")
+                {
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Boardcast", "BoardcastMessage", "Admin")
 
-            </ul>
+                    </li>
+                }
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Logout", "Logout", "Account")
+                    </li>
+
+                </ul>
         </div>
     </nav>
 

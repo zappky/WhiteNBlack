@@ -19,7 +19,7 @@ $(function () {
         }
     });
 });
-function load() {
+function load() 
     if ($("#nameRad").is(':checked')) {
         $('#searchBar').tagsinput('removeALL');
         $('#searchBar').tagsinput('destroy');
@@ -33,4 +33,7 @@ function load() {
     }
    
 }
+
+
+
 window.onload = load;

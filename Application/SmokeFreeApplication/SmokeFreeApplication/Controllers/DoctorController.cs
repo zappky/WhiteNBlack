@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SmokeFreeApplication.Models;
 using PagedList;
-
+using System.IO;
 
 namespace SmokeFreeApplication.Controllers
 {
@@ -27,7 +27,7 @@ namespace SmokeFreeApplication.Controllers
             //If null, redirect user back to sign in page
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else
             {
@@ -76,9 +76,10 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult EditDrProfile()
         {
+            DoctorCompoundModel docModel = new DoctorCompoundModel();
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else
             {
@@ -89,15 +90,15 @@ namespace SmokeFreeApplication.Controllers
                 var generaldata = smokeFreeDB.GeneralUser.Where(x => x.userName.Equals(username));
                 var docdata = smokeFreeDB.Doctor.Where(x => x.userName.Equals(username));
 
-                ViewBag.workLocation = docdata.FirstOrDefault().workLocation;
-                ViewBag.description = docdata.FirstOrDefault().description;
-                ViewBag.contactNo = docdata.FirstOrDefault().contactNo;
+                docModel.Doctors = docdata.FirstOrDefault();
+                docModel.GeneralUsers = generaldata.FirstOrDefault();
+
                 ViewBag.username = username;
 
             }
            
 
-            return View();
+            return View(docModel);
 
         }
 
@@ -105,9 +106,23 @@ namespace SmokeFreeApplication.Controllers
         {
             string username = Session["username"].ToString();
             var doctor = smokeFreeDB.Doctor.Find(username);
+            var generalUser = smokeFreeDB.GeneralUser.Find(username);
+
+            HttpPostedFileBase postedFile = Request.Files["ImageFile"];
+            //If user uploads new profile picture
+            if (postedFile.ContentLength > 0 && postedFile.ContentType.Contains("image"))
+            {
+                Stream stream = postedFile.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] img = binaryReader.ReadBytes((int)stream.Length);
+                generalUser.profilePicture = img;
+                
+            }
+
             doctor.description = accountInfo.Doctors.description;
             doctor.contactNo = accountInfo.Doctors.contactNo;
             doctor.workLocation = accountInfo.Doctors.workLocation;
+            smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("DrProfile", new {viewUsername = username, page = 1});

@@ -12,21 +12,7 @@
 
 <h2>Articles</h2>
 
-<div class="alert alert-dismissible alert-primary" style="display:none;">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-</div>
-<!--Search-->
-@using (Html.BeginForm("Articles", "Article", FormMethod.Get, new { id = "searchForm" }))
-{
-    <b> Search By: </b>
-    @Html.RadioButton("option", "Name", new { id = "nameRad", @required = "required" })<text>Name</text>
-    @Html.RadioButton("option", "Tags", new { id = "tagRad" })<text> Tags </text>
-    <br />
-    <input name="search" id="searchBar" type="text" data-role="none" required" />
-    <input type="button" onclick="this.form.submit();" value="Search" id="searchBtn" class="btn btn-default" />
-
-}
+@Html.Partial("~/Views/Shared/_SearchBar.cshtml")
 
 @foreach (var item in Model)
 {
@@ -53,12 +39,12 @@
                 </div>*@
 
             <div class="card" style="width: 18rem;">
-             <img class="card-img-top" src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image"/>
-             <div class="card-body">
-                 <h5 class="card-title">@Html.DisplayFor(modelItem => item.title)</h5>
-                 <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                 @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
-             </div>
+                <img class="card-img-top" src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.title)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
+                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                </div>
             </div>
         </a>
     </div>

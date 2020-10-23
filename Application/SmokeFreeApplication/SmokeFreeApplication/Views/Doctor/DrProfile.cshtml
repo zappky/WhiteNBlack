@@ -8,31 +8,40 @@
 }
 
 <div style="margin-left: 5px;">
-    <img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
-    
+    <table>
+        <tr>
+            <td>
+                <img src="@Url.Action("retrieveUserPic", "Doctor", new { username = ViewBag.username})" style="width:150px; height:150px; float:left; margin-right:10px;" alt="Image" />
+            </td>
+            <td>
+                <h3>@ViewBag.docName</h3>
+                <p>Bio</p>
+                <p class="title">Doctor at @ViewBag.workLocation</p>
+                <p>@ViewBag.description</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if (ViewBag.ownAccount == true)
+                {
+                    <button class="btn btn-secondary">@Html.ActionLink("Create Article", "createArticle", "Article")</button>
+                }
+            </td>
+            <td>
+                @if (ViewBag.ownAccount == true)
+                {
+                    <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditDrProfile", "Doctor")</button>
+                }
+            </td>
+        </tr>
+    </table>
 
-    <div>
-        <h3>@ViewBag.docName</h3>
-        <p>Bio</p>
-        <p class="title">Doctor at @ViewBag.workLocation</p>
-        <p>@ViewBag.description</p>
-    </div>
+
+
 
 
 </div>
 
-<div>
-        @if (ViewBag.ownAccount == true)
-        {
-            <button class="btn btn-secondary">@Html.ActionLink("Create Article", "createArticle", "Article")</button>
-        }
-
-    
-        @if (ViewBag.ownAccount == true)
-        {
-            <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditDrProfile", "Doctor")</button>
-        }
-</div>
 
 <h2>Articles</h2>
 @foreach (var item in Model)
@@ -40,7 +49,6 @@
     <div class="card" style="width: 70rem;">
         <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
             <div class="card-header">
-                <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
                 <div style="height:5rem; padding-top:30px; padding-left:100px;">
                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
@@ -63,7 +71,7 @@
 }
 <!---linking pager to search display-->
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, option = ViewBag.option, search = ViewBag.search }))
+@Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, viewUsername = ViewBag.username, option = ViewBag.option, search = ViewBag.search }))
 
 <!--Search script-->
 @section Scripts
