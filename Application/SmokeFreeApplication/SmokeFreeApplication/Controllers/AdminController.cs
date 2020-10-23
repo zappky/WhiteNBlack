@@ -140,7 +140,8 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult RejectDoc(DocQuery q)
         {
             var aDoc = smokeFreeDB.Doctor.Find(q.id);
-            aDoc.adminVerify = false;
+            //aDoc.adminVerify = false;
+            smokeFreeDB.Doctor.Remove(aDoc);
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("Manage");
@@ -222,10 +223,6 @@ namespace SmokeFreeApplication.Controllers
             if (imgByteArray != null)
             {
                 return new FileContentResult(imgByteArray, "image/jpeg");
-            }
-            else
-            {
-                return null;
             }
             */
             return null;

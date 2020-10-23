@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal">close</button>
-                    <button class="btn btn-secondary" data-dismiss="modal" onclick="popupAgain()">Never Show Again</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" onclick="NeverPopupAgain()">Never Show Again</button>
                 </div>
 
             </div>
@@ -39,7 +39,7 @@
 </div>
 
 <script type='text/javascript'>
-    function popupAgain() {
+    function NeverPopupAgain() {
         document.cookie = "popup=false";
         //var cookie = '@HttpContext.Current.Request.Cookies["popup"].Value';
         //alert(cookie);

@@ -137,7 +137,6 @@
     <Compile Include="Controllers\InterestedPartyController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Controllers\TagController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,7 +199,6 @@
     <Compile Include="Models\Story.cs" />
     <Compile Include="Models\StoriesTag.cs" />
     <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -356,10 +354,6 @@
     <Content Include="Views\Account\SignUpDoctor.cshtml" />
     <Content Include="Views\Shared\_SignedIn.cshtml" />
     <Content Include="Views\Shared\_NotSignedIn.cshtml" />
-    <Content Include="Views\Test\Test.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Views\Test\para.cshtml" />
-    <Content Include="Views\Test\printTest.cshtml" />
     <Content Include="Views\Admin\Manage.cshtml" />
     <Content Include="Views\Account\SignInAdmin.cshtml" />
     <Content Include="Views\Doctor\DrProfile.cshtml" />
