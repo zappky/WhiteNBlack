@@ -2,6 +2,15 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model SmokeFreeApplication.Models.BroadcastMessage
+
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">@Html.DisplayFor(modelItem => Model.title)</h4>
+    <p>@Html.DisplayFor(modelItem => Model.content)</p>
+    <hr>
+    <p class="mb-0">@Html.DisplayFor(modelItem => Model.ownerName)</p>
+</div>
+
 
 <div class="jumbotron">
 
@@ -57,4 +66,3 @@
 </div>
 
 
-@Html.Partial("_PopUp")
