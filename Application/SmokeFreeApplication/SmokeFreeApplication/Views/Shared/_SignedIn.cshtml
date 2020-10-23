@@ -37,7 +37,7 @@
                     }
                     else if (Session["docOrMember"] == "member")
                     {
-                        @Html.ActionLink("Profile", "MemberProfile", "InterestedParty")
+                        @Html.ActionLink("Profile", "MemberProfile", "InterestedParty", new {viewUsername = Session["username"].ToString() }, new { page = 1 })
                     }
                     else if (Session["docOrMember"] == "admin")
                     {

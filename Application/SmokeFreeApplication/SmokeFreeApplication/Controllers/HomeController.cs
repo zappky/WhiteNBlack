@@ -17,7 +17,12 @@ namespace SmokeFreeApplication.Controllers
 
             //private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
             SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
-            var msg = smokeFreeDB.BroadCastMessage.First();
+
+            var msgs = from m in smokeFreeDB.BroadCastMessage
+                           orderby m.postTime descending
+                           select m;
+
+            var msg = msgs.First();
 
             return View(msg);
         }

@@ -160,7 +160,7 @@ namespace SmokeFreeApplication.Migrations
 
                 );
             
-            context.Article.AddOrUpdate(
+            /*context.Article.AddOrUpdate(
                 p => p.userName,
                 new Article
                 {
@@ -196,7 +196,7 @@ namespace SmokeFreeApplication.Migrations
                     postDate = DateTime.Parse("2020-10-11")
                 }
 
-                );
+                );*/
             
             /*
             context.BroadCastMessage.AddOrUpdate(
