@@ -24,7 +24,7 @@ namespace SmokeFreeApplication.Controllers
 
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInMember", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             if (!String.IsNullOrEmpty(search))
             {
@@ -40,7 +40,7 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-                View(smokeFreeDB.Story.ToList().ToPagedList(pageNumber, pageSize));
+                displayList =  smokeFreeDB.Story.ToList();
             }
 
 

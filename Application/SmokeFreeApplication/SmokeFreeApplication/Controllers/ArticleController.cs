@@ -28,7 +28,7 @@ namespace SmokeFreeApplication.Controllers
 
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             if (!String.IsNullOrEmpty(search))
             {
@@ -68,7 +68,7 @@ namespace SmokeFreeApplication.Controllers
         {
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
 
             if (id == null)
@@ -95,7 +95,7 @@ namespace SmokeFreeApplication.Controllers
 
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInDoctor", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             if (ModelState.IsValid)
             {
@@ -109,12 +109,12 @@ namespace SmokeFreeApplication.Controllers
                 article.userName = Session["username"].ToString();
                 article.articleStatus = "pending";
                 string tags = Request["tagsinput"].ToString();
+                article.articlePicture = img;
                 smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
                 smokeFreeDB.Article.Add(article);
                 smokeFreeDB.SaveChanges();
                 smokeFreeDB.Entry(article).Reload();
                 tagAccess.saveTags(tags, article.articleID);
-                //System.Diagnostics.Debug.WriteLine(Request.Files["ImageFile"].ToString());
                 return RedirectToAction("Articles");
             }
 
