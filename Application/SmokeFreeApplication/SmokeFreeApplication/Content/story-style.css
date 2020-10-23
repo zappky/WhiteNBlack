@@ -3,7 +3,5 @@
 }
 input {
     resize: none;
-}
-input {
     resize: vertical;
 }

@@ -44,6 +44,7 @@
 <!---paging link with search and option-->
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Stories", new { page, option = ViewBag.option, search = ViewBag.search }))
+
 @section Scripts
 {
     <script type="text/javascript" src="~/Scripts/search.js"></script>
