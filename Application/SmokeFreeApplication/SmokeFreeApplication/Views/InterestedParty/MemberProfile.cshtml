@@ -1,8 +1,66 @@
-﻿
+﻿@model PagedList.IPagedList<SmokeFreeApplication.Models.Story>
+@using PagedList.Mvc;
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
     ViewBag.Title = "MemberProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MemberProfile</h2>
+<div style="margin-left: 5px;">
+    <img src="@Url.Action("RetrieveMemberPic", "InterestedParty", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
+    <div>
+        <h3>@ViewBag.memberName</h3>
+        <h4>Bio</h4>
+        <p>@ViewBag.memberBio</p>
+    </div>
+</div>
 
+<div>
+    @if (ViewBag.ownAccount == true)
+    {
+        <button class="btn btn-secondary">@Html.ActionLink("Create Story", "CreateStory", "Story")</button>
+    }
+
+
+    @if (ViewBag.ownAccount == true)
+    {
+        <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditMemberProfile", "InterestedParty")</button>
+    }
+</div>
+
+<h2>Stories</h2>
+
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 70rem;">
+        <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID })" style="text-decoration: none;">
+            <div class="card-header">
+                <img src="@Url.Action("retrieveUserPic", "Story", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
+                <div class="card-text">@Html.Raw(item.body)</div>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID })" style="text-decoration: none;">Read More</a>
+                <a href="#" class="card-link">Share</a>
+            </div>
+        </a>
+    </div>
+    <br />
+}
+<!---linking pager to search display-->
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Stories", new { page, option = ViewBag.option, search = ViewBag.search }))
+
+<!--Search script-->
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/search.js"></script>
+}
+<!------->
