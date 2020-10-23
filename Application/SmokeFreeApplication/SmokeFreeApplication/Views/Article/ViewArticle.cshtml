@@ -4,30 +4,33 @@
     ViewBag.Title = "ViewArticle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-</br>
+<br />
 <p>
     @Html.ActionLink("Back to List", "Articles")
 </p>
-
-@*<<<<<<< HEAD
-=======
-@*Modify this section to display other things like pictures*@
-@*>>>>>>> 96023bd91467fe1da0c3c1d8f160597abeb986c6*@
-<div class="mx-auto" style="width: 70rem;">
-    <h3> @Html.DisplayFor(model => model.title)</h3>
-    <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
-    <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
-    <p>@Html.DisplayFor(model => model.body)</p>
-    @foreach (var tag in ViewBag.tagList)
-    {
-        <span class="badge badge-dark"> @Html.Raw(tag) </span>
-    }
+<div class="mx-auto" style="max-width: 70rem;">
+        <img src="@Url.Action("retrieveArticlePic", "Article", new { username = ViewBag.username})" style="width:500px; height:350px; float:left; margin-right:10px;" alt="Image" />
+        <h3> @Html.DisplayFor(model => model.title)</h3>
+        <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
+        <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
+        <br />
+        @foreach (var tag in ViewBag.tagList)
+        {
+            <span class="badge badge-dark"> @Html.Raw(tag) </span>
+        }
 </div>
-
+<br />
 <div>
+    <p>@Html.DisplayFor(model => model.body)</p>
+</div>
+<br />
+<br />
+<br />
+<h2>Comments</h2>
+<hr />
+<div class="jumbotron" style="padding:10px">
     @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
 </div>
-
-<div class="jumbotron">
+<div id="accordion">
     @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
 </div>

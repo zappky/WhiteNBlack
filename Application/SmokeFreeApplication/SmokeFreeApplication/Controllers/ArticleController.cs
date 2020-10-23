@@ -64,6 +64,19 @@ namespace SmokeFreeApplication.Controllers
             }
         }
 
+        public FileContentResult retrieveArticlePic(string articleID)
+        {
+            byte[] imgByteArray = smokeFreeDB.Article.Find(articleID).articlePicture;
+            if (imgByteArray != null)
+            {
+                return new FileContentResult(imgByteArray, "image/jpeg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public ActionResult ViewArticle(int? id)
         {
             if (Session["username"] == null)
@@ -77,6 +90,7 @@ namespace SmokeFreeApplication.Controllers
             }
             ViewBag.tagList = tagAccess.getTags(id);
             Article article = smokeFreeDB.Article.Find(id);
+            ViewBag.articleDetails = article.body;
             if (article == null)
             {
                 return HttpNotFound();
