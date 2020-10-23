@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using SmokeFreeApplication.Models;
+using SmokeFreeApplication.Controllers;
 using PagedList;
 using System.Net;
 using System.IO;
@@ -14,6 +15,7 @@ namespace SmokeFreeApplication.Controllers
     public class ArticleController : Controller
     {
         private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
+        private TagController tagAccess = new TagController();
 
         // GET: Article
         public ActionResult Articles(string option, string search, int? page)
@@ -36,7 +38,7 @@ namespace SmokeFreeApplication.Controllers
                 }
                 else if (option == "Tags")
                 {
-                    displayList = searchTags(search);
+                    displayList =(dynamic) tagAccess.searchArticleByTag(search);
                 }
 
             }
@@ -47,38 +49,6 @@ namespace SmokeFreeApplication.Controllers
 
 
             return View(displayList.ToPagedList(pageNumber, pageSize));
-        }
-
-        //search with tags
-        public List<Article> searchTags(string inputTags)
-        {
-            string[] tagArray = inputTags.Split(',');
-            string tempTagName;
-            int tempId;
-            ArticlesTag article;
-            int[] tagIdArray = new int[tagArray.Length];
-            List<Article> displayList = new List<Article>();
-            for (int i = 0; i < tagArray.Length; i++)
-            {
-                tempTagName = tagArray[i];
-                Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tempTagName).FirstOrDefault();
-                if (tag != null)
-                {
-                    tagIdArray[i] = tag.tagID;
-                }
-            }
-            for (int i = 0; i < tagIdArray.Length; i++)
-            {
-                tempId = tagIdArray[i];
-                List<ArticlesTag> articleTags = smokeFreeDB.ArticlesTag.Where(x => x.tagID == tempId).ToList();
-                for (int j = 0; j < articleTags.Count; j++)
-                {
-                    tempId = articleTags[j].articleID;
-                    displayList.Add(smokeFreeDB.Article.Where(x => x.articleID == tempId).FirstOrDefault());
-                }
-
-            }
-            return displayList;
         }
 
         public FileContentResult retrieveUserPic(string username)
@@ -105,7 +75,7 @@ namespace SmokeFreeApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.tagList = getTags(id);
+            ViewBag.tagList = tagAccess.getTags(id);
             Article article = smokeFreeDB.Article.Find(id);
             if (article == null)
             {
@@ -114,20 +84,6 @@ namespace SmokeFreeApplication.Controllers
             return View(article);
         }
 
-        public List<String> getTags(int? id)
-        {
-            List<ArticlesTag> articleTags = smokeFreeDB.ArticlesTag.Where(x => x.articleID == id).ToList();
-            List<String> displayList = new List<string>();
-            Tag tagItem;
-            int temp;
-            for (int i = 0; i < articleTags.Count; i++)
-            {
-                temp = articleTags[i].tagID;
-                tagItem = smokeFreeDB.Tag.Where(x => x.tagID == temp).FirstOrDefault();
-                displayList.Add(tagItem.tagName);
-            }
-            return displayList;
-        }
 
         public ActionResult createArticle()
         {
@@ -157,7 +113,7 @@ namespace SmokeFreeApplication.Controllers
                 smokeFreeDB.Article.Add(article);
                 smokeFreeDB.SaveChanges();
                 smokeFreeDB.Entry(article).Reload();
-                saveTags(tags, article.articleID);
+                tagAccess.saveTags(tags, article.articleID);
                 //System.Diagnostics.Debug.WriteLine(Request.Files["ImageFile"].ToString());
                 return RedirectToAction("Articles");
             }
@@ -165,40 +121,6 @@ namespace SmokeFreeApplication.Controllers
             return RedirectToAction("Articles");
         }
 
-        public void saveTags(string inputTags, int articleID)
-        {
-            string[] tagArray = inputTags.Split(',');
-            Tag[] tagList = smokeFreeDB.Tag.ToArray();
-            for (int i = 0; i < tagArray.Length; i++)
-            {
-                string tmp = tagArray[i];
-                Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tmp).FirstOrDefault();
-                ArticlesTag articleTag = new ArticlesTag();
-                if (tag != null)
-                {
-                    // Tag is found
-                    articleTag.tagID = tag.tagID;
-                    articleTag.articleID = articleID;
-                    smokeFreeDB.ArticlesTag.Add(articleTag);
-                    smokeFreeDB.SaveChanges();
-                }
-                else
-                {
-                    //Tag is not found in database
-                    Tag newTag = new Tag();
-                    newTag.tagName = tagArray[i];
-                    smokeFreeDB.Tag.Add(newTag);
-                    smokeFreeDB.SaveChanges();
-                    smokeFreeDB.Entry(newTag).Reload();
-                    articleTag.tagID = newTag.tagID;
-                    articleTag.articleID = articleID;
-                    smokeFreeDB.ArticlesTag.Add(articleTag);
-                    smokeFreeDB.SaveChanges();
-
-                }
-            }
-        }
-        // Borrow code from ray!
     }
 
     
