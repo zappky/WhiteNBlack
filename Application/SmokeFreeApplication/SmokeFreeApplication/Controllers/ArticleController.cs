@@ -20,7 +20,7 @@ namespace SmokeFreeApplication.Controllers
         // GET: Article
         public ActionResult Articles(string option, string search, int? page)
         {
-            int pageSize = 1;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
             List<Article> displayList = new List<Article>();
             ViewBag.search = search;
