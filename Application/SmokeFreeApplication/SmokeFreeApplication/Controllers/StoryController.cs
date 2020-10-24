@@ -16,7 +16,7 @@ namespace SmokeFreeApplication.Controllers
         // search is implement at index method, stories (in this case)
         public ActionResult Stories(string option,string search, int? page)
         {
-            int pageSize = 1;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             List<Story> displayList = new List<Story>();
             ViewBag.search = search;

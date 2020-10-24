@@ -11,9 +11,10 @@
 <!---search partial view-->
 @Html.Partial("~/Views/Shared/_SearchBar.cshtml")
 
-<p>
-    @Html.ActionLink("Create New", "CreateStory")
-</p>
+<div class="btnDiv">
+    @Html.ActionLink("Create New", "CreateStory", null, new { @class = "btn btn-outline-primary" })
+ </div>
+
 <!---display stories-->
 @foreach (var item in Model)
 {
@@ -47,5 +48,6 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @section Scripts
 {
+    <link href="~/Content/story-style.css" rel="stylesheet">
     <script type="text/javascript" src="~/Scripts/search.js"></script>
 }

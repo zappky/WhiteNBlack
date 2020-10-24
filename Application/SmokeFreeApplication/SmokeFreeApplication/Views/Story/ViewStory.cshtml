@@ -5,10 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<p>
-    @Html.ActionLink("Back to List", "Stories")
-</p>
-<div class="mx-auto" style="max-width: 70rem;">
+<div class="btnDiv">@Html.ActionLink("Back to Stories", "Stories", null, new { @class = "btn btn-outline-primary" })</div>
+
+
+<br />
+
+<div id="details" class="mx-auto" style="max-width: 70rem;">
     <h2> @Html.DisplayFor(model => model.title)</h2>
     <span class="font-weight-light">@Html.DisplayFor(model => model.postDate)  |  </span>
     <span class="font-weight-light">@Html.DisplayFor(model => model.userName)</span>
@@ -33,3 +35,9 @@
 <div id="accordion">
     @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.storyID, "S"))
 </div>
+
+@section Scripts
+{
+    <link href="~/Content/comment.css" rel="stylesheet">
+    <link href="~/Content/story-style.css" rel="stylesheet">
+}

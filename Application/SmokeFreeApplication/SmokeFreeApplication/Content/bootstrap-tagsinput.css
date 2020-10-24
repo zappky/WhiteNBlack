@@ -7,10 +7,12 @@
     color: #555;
     vertical-align: middle;
     border-radius: 4px;
-    width: 200px !important;
-    max-width: 200px;
+    width: 100% !important;
     line-height: 22px;
     cursor: text;
+}
+#search-container .bootstrap-tagsinput {
+    width: 85% !important;
 }
 .bootstrap-tagsinput input {
   border: none;
@@ -19,7 +21,6 @@
   background-color: transparent;
   padding: 0 6px;
   margin: 0;
-  width: 200px !important;
   resize: none;
 }
 .bootstrap-tagsinput.form-control input::-moz-placeholder {
@@ -37,8 +38,11 @@
   box-shadow: none;
 }
 .bootstrap-tagsinput .tag {
-  margin-right: 2px;
   color: black;
+  border: 1px solid #d9d9d9;
+  border-radius:5px;
+  margin-right:2px;
+  background-color: lightgray;
 }
 .bootstrap-tagsinput .tag [data-role="remove"] {
   margin-left: 8px;

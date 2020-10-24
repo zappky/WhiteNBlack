@@ -5,42 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<div>
-    @Html.ActionLink("Back to List", "Stories")
-</div>
-<br />
 <h2>Create Story</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateStory", "Story", FormMethod.Post, new { @id = "createForm" }))
 {
     @Html.AntiForgeryToken()
-
-<form onsubmit="return false;">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        <p>Title: </p>
-        <div>
-            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control create-story-field" } })
-            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+        <h5>Title: </h5>
+        <div id="titleDiv">
+            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+            <span id="titleVali" class="badge badge-danger">Please enter the story title that has at least 2 words!</span>
         </div>
     </div>
 
     <div class="form-group">
-        <p>Description: </p>
+        <h5>Description: </h5>
         <div>
-            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control create-story-field" } })
-            @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
+            <span id="bodyVali" class="badge badge-danger">Please enter the story description that has at least 500 characters!</span>
+            <p style="text-align:left; display:inline;text-decoration:solid">Words Limit:</p>
+            <p id="withinRange" style="text-align:right;display:inline;">1000</p>
         </div>
     </div>
     @Html.Partial("~/Views/Shared/_TagField.cshtml")
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="button" onclick="this.form.submit();" value="Create" class="btn btn-default" />
+        <div>
+            <button id="createBtn" type="submit" class="btn btn-primary">Create</button>
+            <button type="button" class="btn btn-primary">@Html.ActionLink("Cancel", "Stories", null, new { @class = "cancelBtn" })</button>
+
         </div>
     </div>
-</form>
 }
 @section Scripts
 {
@@ -48,4 +44,5 @@
     <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
     <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
     <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
+    <script type="text/javascript" src="~/Scripts/form-validation.js"></script>
 }

@@ -214,6 +214,7 @@
     <Content Include="Content\bootstrap-tagsinput.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\comment.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\story-style.css" />
     <Content Include="favicon.ico" />
@@ -232,6 +233,7 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\form-validation.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
