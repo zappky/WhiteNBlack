@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+
 
 /// <summary>
 /// The controller class for admin interface
@@ -85,13 +88,15 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult ArticleManage(ArticleQuery q)
         {
-            var article = smokeFreeDB.Article.Find(q.id);
-            return View(article);
+            emailableModel<Article> aArticle = new emailableModel<Article>();
+            aArticle.model = smokeFreeDB.Article.Find(q.id);
+            return View(aArticle);
         }
 
         public ActionResult DoctorManage(DocQuery q)
         {
-            var aDoc = smokeFreeDB.Doctor.Find(q.id);
+            emailableModel<Doctor> aDoc = new emailableModel<Doctor>();
+            aDoc.model = smokeFreeDB.Doctor.Find(q.id);
             return View(aDoc);
         }
         public ActionResult PrevPost(ArticleQuery q)
@@ -143,11 +148,45 @@ namespace SmokeFreeApplication.Controllers
 
             return RedirectToAction("Manage");
         }
-        public ActionResult RejectPost(ArticleQuery q)
+        [HttpPost]
+        public ActionResult RejectPost(emailableModel<Article> aModel)
         {
-            var article = smokeFreeDB.Article.Find(q.id);
-            smokeFreeDB.Article.Remove(article);
-            smokeFreeDB.SaveChanges();
+            EmailMessage theMail = aModel.emailModel;
+            Article theArticle = aModel.model;
+            var article = smokeFreeDB.Article.Find(theArticle.articleID);
+
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                //string testEmail = "pang_kee_yang@hotmail.com";
+                mail.To.Add(theMail.To);
+                mail.From = new MailAddress(theMail.From);
+                if (String.IsNullOrEmpty(theMail.Subject))
+                    mail.Subject = "[Rejected article] Thank you for your submission";
+                else
+                    mail.Subject = theMail.Subject;
+                if (String.IsNullOrEmpty(theMail.Body))
+                    mail.Body = "Hi Sir/Mdm,\n Sorry, we have deem it unfit to be posted. Please submit another one\n Thank you";
+                else
+                    mail.Body = theMail.Body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("zappiky@gmail.com", "Omaewamou"); // Enter senders User name and password  
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+
+                smokeFreeDB.Article.Remove(article);
+                smokeFreeDB.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                //hmmm....
+            }
+
 
             return RedirectToAction("Manage");
         }
@@ -163,15 +202,48 @@ namespace SmokeFreeApplication.Controllers
             aDoc.adminVerify = true;
             smokeFreeDB.SaveChanges();
 
+
+
             return RedirectToAction("Manage");
         }
-
-        public ActionResult RejectDoc(DocQuery q)
+        [HttpPost]
+        public ActionResult RejectDoc(emailableModel<Doctor> aModel)
         {
-            var aDoc = smokeFreeDB.Doctor.Find(q.id);
-            //aDoc.adminVerify = false;
-            smokeFreeDB.Doctor.Remove(aDoc);
-            smokeFreeDB.SaveChanges();
+            EmailMessage theMail = aModel.emailModel;
+            Doctor theDoc = aModel.model;
+            var aDoc = smokeFreeDB.Doctor.Find(theDoc.userName);
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(theMail.To);
+                mail.From = new MailAddress(theMail.From);
+                if (String.IsNullOrEmpty(theMail.Subject))
+                    mail.Subject = "[Rejected Doctor] Thank you for your registration";
+                else
+                    mail.Subject = theMail.Subject;
+                if (String.IsNullOrEmpty(theMail.Body))
+                    mail.Body = "Hi Sir/Mdm,\n Sorry, we have deem you unfit to be accepted. Please submit another one request\n Thank you";
+                else
+                    mail.Body = theMail.Body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("zappiky@gmail.com", "Omaewamou"); // Enter senders User name and password  
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+
+                
+                smokeFreeDB.Doctor.Remove(aDoc);
+                smokeFreeDB.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                //hmmm....
+            }
 
             return RedirectToAction("Manage");
         }
@@ -245,6 +317,12 @@ namespace SmokeFreeApplication.Controllers
 
     }
 
+    public class emailableModel<T>
+    {
+        public T model { get; set; }
+        public EmailMessage emailModel { get; set; }
+    }
+
     public class ArticleQuery
     {
         public int id { get; set; }
@@ -253,9 +331,11 @@ namespace SmokeFreeApplication.Controllers
         {
             id = i;
         }
+
         public ArticleQuery()
         {
             id = 0;
+
         }
     }
 
@@ -268,6 +348,7 @@ namespace SmokeFreeApplication.Controllers
             id = i;
 
         }
+
         public DocQuery()
         {
             id = "";

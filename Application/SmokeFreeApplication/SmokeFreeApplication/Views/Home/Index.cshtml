@@ -13,8 +13,6 @@
 
 
 <div class="jumbotron">
-
-
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -64,5 +62,11 @@
         <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
     </div>
 </div>
+
+@*
+    Not sure to still go with this broadcast msg idea or the static msg at the home page idea
+    Still kinda lame now
+*@
+@Html.Partial("_PopUp")
 
 

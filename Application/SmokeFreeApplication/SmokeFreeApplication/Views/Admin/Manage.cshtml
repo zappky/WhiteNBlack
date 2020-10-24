@@ -14,8 +14,8 @@
 
     if (activeSearch)
     {
-        searchArticleList = Model.ElementAt(1).list1;
-        searchDoctorList = Model.ElementAt(1).list2;
+        searchArticleList = Model.Last().list1;
+        searchDoctorList = Model.Last().list2;
     }
 }
 <head>

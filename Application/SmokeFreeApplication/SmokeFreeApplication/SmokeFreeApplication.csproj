@@ -194,6 +194,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
+    <Compile Include="Models\EmailMessage.cs" />
     <Compile Include="Models\InterestedPartyCompoundModel.cs" />
     <Compile Include="Models\Progress.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
@@ -395,10 +396,10 @@
     <Content Include="Views\Account\SignUpSuccessMember.cshtml" />
     <Content Include="Views\Doctor\EditDrProfile.cshtml" />
     <Content Include="Views\Admin\BoardcastMessage.cshtml" />
-    <Content Include="Views\Shared\_PopUp.cshtml" />
     <Content Include="Views\Home\QuitCentres.cshtml" />
     <Content Include="Views\Shared\_TagField.cshtml" />
     <Content Include="Views\Shared\_SearchBar.cshtml" />
+    <Content Include="Views\Home\_PopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
