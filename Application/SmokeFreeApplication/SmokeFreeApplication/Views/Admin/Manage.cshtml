@@ -53,13 +53,13 @@
 </head>
 
 <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Pending Article')">Pending Article</button>
-    <button class="tablinks" onclick="openCity(event, 'Approved Article')">Approved Article</button>
-    <button class="tablinks" onclick="openCity(event, 'Pending Doctor')">Pending Doctor</button>
-    <button class="tablinks" onclick="openCity(event, 'Approved Doctor')">Approved Doctor</button>
+    <button class="tablinks active" onclick="openTab(event, 'Pending Article')">Pending Article</button>
+    <button class="tablinks" onclick="openTab(event, 'Approved Article')">Approved Article</button>
+    <button class="tablinks" onclick="openTab(event, 'Pending Doctor')">Pending Doctor</button>
+    <button class="tablinks" onclick="openTab(event, 'Approved Doctor')">Approved Doctor</button>
 </div>
 
-<div id="Pending Article" class="tabcontent">
+<div id="Pending Article" class="tabcontent" style="display:block;">
     <div class="list-group">
 
 
@@ -157,7 +157,7 @@
 </div>
 
 <script>
-    function openCity(evt, cityName) {
+    function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
 
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -168,15 +168,27 @@
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        document.getElementById(cityName).style.display = "block";
+        document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
 </script>
 
-
-
 @*
-    <p>Admin Interface</p>
-    <p>@articleList.Count()</p>
-    <p>@doctorList.Count()</p>
+
+    <div class="alert alert-dismissible alert-primary" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+    </div>
+
+    @using (Html.BeginForm("Stories", "Story", FormMethod.Get, new { id = "searchForm" }))
+    {
+        <b> Search By: </b>
+        @Html.RadioButton("option", "Name", new { id = "nameRad", @required = "required" })<text>Name</text>
+        @Html.RadioButton("option", "Tags", new { id = "tagRad" })<text> Tags </text>
+        <br />
+        <input name="search" id="searchBar" type="text" data-role="none" required" />
+        <input type="button" onclick="this.form.submit();" value="Search" id="searchBtn" class="btn btn-default" />
+
+    }
+
 *@

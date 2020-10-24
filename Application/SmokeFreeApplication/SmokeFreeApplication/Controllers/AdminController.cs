@@ -196,10 +196,8 @@ namespace SmokeFreeApplication.Controllers
             m.postTime = DateTime.Now;
             m.neverShowAgain = false;
             //not sure if need to set id
-            m.id = 10;
-            //Bug: DB doesnt seems to save the new entry
-            //EDIT: it does appear in db table, but only after i went on to do other stuff
-            //Not sure what is going on
+            //m.id = 10;
+ 
             smokeFreeDB.BroadCastMessage.Add(m);
             smokeFreeDB.SaveChanges();
 
