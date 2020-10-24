@@ -1,61 +1,72 @@
 ﻿
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Smoke Free</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Smoke Free</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active nav-link">
-                    @Html.ActionLink("Home", "Index", "Home")
-                </li>
-                @if (Session["docOrMember"] != "admin")
-                {
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("Articles", "Articles", "Article")
-                    </li>
-                }
-                @if (Session["docOrMember"] != "admin")
-                {
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("Stories", "Stories", "Story")
-                    </li>
-                }
-                @if (Session["docOrMember"] != "admin")
-                {
-                    <li class="nav-item nav-link">
-
-                        @Html.ActionLink("About Us", "About", "Home")
-
-                    </li>
-                }
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active nav-link">
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+            @if (Session["docOrMember"] != "admin")
+            {
                 <li class="nav-item nav-link">
-                    @if (Session["docOrMember"] == "doc")
-                    {
-                        @Html.ActionLink("Profile", "DrProfile", "Doctor", new { viewUsername = Session["username"].ToString() }, new { page = 1 })
-                    }
-                    else if (Session["docOrMember"] == "member")
-                    {
-                        @Html.ActionLink("Profile", "MemberProfile", "InterestedParty", new {viewUsername = Session["username"].ToString() }, new { page = 1 })
-                    }
-                    else if (Session["docOrMember"] == "admin")
-                    {
-                        @Html.ActionLink("Manage", "Manage", "Admin")
-                    }
+                    @Html.ActionLink("Articles", "Articles", "Article")
                 </li>
-                @if (Session["docOrMember"] == "admin")
+            }
+            @if (Session["docOrMember"] != "admin")
+            {
+                <li class="nav-item nav-link">
+                    @Html.ActionLink("Stories", "Stories", "Story")
+                </li>
+            }
+
+            @if (Session["docOrMember"] != "admin")
+            {
+                <li class="nav-item nav-link">
+                    @Html.ActionLink("Quit Centres", "QuitCentres", "Home")
+                </li>
+
+            }
+
+            @if (Session["docOrMember"] != "admin")
+            {
+                <li class="nav-item nav-link">
+
+                    @Html.ActionLink("About Us", "About", "Home")
+
+                </li>
+            }
+            <li class="nav-item nav-link">
+                @if (Session["docOrMember"] == "doc")
                 {
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("Boardcast", "BoardcastMessage", "Admin")
-
-                    </li>
+                    @Html.ActionLink("Profile", "DrProfile", "Doctor", new { viewUsername = Session["username"].ToString() }, new { page = 1 })
                 }
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("Logout", "Logout", "Account")
-                    </li>
+                else if (Session["docOrMember"] == "member")
+                {
+                    @Html.ActionLink("Profile", "MemberProfile", "InterestedParty", new { viewUsername = Session["username"].ToString() }, new { page = 1 })
+                }
+                else if (Session["docOrMember"] == "admin")
+                {
+                    @Html.ActionLink("Manage", "Manage", "Admin")
+                }
+            </li>
+            @if (Session["docOrMember"] == "admin")
+            {
+                <li class="nav-item nav-link">
+                    @Html.ActionLink("Boardcast", "BoardcastMessage", "Admin")
 
-                </ul>
-        </div>
-    </nav>
+                </li>
+            }
+
+
+            <li class="nav-item nav-link">
+                @Html.ActionLink("Logout", "Logout", "Account")
+            </li>
+
+        </ul>
+    </div>
+</nav>
 

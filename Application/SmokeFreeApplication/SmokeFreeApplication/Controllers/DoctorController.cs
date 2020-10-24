@@ -17,10 +17,23 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
+        public FileContentResult retrieveUserPic(string username)
+        {
+            byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
+            if (imgByteArray != null)
+            {
+                return new FileContentResult(imgByteArray, "image/jpeg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         //viewUsername = username of the profile you want to view
         public ActionResult DrProfile(string viewUsername, int? page)
         {
-            int pageSize = 1;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             List<Article> displayList = new List<Article>();
 
@@ -61,18 +74,6 @@ namespace SmokeFreeApplication.Controllers
             return View(displayList.ToPagedList(pageNumber, pageSize));
         }
 
-        public FileContentResult retrieveUserPic(string username)
-        {
-            byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
-            if (imgByteArray != null)
-            {
-                return new FileContentResult(imgByteArray, "image/jpeg");
-            }
-            else
-            {
-                return null;
-            }
-        }
 
         public ActionResult EditDrProfile()
         {

@@ -32,11 +32,12 @@ namespace SmokeFreeApplication.Migrations
             }
             return byte2String;
         }
-        private string getImagePath()
+        private string getImagePath(string imgPath)
         {
+            imgPath = "~/images/dummy_profile.png";
             var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath; //was AbsolutePath but didn't work with spaces according to comments
             var directoryName = Path.GetDirectoryName(absolutePath);
-            var path = Path.Combine(directoryName, ".." + "~/images/dummy_profile.png".TrimStart('~').Replace('/', '\\'));
+            var path = Path.Combine(directoryName, ".." + imgPath.TrimStart('~').Replace('/', '\\'));
             return path;
         }
 
@@ -71,7 +72,7 @@ namespace SmokeFreeApplication.Migrations
                    dateOfBirth = DateTime.Parse("1990-1-11"),
                    email = "generaluser@test.com",
                    gender = "Female",
-                   profilePicture = File.ReadAllBytes(getImagePath()),
+                   profilePicture = File.ReadAllBytes(getImagePath("~/images/dummy_profile.png")),
                    confirmPassword = GetMD5("generaluser1")
                },
                new GeneralUser
@@ -82,7 +83,7 @@ namespace SmokeFreeApplication.Migrations
                    dateOfBirth = DateTime.Parse("1991-2-22"),
                    email = "12321@gmail.com",
                    gender = "Male",
-                   profilePicture = File.ReadAllBytes(getImagePath()),
+                   profilePicture = File.ReadAllBytes(getImagePath("~/images/dummy_profile.png")),
                    confirmPassword = GetMD5("generaluser2")
                },
                new GeneralUser
@@ -93,7 +94,7 @@ namespace SmokeFreeApplication.Migrations
                    dateOfBirth = DateTime.Parse("1994-5-22"),
                    email = "doctor1@gmail.com",
                    gender = "Male",
-                   profilePicture = File.ReadAllBytes(getImagePath()),
+                   profilePicture = File.ReadAllBytes(getImagePath("~/images/dummy_profile.png")),
                    confirmPassword = GetMD5("doctor123")
                },
                new GeneralUser
@@ -104,7 +105,7 @@ namespace SmokeFreeApplication.Migrations
                    dateOfBirth = DateTime.Parse("1990-12-1"),
                    email = "doctor2@gmail.com",
                    gender = "Female",
-                   profilePicture = File.ReadAllBytes(getImagePath()),
+                   profilePicture = File.ReadAllBytes(getImagePath("~/images/dummy_profile.png")),
                    confirmPassword = GetMD5("doctor321")
                }
                );
@@ -159,47 +160,51 @@ namespace SmokeFreeApplication.Migrations
                 }
 
                 );
-            
-            /*context.Article.AddOrUpdate(
+
+            context.Article.AddOrUpdate(
                 p => p.userName,
                 new Article
                 {
                     userName = "doctor1",
                     title = "Dummy Title1",
+                    body = "Dummy body 1",
                     articleStatus = "pending",
-                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
                     postDate = DateTime.Parse("2020-10-11")
 
-                }, 
+                },
                 new Article
                 {
                     userName = "doctor1",
                     title = "Dummy Title2",
+                    body = "Dummy body 2",
                     articleStatus = "approved",
-                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
                     postDate = DateTime.Parse("2020-10-11")
-                }, 
+                },
                 new Article
                 {
                     userName = "doctor2",
                     title = "Dummy Title3",
+                    body = "Dummy body 3",
                     articleStatus = "pending",
-                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
                     postDate = DateTime.Parse("2020-10-11")
-                }, 
+                },
                 new Article
                 {
                     userName = "doctor2",
                     title = "Dummy Title4",
+                    body = "Dummy body 4",
                     articleStatus = "pending",
-                    articlePicture = File.ReadAllBytes(getImagePath()),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
                     postDate = DateTime.Parse("2020-10-11")
                 }
 
-                );*/
-            
-            /*
-            context.BroadCastMessage.AddOrUpdate(
+                );
+
+
+           /* context.BroadCastMessage.AddOrUpdate(
                p => p.id,
                new BroadcastMessage
                {
@@ -211,9 +216,9 @@ namespace SmokeFreeApplication.Migrations
                    postTime = DateTime.Parse("1990-1-11"),
                    expiresTime = DateTime.Parse("1990-1-11")
                }
-               );
-            
-            */
+               );*/
+
+
         }
     }
 }

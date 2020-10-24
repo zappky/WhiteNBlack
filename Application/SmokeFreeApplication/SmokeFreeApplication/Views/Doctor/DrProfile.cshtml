@@ -7,6 +7,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+
+    function showApprovedArticles() {
+        var approved = document.getElementById("ApprovedArticles");
+        var pending = document.getElementById("PendingArticles");
+
+        if (approved.style.display === "none") {
+            approved.style.display = "block";
+            pending.style.display = "none";
+        }
+    }
+
+    function showPendingArticles() {
+        var approved = document.getElementById("ApprovedArticles");
+        var pending = document.getElementById("PendingArticles");
+
+
+        if (pending.style.display === "none") {
+            pending.style.display = "block";
+            approved.style.display = "none";
+        }
+    }
+</script>
+
 <div style="margin-left: 5px;">
     <table>
         <tr>
@@ -35,47 +59,112 @@
             </td>
         </tr>
     </table>
-
-
-
-
-
 </div>
 
 
 <h2>Articles</h2>
-@foreach (var item in Model)
+
+@if (ViewBag.ownAccount == true)
 {
-    <div class="card" style="width: 70rem;">
-        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
-            <div class="card-header">
-                <div style="height:5rem; padding-top:30px; padding-left:100px;">
-                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
-                </div>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
-                <p class="card-text">@Html.Raw(item.body)</p>
-            </div>
-            <div class="card-footer">
-                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">Read More</a>
-                <a href="#" class="card-link">Share</a>
-            </div>
-        </a>
+    <ul class="nav nav-tabs ">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" onclick="showApprovedArticles()">Approved Articles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" onclick="showPendingArticles()">Pending Articles</a>
+
+        </li>
+    </ul>
+
+}
+else
+{
+    <ul class="nav nav-tabs ">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" onclick="showApprovedArticles()">Approved Articles</a>
+        </li>
+    </ul>
+
+}
+
+
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active show">
+        <div id="ApprovedArticles">
+            @foreach (var item in Model)
+            {
+                if (item.articleStatus == "approved")
+                {
+                    <div class="card" style="width: 70rem;">
+                        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">
+                            <div class="card-header">
+                                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
+                                <p class="card-text">@Html.Raw(item.body)</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a>
+                                <a href="#" class="card-link">Share</a>
+                                <p>@Html.DisplayFor(modelItem => item.articleStatus)</p>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <br />
+                }
+
+            }
+        </div>
     </div>
+    <div class="tab-pane fade active show">
+        <div id="PendingArticles" style="display:none;">
+            @foreach (var item in Model)
+            {
+                if (item.articleStatus == "pending")
+                {
+                    <div class="card" style="width: 70rem;">
+                        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">
+                            <div class="card-header">
+                                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                                    <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
+                                <p class="card-text">@Html.Raw(item.body)</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a>
+                                <a href="#" class="card-link">Share</a>
+                                <p>@Html.DisplayFor(modelItem => item.articleStatus)</p>
+                            </div>
+                        </a>
+                    </div>
 
 
-    <br />
+                    <br />
+                }
 
-}
-<!---linking pager to search display-->
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, viewUsername = ViewBag.username, option = ViewBag.option, search = ViewBag.search }))
+            }
+        </div>
+    </div>
+</div>
 
-<!--Search script-->
-@section Scripts
+
+
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, viewUsername = ViewBag.username, option = ViewBag.option, search = ViewBag.search }))
+
+    <!--Search script-->
+    @section Scripts
 {
-    <script type="text/javascript" src="~/Scripts/search.js"></script>
-}
-
+        <script type="text/javascript" src="~/Scripts/search.js"></script>
+    }
