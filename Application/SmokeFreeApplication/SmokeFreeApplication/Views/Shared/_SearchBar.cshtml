@@ -1,5 +1,4 @@
-﻿@using (Html.BeginForm("Stories", "Story", FormMethod.Get, new { id = "searchForm" }))
-{
+﻿
     <b> Search By: </b>
     @Html.RadioButton("option", "Name", new { id = "nameRad", @required = "required" })<text>Name</text>
     @Html.RadioButton("option", "Tags", new { id = "tagRad" })<text> Tags </text>
@@ -9,4 +8,3 @@
         <button type="button" onclick="this.form.submit();" id="searchBtn" class="btn btn-outline-secondary">Search</button>
     </div>
 
-}

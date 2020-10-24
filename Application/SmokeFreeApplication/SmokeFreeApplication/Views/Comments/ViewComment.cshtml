@@ -17,7 +17,7 @@
                 string cmtToDataTargModal = "#" + cmtToDivModal;
             <li class="list-inline">
                 <br />
-                <div class="card" style="padding: 12px">
+                <div class="card" style="padding: 9px">
                     <div class="card-body" style="padding:10px">
                         <div class="d-flex">
                             <div class="mr-auto">
@@ -46,7 +46,7 @@
 
                         @*Button actions for comment card*@
                         <div class="d-flex">
-                            <button class="btn btn-primary collapsed mr-auto" data-toggle="collapse" data-target="@cmtToDataTarg" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="reply btn btn-primary collapsed mr-auto" data-toggle="collapse" data-target="@cmtToDataTarg" aria-expanded="false" aria-controls="collapseTwo">
                                 Reply
                             </button>
                             @if(Session["username"].ToString() == item.userName)

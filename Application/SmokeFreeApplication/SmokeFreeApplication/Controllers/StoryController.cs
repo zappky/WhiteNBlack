@@ -19,8 +19,8 @@ namespace SmokeFreeApplication.Controllers
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             List<Story> displayList = new List<Story>();
-            ViewBag.search = search;
             ViewBag.option = option;
+            ViewBag.search = search;
 
             if (Session["username"] == null)
             {
@@ -28,6 +28,7 @@ namespace SmokeFreeApplication.Controllers
             }
             if (!String.IsNullOrEmpty(search))
             {
+                search.Replace(' ', '+');
                 if (option == "Name")
                 {
                     displayList = smokeFreeDB.Story.Where(x => x.title.Contains(search) || search == null).ToList();

@@ -8,53 +8,40 @@
 }
 <br />
 
-@*I have copied ray's code to kick start the articles page --Daniel*@
 
 <h2>Articles</h2>
-
-@Html.Partial("~/Views/Shared/_SearchBar.cshtml")
-
-@foreach (var item in Model)
+@using (Html.BeginForm("Articles", "Article", FormMethod.Get, new { id = "searchForm" }))
 {
-    <div class="card" style="width: 70rem;">
-        <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
-            @*Edit this to link to view a single article page*@
-
-
-            @*<div class="card-header">
-                    <img src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
-                    <div style="height:5rem; padding-top:30px; padding-left:100px;">
-                        <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">@Html.DisplayFor(modelItem => item.title)</h3>
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                </div>
-                <div class="card-footer">
-
-                    <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">Read More</a>
-                    <a href="#" class="card-link">Share</a>
-                </div>*@
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="@Url.Action("retrieveUserPic", "Article", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
-                <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.title)</h5>
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
-                </div>
-            </div>
-        </a>
-    </div>
-
-
-    <br />
+    @Html.Partial("~/Views/Shared/_SearchBar.cshtml")
 
 }
+<div class="container mt-2 ">
+    <div class="card-columns">
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
+
+                    <div class="card">
+                        <img class="card-img-top" src="@Url.Action("retrieveArticlePic", "Article", new { articleID = item.articleID })" alt="Image" />
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.title)</h5>
+                            <p class="card-text">
+                                <div class="articleBody">@Html.DisplayFor(modelItem => item.body)</div>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+            }
+    </div>
+</div>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Articles", new { page }))
-
+@section Scripts
+{
+    <link href="~/Content/article-style.css" rel="stylesheet">
+    <link href="~/Content/story-style.css" rel="stylesheet">    
+    <script type="text/javascript" src="~/Scripts/search.js"></script>
+ }
 
 

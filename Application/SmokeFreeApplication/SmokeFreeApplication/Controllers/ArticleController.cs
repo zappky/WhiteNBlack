@@ -32,6 +32,7 @@ namespace SmokeFreeApplication.Controllers
             }
             if (!String.IsNullOrEmpty(search))
             {
+                search.Replace(' ', '+');
                 if (option == "Name")
                 {
                     displayList = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();

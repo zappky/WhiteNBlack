@@ -1,0 +1,43 @@
+﻿
+
+img {
+    height: 200px;
+    width: 100% !important;
+}
+
+
+.card {
+    transition: 0.5s;
+    cursor: pointer;
+    width: 18rem;
+    height:100%;
+
+}
+
+.card-title {
+    font-size: 15px;
+    transition: 1s;
+    cursor: pointer;
+}
+.item-card-title i {
+        font-size: 15px;
+        transition: 1s;
+        cursor: pointer;
+        color: #ffa710
+ }
+
+.card-title i:hover {
+    transform: scale(1.25) rotate(100deg);
+    color: #18d4ca;
+}
+
+
+.articleBody {
+    white-space: nowrap;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-text {
+    height: 200px;
+}
