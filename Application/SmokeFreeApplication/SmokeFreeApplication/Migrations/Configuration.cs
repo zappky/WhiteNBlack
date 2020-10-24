@@ -34,7 +34,6 @@ namespace SmokeFreeApplication.Migrations
         }
         private string getImagePath(string imgPath)
         {
-            imgPath = "~/images/dummy_profile.png";
             var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath; //was AbsolutePath but didn't work with spaces according to comments
             var directoryName = Path.GetDirectoryName(absolutePath);
             var path = Path.Combine(directoryName, ".." + imgPath.TrimStart('~').Replace('/', '\\'));
@@ -169,7 +168,7 @@ namespace SmokeFreeApplication.Migrations
                     title = "Dummy Title1",
                     body = "Dummy body 1",
                     articleStatus = "pending",
-                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.jpg")),
                     postDate = DateTime.Parse("2020-10-11")
 
                 },
@@ -179,7 +178,7 @@ namespace SmokeFreeApplication.Migrations
                     title = "Dummy Title2",
                     body = "Dummy body 2",
                     articleStatus = "approved",
-                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.jpg")),
                     postDate = DateTime.Parse("2020-10-11")
                 },
                 new Article
@@ -188,7 +187,7 @@ namespace SmokeFreeApplication.Migrations
                     title = "Dummy Title3",
                     body = "Dummy body 3",
                     articleStatus = "pending",
-                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.jpg")),
                     postDate = DateTime.Parse("2020-10-11")
                 },
                 new Article
@@ -197,7 +196,7 @@ namespace SmokeFreeApplication.Migrations
                     title = "Dummy Title4",
                     body = "Dummy body 4",
                     articleStatus = "pending",
-                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.png")),
+                    articlePicture = File.ReadAllBytes(getImagePath("~/images/dummy_article.jpg")),
                     postDate = DateTime.Parse("2020-10-11")
                 }
 

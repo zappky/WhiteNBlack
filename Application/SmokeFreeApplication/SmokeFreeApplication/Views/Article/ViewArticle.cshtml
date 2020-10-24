@@ -8,26 +8,48 @@
 <p>
     @Html.ActionLink("Back to List", "Articles")
 </p>
-<div class="mx-auto" style="max-width: 70rem;">
-        <img src="@Url.Action("retrieveArticlePic", "Article", new { username = ViewBag.username})" style="width:500px; height:350px; float:left; margin-right:10px;" alt="Image" />
-        <h3> @Html.DisplayFor(model => model.title)</h3>
-        <p class="font-weight-light">@Html.DisplayFor(model => model.userName)</p>
-        <p class="font-weight-light">@Html.DisplayFor(model => model.postDate)</p>
-        <br />
-        @foreach (var tag in ViewBag.tagList)
-        {
-            <span class="badge badge-dark"> @Html.Raw(tag) </span>
-        }
-</div>
-<br />
-<div>
-    <p>@Html.DisplayFor(model => model.body)</p>
-</div>
-<br />
-<br />
-<br />
-<h2>Comments</h2>
-<hr />
+
+<table>
+    <tr>
+        <td colspan="2">
+            <img src="@Url.Action("retrieveArticlePic", "Article", new { articleID = Model.articleID })" style="width:650px; height:350px;" alt="Image" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h2> @Html.DisplayFor(model => model.title)</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="font-weight-light">Posted By: @Html.DisplayFor(model => model.userName)</p>     
+        </td>
+        <td>
+            <p class="font-weight-light">Date Posted: @Html.DisplayFor(model => model.postDate)</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            @foreach (var tag in ViewBag.tagList)
+            {
+                <span class="badge badge-dark"> @Html.Raw(tag) </span>
+            }
+        </td> 
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                <p>@Html.DisplayFor(model => model.body)</p>
+            </div>
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+<h3>Comments</h3>
 <div class="jumbotron" style="padding:10px">
     @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
 </div>
