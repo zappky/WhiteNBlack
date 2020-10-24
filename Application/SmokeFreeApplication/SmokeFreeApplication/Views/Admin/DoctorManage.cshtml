@@ -1,5 +1,6 @@
 ﻿
-@model SmokeFreeApplication.Models.Doctor
+@model SmokeFreeApplication.Controllers.emailableModel<SmokeFreeApplication.Models.Doctor>
+
 @{
     ViewBag.Title = "Doctor Manage";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,15 +10,15 @@
 <div class="card" style="width: 70rem;">
 
     <div class="card-header">
-        <img src="@Url.Action("retrieveUserPic", "Admin", new { username = Model.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
+        <img src="@Url.Action("retrieveUserPic", "Admin", new { username = Model.model.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
         <div style="height:5rem; padding-top:30px; padding-left:100px;">
-            <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => Model.doctorID)</h6>
-            <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => Model.userName)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => Model.model.doctorID)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => Model.model.userName)</h6>
         </div>
     </div>
     <div class="card-body">
-        <h3 class="card-title">@Html.DisplayFor(modelItem => Model.workLocation)</h3>
-        <p class="card-text">@Html.DisplayFor(modelItem => Model.description)</p>
+        <h3 class="card-title">@Html.DisplayFor(modelItem => Model.model.workLocation)</h3>
+        <p class="card-text">@Html.DisplayFor(modelItem => Model.model.description)</p>
     </div>
 
     </a>
@@ -28,24 +29,55 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active nav-link">
-                @Html.ActionLink("Close", "CloseDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                @Html.ActionLink("Close", "CloseDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
             </li>
-            @if (Model.adminVerify == false)
+            @if (Model.model.adminVerify == false)
             {
                 <li class="nav-item active nav-link">
-                    @Html.ActionLink("Approve", "ApproveDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                    @Html.ActionLink("Approve", "ApproveDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
                 </li>
                 <li class="nav-item active nav-link">
-                    @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                    @*
+        @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
+                    *@
+                    <button type="button" class="btn" data-target="#MyModal" data-toggle="modal"> Reject</button>
+                    <div class="modal" id="MyModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <fieldset>
+                                    <legend>
+                                        Rejection Email
+                                    </legend>
+
+                                    @using (Html.BeginForm("RejectDoc", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.HiddenFor(m => Model.model.userName);
+                                        @Html.ValidationSummary()
+                                        <p>From: </p>
+                                        <p>@Html.TextBoxFor(m => Model.emailModel.From)</p>
+                                        <p>To: </p>
+                                        <p>@Html.TextBoxFor(m => Model.emailModel.To)</p>
+                                        <p>Subject: </p>
+                                        <p>@Html.TextBoxFor(m => Model.emailModel.Subject)</p>
+                                        <p>Body: </p>
+                                        <p>@Html.TextAreaFor(m => Model.emailModel.Body)</p>
+                                        <input type="submit" value="Send" />
+                                    }
+
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             }
         </ul>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active justify-content-end">
-                @Html.ActionLink("Previous", "PrevDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                @Html.ActionLink("Previous", "PrevDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
             </li>
             <li class="nav-item active justify-content-end">
-                @Html.ActionLink("Next", "NextDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.userName), null)
+                @Html.ActionLink("Next", "NextDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
             </li>
         </ul>
 

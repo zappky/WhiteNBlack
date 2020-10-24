@@ -194,6 +194,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DoctorCompoundModel.cs" />
+    <Compile Include="Models\EmailMessage.cs" />
     <Compile Include="Models\InterestedPartyCompoundModel.cs" />
     <Compile Include="Models\Progress.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
