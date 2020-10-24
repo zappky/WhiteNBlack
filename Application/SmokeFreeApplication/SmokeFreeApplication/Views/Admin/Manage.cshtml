@@ -1,10 +1,22 @@
-﻿@model SmokeFreeApplication.Models.AdminManageDataPacket
+﻿@model List<SmokeFreeApplication.Models.AdminManageDataPacket>
 
 @{
     ViewBag.Title = "My Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IEnumerable<SmokeFreeApplication.Models.Article> articleList = Model.list1;
-    IEnumerable<SmokeFreeApplication.Models.Doctor> doctorList = Model.list2;
+
+    IEnumerable<SmokeFreeApplication.Models.Article> articleList = Model.First().list1;
+    IEnumerable<SmokeFreeApplication.Models.Doctor> doctorList = Model.First().list2;
+
+    IEnumerable<SmokeFreeApplication.Models.Article> searchArticleList = new List<SmokeFreeApplication.Models.Article>();
+    IEnumerable<SmokeFreeApplication.Models.Doctor> searchDoctorList = new List<SmokeFreeApplication.Models.Doctor>();
+
+    bool activeSearch = Model.Count() > 1;
+
+    if (activeSearch)
+    {
+        searchArticleList = Model.ElementAt(1).list1;
+        searchDoctorList = Model.ElementAt(1).list2;
+    }
 }
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,38 +64,103 @@
     </style>
 </head>
 
+
+<div class="alert alert-dismissible alert-primary" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+</div>
+
+@using (Html.BeginForm("Manage", "Admin", FormMethod.Get, new { id = "searchForm" }))
+{
+    <b> Search By: </b>
+    @Html.RadioButton("option", "byAll", new { id = "allRad", @required = "required" })<text>All</text>
+    @Html.RadioButton("option", "byArticle", new { id = "articleRad", @required = "required" })<text> Article </text>
+    @Html.RadioButton("option", "byDoctor", new { id = "doctorRad", @required = "required" })<text> Doctor </text>
+    <br />
+    <input name="search" id="searchBar" type="text" data-role="none" required" />
+    <input type="button" onclick="this.form.submit();" value="Search" id="searchBtn" class="btn btn-default" />
+
+}
+
+
 <div class="tab">
-    <button class="tablinks active" onclick="openTab(event, 'Pending Article')">Pending Article</button>
+    @if (!activeSearch)
+    {
+        <button class="tablinks active" onclick="openTab(event, 'Pending Article')">Pending Article</button>
+    }
+    else
+    {
+        <button class="tablinks " onclick="openTab(event, 'Pending Article')">Pending Article</button>
+    }
+
     <button class="tablinks" onclick="openTab(event, 'Approved Article')">Approved Article</button>
     <button class="tablinks" onclick="openTab(event, 'Pending Doctor')">Pending Doctor</button>
     <button class="tablinks" onclick="openTab(event, 'Approved Doctor')">Approved Doctor</button>
+    @if (activeSearch)
+    {
+        <button class="tablinks active" onclick="openTab(event, 'Search Result')">Search Result</button>
+    }
+    else
+    {
+       // <button class="tablinks" onclick="openTab(event, 'Search Result')">Search Result</button>
+    }
+
 </div>
 
-<div id="Pending Article" class="tabcontent" style="display:block;">
-    <div class="list-group">
-
-
-        @foreach (var item in articleList)
-        {
-            if ("pending" == item.articleStatus)
-            {
-                <div class="card">
-
-                    <div class="card-body" style="padding-left:37px">
-                        <a href="@Url.Action("ArticleManage", "Admin", new { id = item.articleID})" style="text-decoration: none;">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-
-                    </div>
-                </div>
-            }
-        }
-
+@helper DisplayArticle(SmokeFreeApplication.Models.Article anArticle)
+{
+    <div class="card">
+        <div class="card-body" style="padding-left:37px">
+            <a href="@Url.Action("ArticleManage", "Admin", new { id = anArticle.articleID})" style="text-decoration: none;">
+                <h4 class="card-title">@Html.DisplayFor(modelItem => anArticle.title)</h4>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => anArticle.postDate)</h6>
+                <p class="card-text">@Html.DisplayFor(modelItem => anArticle.body)</p>
+        </div>
     </div>
+}
+
+@helper DisplayDoctor(SmokeFreeApplication.Models.Doctor aDoctor)
+{
+    <div class="card">
+        <div class="card-body" style="padding-left:37px">
+            <a href="@Url.Action("DoctorManage", "Admin", new { id = aDoctor.userName})" style="text-decoration: none;">
+                <h4 class="card-title">@Html.DisplayFor(modelItem => aDoctor.userName)</h4>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => aDoctor.contactNo)</h6>
+                <p class="card-text">@Html.DisplayFor(modelItem => aDoctor.description)</p>
+        </div>
+    </div>
+}
+
+@if (!activeSearch)
+{
+    <div id="Pending Article" class="tabcontent" style="display:block;">
+        <div class="list-group">
+            @foreach (var item in articleList)
+            {
+                if ("pending" == item.articleStatus)
+                {
+                    @DisplayArticle(item);
+                }
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div id="Pending Article" class="tabcontent" style="display:none;">
+        <div class="list-group">
+            @foreach (var item in articleList)
+            {
+                if ("pending" == item.articleStatus)
+                {
+                    @DisplayArticle(item);
+                }
+            }
+        </div>
+    </div>
+}
 
 
-</div>
 
 <div id="Approved Article" class="tabcontent" style="display: none;">
 
@@ -92,17 +169,8 @@
         {
             if ("approved" == item.articleStatus)
             {
-                <div class="card">
-                    <div class="card-body" style="padding-left:37px">
-                        <a href="@Url.Action("ArticleManage", "Admin", new { id = item.articleID})" style="text-decoration: none;">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.title)</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.postDate)</h6>
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.body)</p>
-                    </div>
-                </div>
+                @DisplayArticle(item);
             }
-
-
         }
 
     </div>
@@ -117,16 +185,8 @@
         {
             if (!item.adminVerify)
             {
-                <div class="card">
-                    <div class="card-body" style="padding-left:37px">
-                        <a href="@Url.Action("DoctorManage", "Admin", new { id = item.userName})" style="text-decoration: none;">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
-                    </div>
-                </div>
+                @DisplayDoctor(item);
             }
-
 
         }
 
@@ -140,21 +200,60 @@
         {
             if (item.adminVerify)
             {
-                <div class="card">
-                    <div class="card-body" style="padding-left:37px">
-                        <a href="@Url.Action("DoctorManage", "Admin", new { id = item.userName})" style="text-decoration: none;">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.userName)</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.contactNo)</h6>
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
-                    </div>
-                </div>
+                @DisplayDoctor(item);
             }
-
 
         }
 
     </div>
 </div>
+
+@if (activeSearch)
+{
+    <div id="Search Result" class="tabcontent" style="display: block;">
+        <div class="list-group">
+            @if (searchArticleList != null)
+            {
+                foreach (var article in searchArticleList)
+                {
+                    @DisplayArticle(article);
+                }
+            }
+
+            @if (searchDoctorList!=null)
+            {
+                foreach (var doctor in searchDoctorList)
+                {
+                    @DisplayDoctor(doctor);
+                }
+            }
+            </div>
+    </div>
+}
+else
+{
+
+    <div id="Search Result" class="tabcontent" style="display: none;">
+        <div class="list-group">
+            @if (searchArticleList != null)
+            {
+                foreach (var article in searchArticleList)
+                {
+                    @DisplayArticle(article);
+                }
+            }
+            @if (searchDoctorList != null)
+            {
+                foreach (var doctor in searchDoctorList)
+                {
+                    @DisplayDoctor(doctor);
+                }
+            }
+            </div>
+    </div>
+
+}
+
 
 <script>
     function openTab(evt, tabName) {
@@ -173,22 +272,6 @@
     }
 </script>
 
-@*
 
-    <div class="alert alert-dismissible alert-primary" style="display:none;">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-    </div>
 
-    @using (Html.BeginForm("Stories", "Story", FormMethod.Get, new { id = "searchForm" }))
-    {
-        <b> Search By: </b>
-        @Html.RadioButton("option", "Name", new { id = "nameRad", @required = "required" })<text>Name</text>
-        @Html.RadioButton("option", "Tags", new { id = "tagRad" })<text> Tags </text>
-        <br />
-        <input name="search" id="searchBar" type="text" data-role="none" required" />
-        <input type="button" onclick="this.form.submit();" value="Search" id="searchBtn" class="btn btn-default" />
 
-    }
-
-*@

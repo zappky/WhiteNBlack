@@ -33,11 +33,36 @@ namespace SmokeFreeApplication.Controllers
         }
 
         //Default view of the admin interface
-        public ActionResult Manage()
+        public ActionResult Manage(string option, string search)
         {
-            //ValidateAdminLogin();
 
-            return View( new AdminManageDataPacket() { list1 = smokeFreeDB.Article.ToList(), list2 = smokeFreeDB.Doctor.ToList() });
+            AdminManageDataPacket allList = new AdminManageDataPacket() { list1 = smokeFreeDB.Article.ToList(), list2 = smokeFreeDB.Doctor.ToList() };
+            List<AdminManageDataPacket> dataPacket = new List<AdminManageDataPacket>() { allList };
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                AdminManageDataPacket searchList = new AdminManageDataPacket() { };
+                switch (option)
+                {
+                    
+                    case "byArticle":
+                        searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
+                        break;
+                    case "byDoctor":
+                        searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) || search == null).ToList();
+                        break;
+
+                    case "byAll":
+                        searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
+                        searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) || search == null).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                dataPacket.Add(searchList);
+            }
+            
+            return View(dataPacket);
         }
 
         //When i click My Admin
