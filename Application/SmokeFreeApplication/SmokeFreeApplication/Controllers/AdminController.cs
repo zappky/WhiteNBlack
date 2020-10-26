@@ -1,6 +1,7 @@
 ﻿using SmokeFreeApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 
 using System.Net.Mail;
@@ -35,10 +36,8 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-        //Default view of the admin interface
-        public ActionResult Manage(string option, string search)
+        private List<AdminManageDataPacket> populateView(string option, string search)
         {
-
             AdminManageDataPacket allList = new AdminManageDataPacket() { list1 = smokeFreeDB.Article.ToList(), list2 = smokeFreeDB.Doctor.ToList() };
             List<AdminManageDataPacket> dataPacket = new List<AdminManageDataPacket>() { allList };
 
@@ -47,7 +46,7 @@ namespace SmokeFreeApplication.Controllers
                 AdminManageDataPacket searchList = new AdminManageDataPacket() { };
                 switch (option)
                 {
-                    
+
                     case "byArticle":
                         searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
                         break;
@@ -64,8 +63,13 @@ namespace SmokeFreeApplication.Controllers
                 }
                 dataPacket.Add(searchList);
             }
-            
-            return View(dataPacket);
+            return dataPacket;
+        }
+
+        //Default view of the admin interface
+        public ActionResult Manage(string option, string search)
+        {
+            return View(populateView(option,search));
         }
 
         //When i click My Admin
@@ -138,7 +142,17 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult ClosePost(ArticleQuery q)
         {
-            return RedirectToAction("Manage");
+            var article = smokeFreeDB.Article.Find(q.id);
+            if (article.articleStatus == "approved")
+            {
+                ViewBag.activeTabContent = "Approved Article";
+            }
+            else
+            {
+                ViewBag.activeTabContent = "Pending Article";
+            }
+            
+            return View("Manage", populateView("",""));
         }
         public ActionResult ApprovePost(ArticleQuery q)
         {
@@ -146,7 +160,8 @@ namespace SmokeFreeApplication.Controllers
             article.articleStatus = "approved";
             smokeFreeDB.SaveChanges();
 
-            return RedirectToAction("Manage");
+            ViewBag.activeTabContent = "Pending Article";
+            return View("Manage", populateView("", ""));
         }
         [HttpPost]
         public ActionResult RejectPost(emailableModel<Article> aModel)
@@ -187,24 +202,53 @@ namespace SmokeFreeApplication.Controllers
                 //hmmm....
             }
 
-
-            return RedirectToAction("Manage");
+            ViewBag.activeTabContent = "Pending Article";
+            return View("Manage", populateView("", ""));
         }
 
 
         public ActionResult CloseDoc(DocQuery q)
         {
-            return RedirectToAction("Manage");
+            var aDoc = smokeFreeDB.Doctor.Find(q.id);
+            if (aDoc.adminVerify == true)
+            {
+                ViewBag.activeTabContent = "Approved Doctor";
+            }
+            else
+            {
+                ViewBag.activeTabContent = "Pending Doctor";
+            }
+            return View("Manage", populateView("", ""));
+            //return RedirectToAction("Manage");
         }
         public ActionResult ApproveDoc(DocQuery q)
         {
             var aDoc = smokeFreeDB.Doctor.Find(q.id);
             aDoc.adminVerify = true;
-            smokeFreeDB.SaveChanges();
+            try
+            {
+
+                smokeFreeDB.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            
 
 
-
-            return RedirectToAction("Manage");
+            ViewBag.activeTabContent = "Pending Doctor";
+            return View("Manage", populateView("", ""));
         }
         [HttpPost]
         public ActionResult RejectDoc(emailableModel<Doctor> aModel)
@@ -245,7 +289,8 @@ namespace SmokeFreeApplication.Controllers
                 //hmmm....
             }
 
-            return RedirectToAction("Manage");
+            ViewBag.activeTabContent = "Pending Doctor";
+            return View("Manage", populateView("", ""));
         }
         public ActionResult PrevDoc(DocQuery q)
         {
@@ -298,7 +343,7 @@ namespace SmokeFreeApplication.Controllers
             smokeFreeDB.BroadCastMessage.Add(m);
             smokeFreeDB.SaveChanges();
 
-            return RedirectToAction("Manage");
+            return View("Manage", populateView("", ""));
         }
 
 
