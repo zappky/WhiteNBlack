@@ -1,0 +1,42 @@
+﻿@model SmokeFreeApplication.Models.Progress
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome to progress page</h2>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.userName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.userName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.totalCheckins)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.totalCheckins)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.cigaIntake)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.cigaIntake)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.cigaPrice)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.cigaPrice)
+    </dd>
+</dl>

@@ -25,10 +25,10 @@ namespace SmokeFreeApplication.Controllers
         // GET: Comments/Create
         public ActionResult CreateComment(CommentQuery q)
         {
-            Comment c = new Comment();
-            c.parentID = q.id;
-            c.parentType = q.pType;
-            return View(c);
+            Comment comment = new Comment();
+            comment.parentID = q.id;
+            comment.parentType = q.pType;
+            return View(comment);
         }
 
         // POST: Comments/Create
@@ -60,28 +60,29 @@ namespace SmokeFreeApplication.Controllers
             return View(comment);
         }
 
-        public ActionResult findParent (Comment curr)
+        public ActionResult findParent (Comment comment)
         {
             // Take the current comment being modified/created as a parameter to find the root story or article
-            int currParent = curr.parentID;
-            Comment parentC = db.Comment.Where(x => x.commentID == currParent).FirstOrDefault();
-            while (parentC.parentType == "C")
+            int currParent = 0;
+            Comment curr = comment;
+            
+            while (curr.parentType == "C")
             {
-                currParent = parentC.parentID;
-                parentC = db.Comment.Where(x => x.commentID == currParent).FirstOrDefault();
+                currParent = curr.parentID;
+                curr = db.Comment.Where(x => x.commentID == currParent).FirstOrDefault();
             }
             
             // Depending on the root of the comment, redirect to appropriate location
-            if (parentC.parentType == "S")
+            if (curr.parentType == "S")
             {
                 Story story;
-                story = db.Story.Find(parentC.parentID);
+                story = db.Story.Find(curr.parentID);
                 return Redirect("~/Story/ViewStory/" + story.storyID); 
             }
-            else if (parentC.parentType == "A")
+            else if (curr.parentType == "A")
             {
                 Article article;
-                article = db.Article.Find(parentC.parentID);
+                article = db.Article.Find(curr.parentID);
                 return Redirect("~/Article/ViewArticle/" + article.articleID); 
             }
 

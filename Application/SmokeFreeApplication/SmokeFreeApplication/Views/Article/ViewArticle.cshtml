@@ -51,8 +51,8 @@
 
 <h3>Comments</h3>
 <div class="jumbotron" style="padding:10px">
-    @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
+    @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "A"))
 </div>
 <div id="accordion">
-    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "S"))
+    @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "A"))
 </div>

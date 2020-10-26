@@ -25,7 +25,7 @@ namespace SmokeFreeApplication.Controllers
 
             if (Session["username"] == null) 
             {
-                return RedirectToAction("SignInMember", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else 
             {
@@ -37,6 +37,7 @@ namespace SmokeFreeApplication.Controllers
                 ViewBag.memberName = generaldata.FirstOrDefault().name;
                 ViewBag.memberBio = interestedpartydata.FirstOrDefault().bio;
                 ViewBag.username = viewUsername;
+                ViewBag.smokerOrNot = interestedpartydata.FirstOrDefault().smokerOrNot;
 
                 if (username == viewUsername)
                 {
@@ -68,7 +69,7 @@ namespace SmokeFreeApplication.Controllers
         {
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInMember", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else
             {
@@ -93,6 +94,41 @@ namespace SmokeFreeApplication.Controllers
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("MemberProfile", new { viewUsername = username, page = 1 });
+        }
+
+        public ActionResult TrackProgress()
+        {
+            // If not logged in, redirect to the sign in page
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+
+            Progress progress = new Progress();
+            string user = Session["username"].ToString();
+
+            // If has no progress, initialise progress
+            var checkUsername = smokeFreeDB.Progress.FirstOrDefault(m => m.userName == user);
+            if (checkUsername == null)
+            {
+                // Create a new Progress for the user
+                progress.userName = user;
+            }
+            else
+            {
+                // query for the correct progress
+                progress = smokeFreeDB.Progress.Find(user);
+            }
+            
+
+            return View(progress);
+        }
+
+        [HttpPost]
+        public ActionResult TrackProgress(CheckInDate check, Progress progress)
+        {
+            // Take check in date (1 day only) as input and add 1 day to progress
+            return View(progress);
         }
     }
 }

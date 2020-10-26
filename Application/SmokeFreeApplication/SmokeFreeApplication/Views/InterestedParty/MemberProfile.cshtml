@@ -27,6 +27,11 @@
     {
         <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditMemberProfile", "InterestedParty")</button>
     }
+
+    @if (ViewBag.ownAccount == true && ViewBag.smokerOrNot == true)
+    {
+        <button class="btn btn-secondary">@Html.ActionLink("Track my progress", "TrackProgress", "InterestedParty")</button>
+    }
 </div>
 
 <h2>Stories</h2>
