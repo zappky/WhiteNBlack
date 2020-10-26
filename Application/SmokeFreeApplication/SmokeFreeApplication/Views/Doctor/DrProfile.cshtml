@@ -7,29 +7,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script>
+<script type="text/javascript">
+
+    function setApprovedTab() {
+        var approvedTab = document.getElementById("approvedTag");
+        approvedTab.style.backgroundColor = "#d9d9d9";
+
+    }
 
     function showApprovedArticles() {
         var approved = document.getElementById("ApprovedArticles");
         var pending = document.getElementById("PendingArticles");
+        var approvedTab = document.getElementById("approvedTab");
+        var pendingTab = document.getElementById("pendingTab");
 
         if (approved.style.display === "none") {
             approved.style.display = "block";
             pending.style.display = "none";
+            approvedTab.style.backgroundColor = "#d9d9d9";
+            pendingTab.style.backgroundColor = "#ffffff";
+
         }
     }
 
     function showPendingArticles() {
         var approved = document.getElementById("ApprovedArticles");
         var pending = document.getElementById("PendingArticles");
-
+        var approvedTab = document.getElementById("approvedTab");
+        var pendingTab = document.getElementById("pendingTab");
 
         if (pending.style.display === "none") {
             pending.style.display = "block";
             approved.style.display = "none";
+            approvedTab.style.backgroundColor = "#ffffff";
+            pendingTab.style.backgroundColor = "#d9d9d9";
         }
     }
 </script>
+
 
 <div style="margin-left: 5px;">
     <table>
@@ -68,10 +83,10 @@
 {
     <ul class="nav nav-tabs ">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" onclick="showApprovedArticles()">Approved Articles</a>
+            <button class="nav-link active" id ="approvedTab" style="background-color:#d9d9d9;" onload="setApprovedTab()" onclick="showApprovedArticles()">Approved Articles</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" onclick="showPendingArticles()">Pending Articles</a>
+            <button class="nav-link active" id="pendingTab" onclick="showPendingArticles()">Pending Articles</button>
 
         </li>
     </ul>
