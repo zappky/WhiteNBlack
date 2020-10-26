@@ -1,56 +1,55 @@
-﻿
-@{
-    ViewBag.Title = "createArticle";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model SmokeFreeApplication.Models.Article
 
+    @{
+        ViewBag.Title = "createArticle";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
+    <br />
+    <h2>Create an Article</h2>
 
-<h1>Create an Article</h1>
+    @using (Html.BeginForm("createArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <form onsubmit="return false;">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-@model SmokeFreeApplication.Models.Article
-@using (Html.BeginForm("createArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+            <div class="form-group">
+                    <h5>Title: </h5>
+                    <div>
+                        @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control create-article-field" } })
+                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-<form onsubmit="return false;">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                    <h5>Description: </h5>
+                    <div>
+                        @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
+                        <span id="bodyVali" class="badge badge-danger">Please enter the article description that has at least 500 characters!</span>
+                    </div>
+                </div>
 
-    <div class="form-group">
-        <h5>Title: </h5>
-        <div>
-            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control create-article-field" } })
-            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <h5>Upload Article Image </h5>
+                <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.articlePicture)</label>
+                <input type="file" class="form-control-file" name="ImageFile" id="ImageFile" />
+            </div>
 
-    <div class="form-group">
-        <h5>Description: </h5>
-        <div>
-            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
-            <span id="bodyVali" class="badge badge-danger">Please enter the article description that has at least 500 characters!</span>
-        </div>
-    </div>
-
-    <div class="form-group">
-            <h5>Upload Article Image </h5>
-            <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.articlePicture)</label>
-            <input type="file" class="form-control-file" name="ImageFile" id="ImageFile" />
-    </div>
-
-    @Html.Partial("~/Views/Shared/_TagField.cshtml")
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="button" onclick="this.form.submit();" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</form>
-}
-@section Scripts
-{
-    <link href="~/Content/article-style.css" rel="stylesheet">
-    <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
-    <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
-    <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
-}
+            @Html.Partial("~/Views/Shared/_TagField.cshtml")
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" onclick="this.form.submit();" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    }
+    @section Scripts
+    {
+      @*  <link href="~/Content/article-style.css" rel="stylesheet">*@
+        <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
+        <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
+        <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
+    }
