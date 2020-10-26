@@ -276,3 +276,4 @@ C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFr
 C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.csproj.CopyComplete
 C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.dll
 C:\Users\thein\Source\Repos\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.pdb
+D:\UniNotes\Y2S1\SEProj\WhiteNBlack\Application\SmokeFreeApplication\SmokeFreeApplication\obj\Debug\SmokeFreeApplication.Migrations.checkInDateUsername.resources
