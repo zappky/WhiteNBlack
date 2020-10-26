@@ -36,7 +36,7 @@ namespace SmokeFreeApplication.Controllers
             return View();
         }
 
-        private List<AdminManageDataPacket> populateView(string option, string search)
+        private List<AdminManageDataPacket> populateView(string option="",string filter = "", string search = "")
         {
             AdminManageDataPacket allList = new AdminManageDataPacket() { list1 = smokeFreeDB.Article.ToList(), list2 = smokeFreeDB.Doctor.ToList() };
             List<AdminManageDataPacket> dataPacket = new List<AdminManageDataPacket>() { allList };
@@ -48,15 +48,27 @@ namespace SmokeFreeApplication.Controllers
                 {
 
                     case "byArticle":
-                        searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
+                        if(!string.IsNullOrEmpty(filter))
+                            searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) && x.articleStatus== filter || search == null).ToList();
+                        else
+                            searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search)  || search == null).ToList();
                         break;
                     case "byDoctor":
-                        searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) || search == null).ToList();
+                        if (!string.IsNullOrEmpty(filter))
+                            searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) && x.adminVerify == (filter == "pending" ? false : true) || search == null).ToList();
+                        else
+                            searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) || search == null).ToList();
                         break;
 
                     case "byAll":
-                        searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
-                        searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) || search == null).ToList();
+                        if (!string.IsNullOrEmpty(filter))
+                            searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) && x.articleStatus == filter || search == null).ToList();
+                        else
+                            searchList.list1 = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
+                        if (!string.IsNullOrEmpty(filter))
+                            searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search) && x.adminVerify == (filter == "pending" ? false : true) || search == null).ToList();
+                        else
+                            searchList.list2 = smokeFreeDB.Doctor.Where(x => x.userName.Contains(search)  || search == null).ToList();
                         break;
                     default:
                         break;
@@ -67,9 +79,9 @@ namespace SmokeFreeApplication.Controllers
         }
 
         //Default view of the admin interface
-        public ActionResult Manage(string option, string search)
+        public ActionResult Manage(string option,string filter, string search)
         {
-            return View(populateView(option,search));
+            return View(populateView(option,filter,search));
         }
 
         //When i click My Admin
@@ -152,7 +164,7 @@ namespace SmokeFreeApplication.Controllers
                 ViewBag.activeTabContent = "Pending Article";
             }
             
-            return View("Manage", populateView("",""));
+            return View("Manage", populateView());
         }
         public ActionResult ApprovePost(ArticleQuery q)
         {
@@ -161,7 +173,7 @@ namespace SmokeFreeApplication.Controllers
             smokeFreeDB.SaveChanges();
 
             ViewBag.activeTabContent = "Pending Article";
-            return View("Manage", populateView("", ""));
+            return View("Manage", populateView());
         }
         [HttpPost]
         public ActionResult RejectPost(emailableModel<Article> aModel)
@@ -203,7 +215,7 @@ namespace SmokeFreeApplication.Controllers
             }
 
             ViewBag.activeTabContent = "Pending Article";
-            return View("Manage", populateView("", ""));
+            return View("Manage", populateView());
         }
 
 
@@ -218,7 +230,7 @@ namespace SmokeFreeApplication.Controllers
             {
                 ViewBag.activeTabContent = "Pending Doctor";
             }
-            return View("Manage", populateView("", ""));
+            return View("Manage", populateView());
             //return RedirectToAction("Manage");
         }
         public ActionResult ApproveDoc(DocQuery q)
@@ -248,7 +260,7 @@ namespace SmokeFreeApplication.Controllers
 
 
             ViewBag.activeTabContent = "Pending Doctor";
-            return View("Manage", populateView("", ""));
+            return View("Manage", populateView());
         }
         [HttpPost]
         public ActionResult RejectDoc(emailableModel<Doctor> aModel)
@@ -290,7 +302,7 @@ namespace SmokeFreeApplication.Controllers
             }
 
             ViewBag.activeTabContent = "Pending Doctor";
-            return View("Manage", populateView("", ""));
+            return View("Manage", populateView());
         }
         public ActionResult PrevDoc(DocQuery q)
         {
@@ -343,7 +355,7 @@ namespace SmokeFreeApplication.Controllers
             smokeFreeDB.BroadCastMessage.Add(m);
             smokeFreeDB.SaveChanges();
 
-            return View("Manage", populateView("", ""));
+            return View("Manage", populateView());
         }
 
 

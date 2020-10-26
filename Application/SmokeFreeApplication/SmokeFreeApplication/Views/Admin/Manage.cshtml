@@ -82,6 +82,12 @@
     @Html.RadioButton("option", "byArticle", new { id = "articleRad", @required = "required" })<text> Article </text>
     @Html.RadioButton("option", "byDoctor", new { id = "doctorRad", @required = "required" })<text> Doctor </text>
     <br />
+
+    <b> Filter By: </b>
+    @Html.RadioButton("filter", "pending", new { id = "pendingRad"  })<text>pending</text>
+    @Html.RadioButton("filter", "approved", new { id = "approvedRad"  })<text> approved </text>
+    <br />
+
     <input name="search" id="searchBar" type="text" data-role="none" required" />
     <input type="button" onclick="this.form.submit();" value="Search" id="searchBtn" class="btn btn-default" />
 
@@ -156,7 +162,7 @@
     </div>
 }
 
-@helper DisplayArticleList(IEnumerable<SmokeFreeApplication.Models.Article> articleList,string articleStatus)
+@helper DisplayArticleList(IEnumerable<SmokeFreeApplication.Models.Article> articleList, string articleStatus)
 {
     <div class="list-group">
         @foreach (var item in articleList)
@@ -175,7 +181,7 @@
 @if (!activeSearch && ViewBag.activeTabContent == "Pending Article")
 {
     <div id="Pending Article" class="tabcontent" style="display:block;">
-        @DisplayArticleList(articleList,"pending")
+        @DisplayArticleList(articleList, "pending")
     </div>
 }
 else
@@ -199,7 +205,7 @@ else
     </div>
 }
 
-@helper DisplayDoctorList(IEnumerable<SmokeFreeApplication.Models.Doctor> doctorList,bool adminVerify)
+@helper DisplayDoctorList(IEnumerable<SmokeFreeApplication.Models.Doctor> doctorList, bool adminVerify)
 {
     <div class="list-group">
 
@@ -219,7 +225,7 @@ else
 @if (ViewBag.activeTabContent == "Pending Doctor")
 {
     <div id="Pending Doctor" class="tabcontent" style="display: block;">
-        @DisplayDoctorList(doctorList,false)
+        @DisplayDoctorList(doctorList, false)
     </div>
 }
 else
@@ -233,15 +239,15 @@ else
 
 @if (ViewBag.activeTabContent == "Approved Doctor")
 {
-<div id="Approved Doctor" class="tabcontent" style="display: block;">
-    @DisplayDoctorList(doctorList, true)
-</div>
+    <div id="Approved Doctor" class="tabcontent" style="display: block;">
+        @DisplayDoctorList(doctorList, true)
+    </div>
 }
 else
 {
-<div id="Approved Doctor" class="tabcontent" style="display: none;">
-    @DisplayDoctorList(doctorList, true)
-</div>
+    <div id="Approved Doctor" class="tabcontent" style="display: none;">
+        @DisplayDoctorList(doctorList, true)
+    </div>
 }
 
 
