@@ -77,7 +77,7 @@ namespace SmokeFreeApplication.Controllers
                 var generaldata = smokeFreeDB.GeneralUser.Where(x => x.userName.Equals(username));
                 var interestedPartydata = smokeFreeDB.InterestedParty.Where(x => x.userName.Equals(username));
 
-                ViewBag.smokerOrNot = interestedPartydata.FirstOrDefault().smokerOrNot;
+                //ViewBag.smokerOrNot = interestedPartydata.FirstOrDefault().smokerOrNot;
                 ViewBag.bio = interestedPartydata.FirstOrDefault().bio;
                 ViewBag.username = username;
 
@@ -89,7 +89,7 @@ namespace SmokeFreeApplication.Controllers
             string username = Session["username"].ToString();
             var member = smokeFreeDB.InterestedParty.Find(username);
             member.bio = accountInfo.InterestedParties.bio;
-            member.smokerOrNot = accountInfo.InterestedParties.smokerOrNot;
+            //member.smokerOrNot = accountInfo.InterestedParties.smokerOrNot;
 
             smokeFreeDB.SaveChanges();
 
