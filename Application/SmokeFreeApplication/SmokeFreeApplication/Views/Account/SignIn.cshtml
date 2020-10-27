@@ -8,45 +8,48 @@
 @using (Html.BeginForm("SignningIn", "Account", FormMethod.Post))
 {
     <style>
-        .btnSignIn{
+        .btnSignIn {
             margin: 10px;
         }
-        .btnSignUp{
-            margin:10px;
+
+        .btnSignUp {
+            margin: 10px;
         }
     </style>
-    <div class="card-body">
-        <h3 style="margin-top:20px;">Sign In</h3>
-        <div class="form-group-row">
-            <div class="col-sm-12">
-                <span class="badge badge-danger">@TempData["loginFailed"]</span>
+    <div class="col-md-8 offset-md-2">
+        <div class="card-body">
+            <h3 style="margin-top:20px;">Sign In</h3>
+            <div class="form-group-row">
+                <div class="col-sm-12">
+                    <span class="badge badge-danger">@TempData["loginFailed"]</span>
+                </div>
+                <div class="col-sm-12">
+                    <span class="badge badge-danger">@TempData["notVerified"]</span>
+                </div>
             </div>
-            <div class="col-sm-12">
-                <span class="badge badge-danger">@TempData["notVerified"]</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.userName)</label>
+                <div class="col-sm-10">
+
+                    @Html.TextBoxFor(m => m.userName, "", new { @class = "form-control", @placeholder = "Username", required = "required" })
+
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.userName)</label>
-            <div class="col-sm-10">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.password)</label>
+                <div class="col-sm-10">
 
-                @Html.TextBoxFor(m => m.userName, "", new { @class = "form-control", @placeholder = "Username", required = "required" })
+                    @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password", required = "required" })
 
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.password)</label>
-            <div class="col-sm-10">
-
-                @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password", required = "required" })
-
+            <div class="form-group row">
+                <input class="btn btn-primary btnSignIn" type="submit" value="Sign In" />
+                <button class="btn btn-secondary btnSignUp"> @Html.ActionLink("Sign Up", "SignUpMember", "Account")</button>
             </div>
-        </div>
-
-        <div class="form-group row">
-            <input class="btn btn-primary btnSignIn" type="submit" value="Sign In" />
-            <button class="btn btn-secondary btnSignUp"> @Html.ActionLink("Sign Up", "SignUpMember", "Account")</button>
         </div>
     </div>
 }
