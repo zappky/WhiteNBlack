@@ -130,7 +130,7 @@ namespace SmokeFreeApplication.Controllers
                 smokeFreeDB.Article.Add(article);
                 smokeFreeDB.SaveChanges();
                 smokeFreeDB.Entry(article).Reload();
-                tagAccess.saveTags(tags, article.articleID);
+                tagAccess.saveArticleTags(tags, article.articleID);
                 return RedirectToAction("Articles");
             }
 
