@@ -4,10 +4,6 @@
 $("#title").blur(function () {
     if ($("#title").val() == "") {
         $("#titleVali").css("display", "block");
-        $('#createForm').submit(function (e) {
-            e.preventDefault();
-            // or return false;
-        });
     } else {
         $("#titleVali").css("display", "none");
     }
@@ -15,16 +11,11 @@ $("#title").blur(function () {
 $('#body').on('summernote.blur', function () {
     if ($('#body').summernote('isEmpty')) {
         $("#bodyVali").css("display", "block");
-        $('#createForm').submit(function (e) {
-            e.preventDefault();
-            // or return false;
-        });
     } else {
         $("#bodyVali").css("display", "none");
     }
 });
 $('#body').on('summernote.keyup', function (e) {
-    debugger;
     var text = $(this).next('.note-editor').find('.note-editable').text();
     var length = text.length;
     var num = 1000 - length;
