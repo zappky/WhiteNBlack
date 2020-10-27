@@ -58,6 +58,41 @@ namespace SmokeFreeApplication.Controllers
 
 
         }
+        public void saveArticleTags(string inputTags, int articleId)
+        {
+            string[] tagArray = inputTags.Split(',');
+            Tag[] tagList = smokeFreeDB.Tag.ToArray();
+            for (int i = 0; i < tagArray.Length; i++)
+            {
+                string tmp = tagArray[i];
+                Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tmp).FirstOrDefault();
+                ArticlesTag articleTag = new ArticlesTag();
+                if (tag != null)
+                {
+                    // Tag is found
+                    articleTag.tagID = tag.tagID;
+                    articleTag.articleID = articleId;
+                    smokeFreeDB.ArticlesTag.Add(articleTag);
+                    smokeFreeDB.SaveChanges();
+                }
+                else
+                {
+                    //Tag is not found in database
+                    Tag newTag = new Tag();
+                    newTag.tagName = tagArray[i];
+                    smokeFreeDB.Tag.Add(newTag);
+                    smokeFreeDB.SaveChanges();
+                    smokeFreeDB.Entry(newTag).Reload();
+                    articleTag.tagID = newTag.tagID;
+                    articleTag.articleID = articleId;
+                    smokeFreeDB.ArticlesTag.Add(articleTag);
+                    smokeFreeDB.SaveChanges();
+
+                }
+            }
+
+
+        }
         public List<Story> searchStoryByTag(string inputTags)
         {
             string[] tagArray = inputTags.Split(',');
