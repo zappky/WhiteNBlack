@@ -172,6 +172,32 @@ namespace SmokeFreeApplication.Controllers
             article.articleStatus = "approved";
             smokeFreeDB.SaveChanges();
 
+            try
+            {
+                const string systemEmail = "zappiky@gmail.com";
+                const string systemEmailPw = "Omaewamou"; // dont hack me , thx
+                MailMessage mail = new MailMessage();
+                //string testEmail = "pang_kee_yang@hotmail.com";
+                var aDoc = smokeFreeDB.GeneralUser.Find(article.userName);
+                mail.To.Add(aDoc.email);
+                mail.From = new MailAddress(systemEmail);
+                mail.Subject = "Article Accepted - Thank you for your submission";
+                mail.Body = "Hi Sir/Mdm,\n Welcome!, we have decided to accept your article.\n Thank you";
+
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential(systemEmail, systemEmailPw); // Enter senders User name and password  
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
+            catch (Exception e)
+            {
+                //hmmm....
+            }
+
             ViewBag.activeTabContent = "Pending Article";
             return View("Manage", populateView());
         }
@@ -181,16 +207,18 @@ namespace SmokeFreeApplication.Controllers
             EmailMessage theMail = aModel.emailModel;
             Article theArticle = aModel.model;
             var article = smokeFreeDB.Article.Find(theArticle.articleID);
-
+            var doc = smokeFreeDB.GeneralUser.Find(theArticle.userName);
+            const string systemEmail = "zappiky@gmail.com";
+            const string  systemEmailPw = "Omaewamou"; // dont hack me , thx
 
             try
             {
                 MailMessage mail = new MailMessage();
                 //string testEmail = "pang_kee_yang@hotmail.com";
-                mail.To.Add(theMail.To);
-                mail.From = new MailAddress(theMail.From);
+                mail.To.Add(doc.email);
+                mail.From = new MailAddress(systemEmail);
                 if (String.IsNullOrEmpty(theMail.Subject))
-                    mail.Subject = "[Rejected article] Thank you for your submission";
+                    mail.Subject = "Article Rejected - Thank you for your interest";
                 else
                     mail.Subject = theMail.Subject;
                 if (String.IsNullOrEmpty(theMail.Body))
@@ -202,7 +230,7 @@ namespace SmokeFreeApplication.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("zappiky@gmail.com", "Omaewamou"); // Enter senders User name and password  
+                smtp.Credentials = new System.Net.NetworkCredential(systemEmail, systemEmailPw); // Enter senders User name and password  
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
 
@@ -239,8 +267,31 @@ namespace SmokeFreeApplication.Controllers
             aDoc.adminVerify = true;
             try
             {
-
                 smokeFreeDB.SaveChanges();
+                try
+                {
+                    const string systemEmail = "zappiky@gmail.com";
+                    const string systemEmailPw = "Omaewamou"; // dont hack me , thx
+                    MailMessage mail = new MailMessage();
+                    var aDocc = smokeFreeDB.GeneralUser.Find(aDoc.userName);
+                    mail.To.Add(aDocc.email);
+                    mail.From = new MailAddress(systemEmail);
+                    mail.Subject = "Registration Accepted - Thank you for your interest";
+                    mail.Body = "Hi Sir/Mdm,\n Welcome!, we have decided to accept your registration.\n Thank you";
+
+                    mail.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential(systemEmail, systemEmailPw); // Enter senders User name and password  
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+                catch (Exception e)
+                {
+                    //hmmm....
+                }
             }
             catch (DbEntityValidationException e)
             {
@@ -267,15 +318,19 @@ namespace SmokeFreeApplication.Controllers
         {
             EmailMessage theMail = aModel.emailModel;
             Doctor theDoc = aModel.model;
-            var aDoc = smokeFreeDB.Doctor.Find(theDoc.userName);
+            var aDocc = smokeFreeDB.Doctor.Find(theDoc.userName);
+            var aDoc = smokeFreeDB.GeneralUser.Find(theDoc.userName);
+
+            const string systemEmail = "zappiky@gmail.com";
+            const string systemEmailPw = "Omaewamou"; // dont hack me , thx
 
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add(theMail.To);
-                mail.From = new MailAddress(theMail.From);
+                mail.To.Add(aDoc.email);
+                mail.From = new MailAddress(systemEmail);
                 if (String.IsNullOrEmpty(theMail.Subject))
-                    mail.Subject = "[Rejected Doctor] Thank you for your registration";
+                    mail.Subject = "Registration rejected - Thank you for your interest";
                 else
                     mail.Subject = theMail.Subject;
                 if (String.IsNullOrEmpty(theMail.Body))
@@ -287,12 +342,12 @@ namespace SmokeFreeApplication.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("zappiky@gmail.com", "Omaewamou"); // Enter senders User name and password  
+                smtp.Credentials = new System.Net.NetworkCredential(systemEmail, systemEmailPw); // Enter senders User name and password  
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
 
-                
-                smokeFreeDB.Doctor.Remove(aDoc);
+                smokeFreeDB.GeneralUser.Remove(aDoc);
+                smokeFreeDB.Doctor.Remove(aDocc);
                 smokeFreeDB.SaveChanges();
 
             }
@@ -337,7 +392,7 @@ namespace SmokeFreeApplication.Controllers
             return RedirectToAction("DoctorManage", new SmokeFreeApplication.Controllers.DocQuery(nextdoc.userName));
         }
 
-        public ActionResult BoardcastMessage()
+        public ActionResult BroadcastMessage()
         {
             //spawn a boardcast form
             return View();
@@ -361,13 +416,12 @@ namespace SmokeFreeApplication.Controllers
 
         public FileContentResult retrieveUserPic(string username)
         {
-            /*
-            byte[] imgByteArray = smokeFreeDB.Article.Find(username).articlePicture;
-            if (imgByteArray != null)
-            {
-                return new FileContentResult(imgByteArray, "image/jpeg");
-            }
-            */
+            //byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
+            //if (imgByteArray != null)
+            //{
+            //    return new FileContentResult(imgByteArray, "image/jpeg");
+            //}
+
             return null;
         }
 
