@@ -30,16 +30,17 @@
     </tr>
     <tr>
         <td colspan="2">
-            @foreach (var tag in ViewBag.tagList)
-            {
-                <span class="badge badge-dark"> @Html.Raw(tag) </span>
-            }
-        </td> 
+            <div>
+                @foreach (var tag in ViewBag.tagList)
+                {
+                    <span class="badge badge-dark"> @Html.Raw(tag) </span>
+                }</div>
+</td> 
     </tr>
     <tr>
         <td colspan="2">
             <div>
-                <p>@Html.DisplayFor(model => model.body)</p>
+                @Html.Raw(ViewBag.articleDetails)
             </div>
 
         </td>

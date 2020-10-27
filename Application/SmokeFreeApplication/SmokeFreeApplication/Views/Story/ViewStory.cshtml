@@ -13,7 +13,7 @@
 <div id="details" class="mx-auto" style="max-width: 70rem;">
     <h2> @Html.DisplayFor(model => model.title)</h2>
     <span class="font-weight-light">@Html.DisplayFor(model => model.postDate)  |  </span>
-    <span class="font-weight-light">@Html.DisplayFor(model => model.userName)</span>
+    <span class="font-weight-light">@Html.ActionLink(Model.userName, "MemberProfile", "InterestedParty", new { viewUsername = Model.userName }, new { page = 1 }) </span>
     <br />
     <br />
     <div>@Html.Raw(ViewBag.storyDetails)</div>

@@ -23,6 +23,20 @@ namespace SmokeFreeApplication.Controllers
             }
             return displayList;
         }
+        public List<String> getArticleTags(int? id)
+        {
+            List<ArticlesTag> articleTags = smokeFreeDB.ArticlesTag.Where(x => x.articleID == id).ToList();
+            List<String> displayList = new List<string>();
+            Tag tagItem;
+            int temp;
+            for (int i = 0; i < articleTags.Count; i++)
+            {
+                temp = articleTags[i].tagID;
+                tagItem = smokeFreeDB.Tag.Where(x => x.tagID == temp).FirstOrDefault();
+                displayList.Add(tagItem.tagName);
+            }
+            return displayList;
+        }
         public void saveTags(string inputTags, int storyID)
         {
             string[] tagArray = inputTags.Split(',');
@@ -145,7 +159,7 @@ namespace SmokeFreeApplication.Controllers
                 for (int j = 0; j < articleTags.Count; j++)
                 {
                     tempId = articleTags[j].articleID;
-                    displayList.Add(smokeFreeDB.Article.Where(x => x.articleID == tempId).FirstOrDefault());
+                    displayList.Add(smokeFreeDB.Article.Where(x => x.articleID == tempId && x.articleStatus=="approved").FirstOrDefault());
                 }
 
             }

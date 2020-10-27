@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.title)</h5>
                             <p class="card-text">
-                                <div class="articleBody">@Html.DisplayFor(modelItem => item.body)</div>
+                                <div class="articleBody">@Html.Raw(item.body)</div>
                             </p>
                         </div>
                     </div>

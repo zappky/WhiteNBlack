@@ -25,7 +25,7 @@ namespace SmokeFreeApplication.Controllers
             List<Article> displayList = new List<Article>();
             ViewBag.search = search;
             ViewBag.option = option;
-
+            List<Article> articlesList = new List<Article>();
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
@@ -35,7 +35,7 @@ namespace SmokeFreeApplication.Controllers
                 search.Replace(' ', '+');
                 if (option == "Name")
                 {
-                    displayList = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null).ToList();
+                    displayList = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null && x.articleStatus == "approved").ToList();
                 }
                 else if (option == "Tags")
                 {
@@ -45,7 +45,7 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-                displayList = smokeFreeDB.Article.ToList();
+                displayList = smokeFreeDB.Article.Where(x => x.articleStatus == "approved").ToList();
             }
 
 
@@ -89,7 +89,7 @@ namespace SmokeFreeApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.tagList = tagAccess.getTags(id);
+            ViewBag.tagList = tagAccess.getArticleTags(id);
             Article article = smokeFreeDB.Article.Find(id);
             ViewBag.articleDetails = article.body;
  

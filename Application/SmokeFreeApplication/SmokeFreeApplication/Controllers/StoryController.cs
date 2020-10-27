@@ -21,7 +21,8 @@ namespace SmokeFreeApplication.Controllers
             List<Story> displayList = new List<Story>();
             ViewBag.option = option;
             ViewBag.search = search;
-
+            ViewBag.userType = Session["docOrMember"].ToString(); 
+                // Session["docOrMember"] = "doc";
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
@@ -31,7 +32,7 @@ namespace SmokeFreeApplication.Controllers
                 search.Replace(' ', '+');
                 if (option == "Name")
                 {
-                    displayList = smokeFreeDB.Story.Where(x => x.title.Contains(search) || search == null).ToList();
+                    displayList = smokeFreeDB.Story.Where(x => x.title.Contains(search) || search == null).OrderByDescending(x=>x.postDate).ToList();
                 }
                 else if (option == "Tags")
                 {
@@ -41,7 +42,7 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-                displayList =  smokeFreeDB.Story.ToList();
+                displayList =  smokeFreeDB.Story.OrderByDescending(x => x.postDate).ToList();
             }
 
 
