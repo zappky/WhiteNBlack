@@ -10,7 +10,8 @@ namespace SmokeFreeApplication.Models
     public class CheckInDate
     {
         [Key, Column(Order = 1)]
-        public string checkInId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int checkInId { get; set; }
         public DateTime checkInDate { get; set; }
         public string userName { get; set; }
     }

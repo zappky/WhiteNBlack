@@ -184,6 +184,14 @@
     <Compile Include="Migrations\202010230705406_checkInDateUsername.Designer.cs">
       <DependentUpon>202010230705406_checkInDateUsername.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010270309268_checkindateid.cs" />
+    <Compile Include="Migrations\202010270309268_checkindateid.Designer.cs">
+      <DependentUpon>202010270309268_checkindateid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010270311530_checkindateidAUTOINCREMENT.cs" />
+    <Compile Include="Migrations\202010270311530_checkindateidAUTOINCREMENT.Designer.cs">
+      <DependentUpon>202010270311530_checkindateidAUTOINCREMENT.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AdminManageDataPacket.cs" />
@@ -499,6 +507,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010230705406_checkInDateUsername.resx">
       <DependentUpon>202010230705406_checkInDateUsername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010270309268_checkindateid.resx">
+      <DependentUpon>202010270309268_checkindateid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010270311530_checkindateidAUTOINCREMENT.resx">
+      <DependentUpon>202010270311530_checkindateidAUTOINCREMENT.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
