@@ -4,7 +4,7 @@
     @Html.RadioButton("option", "Tags", new { id = "tagRad" })<text> Tags </text>
     <br />
     <div id="search-container">
-        <input name="search" id="searchBar" type="text" data-role="none" required" />
+        <input name="search" id="searchBar" value="@ViewBag.search" type="text" data-role="none" required" />
         <button type="button" onclick="this.form.submit();" id="searchBtn" class="btn btn-outline-secondary">Search</button>
     </div>
 

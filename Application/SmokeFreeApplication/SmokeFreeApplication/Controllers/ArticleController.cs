@@ -36,10 +36,12 @@ namespace SmokeFreeApplication.Controllers
                 if (option == "Name")
                 {
                     displayList = smokeFreeDB.Article.Where(x => x.title.Contains(search) || search == null && x.articleStatus == "approved").ToList();
+                    ViewBag.DisplayStatus = "No results found.";
                 }
                 else if (option == "Tags")
                 {
                     displayList =(dynamic) tagAccess.searchArticleByTag(search);
+                    ViewBag.DisplayStatus = "No results found.";
                 }
 
             }

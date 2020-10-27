@@ -15,8 +15,18 @@
     @Html.Partial("~/Views/Shared/_SearchBar.cshtml")
 
 }
-<div class="container mt-2 ">
-    <div class="card-columns">
+@if (!Model.Any())
+{
+    <br />
+    <br />
+    <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
+        @ViewBag.DisplayStatus
+    </div>
+}
+else
+{
+    <div class="container mt-2 ">
+        <div class="card-columns">
             @foreach (var item in Model)
             {
                 <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
@@ -33,15 +43,16 @@
                 </a>
 
             }
+        </div>
     </div>
-</div>
+}
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Articles", new { page }))
 @section Scripts
 {
     <link href="~/Content/article-style.css" rel="stylesheet">
-    <link href="~/Content/story-style.css" rel="stylesheet">    
+    <link href="~/Content/story-style.css" rel="stylesheet">
     <script type="text/javascript" src="~/Scripts/search.js"></script>
- }
+}
 
 

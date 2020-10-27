@@ -33,10 +33,12 @@ namespace SmokeFreeApplication.Controllers
                 if (option == "Name")
                 {
                     displayList = smokeFreeDB.Story.Where(x => x.title.Contains(search) || search == null).OrderByDescending(x=>x.postDate).ToList();
+                    ViewBag.DisplayStatus = "No results found.";
                 }
                 else if (option == "Tags")
                 {
                     displayList = tagAccess.searchStoryByTag(search);
+                    ViewBag.DisplayStatus = "No results found.";
                 }
 
             }
