@@ -1,9 +1,11 @@
 ﻿@model SmokeFreeApplication.Models.Progress
 
+
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
 
 <h2>Welcome to progress page</h2>
 
@@ -40,3 +42,102 @@
         @Html.DisplayFor(model => model.cigaPrice)
     </dd>
 </dl>
+
+
+<!--Calendar-->
+<div id='calendar'></div>
+
+<!-- Modal -->
+<div class="modal fade" id="CheckInModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Check in?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-footer">
+                <form id="CheckInForm" method="post" action="/InterestedParty/CheckIn">
+                    <div class="form-actions no-color">
+                        <input id="ConfirmCheckIn" type="button" value="Confirm" class="btn btn-primary" />
+                    </div>
+                </form>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src='~/Scripts/fullcalendar/main.js'></script>
+<script>
+    var today = '@DateTime.Now.ToString("yyyy-MM-dd")';
+
+    var events = [];
+    events.push({
+        'start': '',
+        'allDay': true,
+        'title': 'Checked In',
+        'display': 'background',
+        'color': '#d1ffc9'
+    });
+
+    
+    
+
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var confirmBtn = document.getElementById('ConfirmCheckIn');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialDate: today,
+            selectable: true,
+            dayMaxEvents: true, // allow "more" link when too many events
+            //selectAllow: function (arg) {
+            //    if (arg.start < '2020-10-5' || arg.end < today) {
+            //        return false;
+            //    }
+            //    else {
+            //        return true;
+            //    }
+            //},
+            dateClick: function (arg) {
+                //var title = prompt('Event Title:');
+                //if (title) {
+                //    calendar.addEvent({
+                //        title: title,
+                //        start: arg.date
+                //    })
+                //}
+                //confirmBtn.addEventListener('click', function () {
+                //    alert("You clicked me");
+                //});
+                $('#CheckInModal').modal('show');
+                //confirmBtn.onclick(function (){
+                //    alert('clicked');
+                //});
+                $.post({
+                    url: "/InterestedParty/TrackProgress",
+                    data: {
+                        checkInDate: arg.dateStr,
+                        userName: "@Model.userName"
+                    },
+                    success: function (mydata) {
+                        alert("Saved");
+                    },
+                    error: function (error) {
+                        alert('Failed');
+                        alert(error);
+                    }
+                });
+                calendar.unselect();
+            },
+            events: '@Url.RouteUrl(new {action= "GetUserCheckIn", controller="InterestedParty" })'
+        });
+
+
+        calendar.render();
+    });
+</script>

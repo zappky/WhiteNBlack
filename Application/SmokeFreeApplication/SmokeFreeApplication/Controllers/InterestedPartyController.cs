@@ -23,11 +23,11 @@ namespace SmokeFreeApplication.Controllers
             int pageNumber = (page ?? 1);
             List<Story> displayList = new List<Story>();
 
-            if (Session["username"] == null) 
+            if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
             }
-            else 
+            else
             {
                 string username = Session["username"].ToString();
                 var generaldata = smokeFreeDB.GeneralUser.Where(x => x.userName.Equals(viewUsername));
@@ -95,6 +95,34 @@ namespace SmokeFreeApplication.Controllers
 
             return RedirectToAction("MemberProfile", new { viewUsername = username, page = 1 });
         }
+        public ActionResult FillInDetails()
+        {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+            else
+            {
+                ViewBag.trackUsername = Session["username"];
+            }
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult FillInDetails(Progress progressInfo)
+        {
+            //Save details in database
+            if (ModelState.IsValid)
+            {
+                smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
+                smokeFreeDB.Progress.Add(progressInfo);
+                smokeFreeDB.SaveChanges();
+
+
+            }
+
+            return RedirectToAction("TrackProgress");
+        }
 
         public ActionResult TrackProgress()
         {
@@ -107,19 +135,19 @@ namespace SmokeFreeApplication.Controllers
             Progress progress = new Progress();
             string user = Session["username"].ToString();
 
-            // If has no progress, initialise progress
+            // If has no progress, direct to another page for user to fill in details.
             var checkUsername = smokeFreeDB.Progress.FirstOrDefault(m => m.userName == user);
             if (checkUsername == null)
             {
-                // Create a new Progress for the user
-                progress.userName = user;
+                return RedirectToAction("FillInDetails");
             }
             else
             {
+
                 // query for the correct progress
                 progress = smokeFreeDB.Progress.Find(user);
             }
-            
+
 
             return View(progress);
         }
@@ -127,8 +155,45 @@ namespace SmokeFreeApplication.Controllers
         [HttpPost]
         public ActionResult TrackProgress(CheckInDate check, Progress progress)
         {
-            // Take check in date (1 day only) as input and add 1 day to progress
+
+
+
             return View(progress);
         }
+
+        [HttpPost]
+        public ActionResult CheckIn([Bind(Include = "checkInId,checkInDate,userName")] CheckInDate check)
+        {
+
+            smokeFreeDB.CheckInDate.Add(check);
+            smokeFreeDB.SaveChanges();
+            return RedirectToAction("TrackProgress");
+        }
+
+        public JsonResult GetUserCheckIn()
+        {
+            var viewModel = new CheckInViewModel();
+            var events = new List<CheckInViewModel>();
+            //Get check ins
+            string user = Session["username"].ToString();
+            List<CheckInDate> checkins = new List<CheckInDate>();
+            checkins = smokeFreeDB.CheckInDate.Where(c => c.userName == user).ToList();
+
+            for (var i = 0; i < checkins.Count(); i++)
+            {
+                events.Add(new CheckInViewModel()
+                {
+                    start = checkins[i].checkInDate,
+                    end = checkins[i].checkInDate.AddHours(24),
+                    allDay = true,
+                    display = "background",
+                    color = "#d1ffc9"
+                });
+
+            }
+
+
+            return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
+        } 
     }
 }

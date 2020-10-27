@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "FillInDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SmokeFreeApplication.Models.Progress
+
+@using (Html.BeginForm("FillInDetails", "InterestedParty", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="col-md-10 offset-md-1">
+    <h2 style="margin-top: 20px;">Details</h2>
+    <p>Fill in details before you start tracking your smoke free progress!</p>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">@Html.LabelFor(m => m.cigaIntake)</label>
+        <div class="col-sm-9">
+            @Html.TextBoxFor(m => m.cigaIntake, "", new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(m => m.cigaIntake, "", new { @class = "badge badge-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">@Html.LabelFor(m => m.cigaPrice)</label>
+        <div class="col-sm-9">
+            @Html.TextBoxFor(m => m.cigaPrice, "", new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(m => m.cigaPrice, "", new { @class = "badge badge-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.userName, new { @Value = ViewBag.trackUsername })
+    @Html.HiddenFor(m => m.totalCheckins, new { @Value = 0 })
+
+    <div class="form-group row">
+        <input class="btn btn-primary" type="submit" value="Start Tracking Progress" />
+    </div>
+</div>
+  }
+
