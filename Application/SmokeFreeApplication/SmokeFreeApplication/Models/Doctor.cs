@@ -22,6 +22,7 @@ namespace SmokeFreeApplication.Models
         public string description { get; set; }
         [Required]
         [DisplayName("Contact Number")]
+        [Range(10000000, 99999999)]
         public int contactNo { get; set; }
 
         [Required]

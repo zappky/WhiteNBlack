@@ -36,6 +36,7 @@ namespace SmokeFreeApplication.Models
         public string confirmPassword { get; set; }
         [Required]
         [DisplayName("Date of Birth")]
+        [Range(typeof(DateTime), "1/1/1900", "31/12/2004", ErrorMessage = "You have to be at least 16 years old to register")]
         public DateTime dateOfBirth { get; set; }
         [Required]
         [DisplayName("Gender")]
