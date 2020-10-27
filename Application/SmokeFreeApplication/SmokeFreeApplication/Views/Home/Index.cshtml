@@ -4,6 +4,13 @@
 }
 @model SmokeFreeApplication.Models.BroadcastMessage
 
+<style>
+    .imgclass {
+        max-width: 100%;
+        height: auto;
+
+    }
+</style>
 <div class="alert alert-info" role="alert">
     <h4 class="alert-heading">@Html.DisplayFor(modelItem => Model.title)</h4>
     <p>@Html.DisplayFor(modelItem => Model.content)</p>
@@ -21,13 +28,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="~/images/smoke-free1.png" alt="">
+                <img class="d-block w-100 imgclass" src="~/images/smoke-free1.png" alt="">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="~/images/smoke-free2.png" alt="">
+                <img class="d-block w-100 imgclass" src="~/images/smoke-free2.png" alt="">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="~/images/smoke-free2.png" alt="">
+                <img class="d-block w-100 imgclass" src="~/images/smoke-free2.png" alt="">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -43,26 +50,57 @@
 
 
 </div>
-
+@if (Session["username"] != null)
+{
 <div class="row">
-
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <h2>Getting started</h2>
+        <p>Share your stories here or see other stories!</p>
+        <p class="btn btn-default">@Html.ActionLink("Stories", "Stories", "Story")</p>
+    </div>
+    <div class="col-md-3">
+        <h2>Articles</h2>
+        <p>Read some of our articles written by professionals about what smoking can do to your health!</p>
+        <p class="btn btn-default">@Html.ActionLink("Articles", "Articles", "Article")</p>
+    </div>
+    <div class="col-md-3">
+        <h2>Quit Centres</h2>
+        <p>Have trouble qutting? Visit one of the quit centres today!</p>
+        <p class="btn btn-default">@Html.ActionLink("Quit Centres", "QuitCentres", "Home")</p>
+    </div>
+    <div class="col-md-3">
+        <h2>About us</h2>
+        <p>Learn about our website and why we do what we do!</p>
+        <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
+    </div>
+</div>
+}
+else
+{
+<div class="row">
+    <div class="col-md-3">
         <h2>Getting started</h2>
         <p>Wonder how you can begin your journey to being smoke free? Start here today!</p>
-        <p class="btn btn-default">@Html.ActionLink("Sign Up", "SignUp", "Account")</p>
+        <p class="btn btn-default">@Html.ActionLink("Sign Up", "SignUpMember", "Account")</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Articles</h2>
         <p>Read some of our articles written by professionals about what smoking can do to your health</p>
         <p class="btn btn-default">@Html.ActionLink("Login", "SignIn", "Account")</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <h2>Quit Centres</h2>
+        <p>Have trouble qutting? Visit one of the quit centres today!</p>
+        <p class="btn btn-default">@Html.ActionLink("Quit Centres", "QuitCentres", "Home")</p>
+    </div>
+    <div class="col-md-3">
         <h2>About us</h2>
         <p>Learn about our website and why we do what we do!</p>
         <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
     </div>
 </div>
 
+}
 @*
     Not sure to still go with this broadcast msg idea or the static msg at the home page idea
     Still kinda lame now

@@ -302,7 +302,6 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\form-validation.js" />
     <Content Include="Scripts\fullcalendar\locales-all.js" />
     <Content Include="Scripts\fullcalendar\locales-all.min.js" />
     <Content Include="Scripts\fullcalendar\locales\af.js" />
