@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td>
-            <p class="font-weight-light">Posted By: @Html.ActionLink("Profile", "DrProfile", "Doctor", new { viewUsername = Model.userName }, new { page = 1 })</p>     
+            <p class="font-weight-light">Posted By: @Html.ActionLink(Model.userName, "DrProfile", "Doctor", new { viewUsername = Model.userName }, new { page = 1 })</p>     
         </td>
         <td>
             <p class="font-weight-light">Date Posted: @Html.DisplayFor(model => model.postDate)</p>
