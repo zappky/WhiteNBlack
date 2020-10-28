@@ -20,9 +20,4 @@
 *.mod
 *.smod
 
-# Compiled Static libraries
-Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
-*.config
-*.config
-Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
-*.cache
+
