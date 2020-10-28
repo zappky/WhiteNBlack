@@ -156,17 +156,17 @@ namespace SmokeFreeApplication.Controllers
         public ActionResult TrackProgress(CheckInDate check, Progress progress)
         {
 
-
-
             return View(progress);
         }
 
         [HttpPost]
         public ActionResult CheckIn([Bind(Include = "checkInId,checkInDate,userName")] CheckInDate check)
         {
-
+            // TODO check for duplicates
             smokeFreeDB.CheckInDate.Add(check);
             smokeFreeDB.SaveChanges();
+
+            // TODO update smokeFreeDB.Progress
             return RedirectToAction("TrackProgress");
         }
 
@@ -181,10 +181,12 @@ namespace SmokeFreeApplication.Controllers
 
             for (var i = 0; i < checkins.Count(); i++)
             {
+                var startDateStr = checkins[i].checkInDate.Date.ToString("yyyy-MM-dd");
+                var endDateStr = checkins[i].checkInDate.AddDays(1).Date.ToString("yyyy-MM-dd");
                 events.Add(new CheckInViewModel()
                 {
-                    start = checkins[i].checkInDate,
-                    end = checkins[i].checkInDate.AddHours(24),
+                    startStr = startDateStr,
+                    endStr = endDateStr,
                     allDay = true,
                     display = "background",
                     color = "#d1ffc9"
@@ -193,7 +195,7 @@ namespace SmokeFreeApplication.Controllers
             }
 
 
-            return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
+            return new JsonResult { Data = events.ToArray(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         } 
     }
 }

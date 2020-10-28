@@ -75,19 +75,34 @@
 <script>
     var today = '@DateTime.Now.ToString("yyyy-MM-dd")';
 
-    var events = [];
-    events.push({
-        'start': '',
-        'allDay': true,
-        'title': 'Checked In',
-        'display': 'background',
-        'color': '#d1ffc9'
-    });
+    //$.ajax({
+    //    type: "GET",
+    //    contentType: "application/json",
+    //    url: "/InterestedParty/GetUserCheckIn",
+    //    dataType: "JSON",
+    //    success: function (data) {
+    //        var events = [];
+    //        $.each(data, function (i, data) {
+    //            events.push({
+    //                start: startStr,
+    //                end: endStr,
+    //                display: display,
+    //                color: color
+    //            });
+    //        });
+    //        callback(events);
+    //    }
+    //}); // thtis section not working yet
+    
 
-    
-    
+    //events.push({
+    //    'start': '',
+    //    'allDay': true,
+    //    'title': 'Checked In',
+    //    'display': 'background',
+    //    'color': '#d1ffc9'
+    //});
 
-    
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
         var confirmBtn = document.getElementById('ConfirmCheckIn');
@@ -119,10 +134,10 @@
                 //    alert('clicked');
                 //});
                 $.post({
-                    url: "/InterestedParty/TrackProgress",
+                    url: '/InterestedParty/CheckIn',
                     data: {
                         checkInDate: arg.dateStr,
-                        userName: "@Model.userName"
+                        userName: '@Model.userName'
                     },
                     success: function (mydata) {
                         alert("Saved");
@@ -134,10 +149,25 @@
                 });
                 calendar.unselect();
             },
-            events: '@Url.RouteUrl(new {action= "GetUserCheckIn", controller="InterestedParty" })'
+            //events: [
+            //    {
+            //        url: '/InterestedParty/GetUserCheckIn/',
+            //        startParam: '',
+            //        endParam: '',
+            //        success: function (data) {
+            //            alert("Check in fetched");
+            //        },
+            //        failure: function (error) {
+            //            alert('Check in fetch failed');
+            //            alert(error);
+            //        }
+            //    }
+            //]
+
         });
 
 
         calendar.render();
+        
     });
 </script>
