@@ -4,11 +4,18 @@
 }
 @model SmokeFreeApplication.Models.BroadcastMessage
 
+<style>
+    .imgclass {
+        max-width: 100%;
+        height: auto;
 
+    }
+</style>
 <div class="alert alert-info" role="alert">
     <h4 class="alert-heading">@Html.DisplayFor(modelItem => Model.title)</h4>
     <p>@Html.DisplayFor(modelItem => Model.content)</p>
-    
+    <hr>
+    <p class="mb-0">@Html.DisplayFor(modelItem => Model.ownerName)</p>
 </div>
 
 
@@ -39,6 +46,9 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+
+
+
 </div>
 @if (Session["username"] != null)
 {
