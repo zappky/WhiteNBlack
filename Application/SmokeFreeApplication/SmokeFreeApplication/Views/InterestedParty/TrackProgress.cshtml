@@ -73,7 +73,6 @@
 
 @section Scripts{
     <script src='~/Scripts/fullcalendar/main.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script>
     var today = '@DateTime.Now.ToString("yyyy-MM-dd")';
     $(document).ready(function () {
@@ -99,8 +98,8 @@
         })
 
         function GenerateCalender(events) {
-            var calendarEl = document.getElementById('calendar');
-            var confirmBtn = document.getElementById('ConfirmCheckIn');
+           var calendarEl = document.getElementById('calendar');
+           var confirmBtn = document.getElementById('ConfirmCheckIn');
            var calendar = new FullCalendar.Calendar(calendarEl, {
             initialDate: today,
             selectable: true,
