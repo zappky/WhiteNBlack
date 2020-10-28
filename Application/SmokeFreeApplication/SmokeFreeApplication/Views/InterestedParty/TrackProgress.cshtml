@@ -71,42 +71,37 @@
     </div>
 </div>
 
-<script src='~/Scripts/fullcalendar/main.js'></script>
+@section Scripts{
+    <script src='~/Scripts/fullcalendar/main.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script>
     var today = '@DateTime.Now.ToString("yyyy-MM-dd")';
+    $(document).ready(function () {
+        var events = [];
+        $.ajax({
+            type: "GET",
+            url: "/InterestedParty/GetUserCheckIn",
+            success: function (data) {
+                $.each(data, function (i, v) {
+                    events.push({
+                        start: v.startStr,
+                        end: v.endStr,
+                        color: v.color,
+                        display: v.display,
+                        allDay: v.allDay
+                    });
+                })
+                GenerateCalender(events);
+            },
+            error: function (error) {
+                alert('failed');
+            }
+        })
 
-    //$.ajax({
-    //    type: "GET",
-    //    contentType: "application/json",
-    //    url: "/InterestedParty/GetUserCheckIn",
-    //    dataType: "JSON",
-    //    success: function (data) {
-    //        var events = [];
-    //        $.each(data, function (i, data) {
-    //            events.push({
-    //                start: startStr,
-    //                end: endStr,
-    //                display: display,
-    //                color: color
-    //            });
-    //        });
-    //        callback(events);
-    //    }
-    //}); // thtis section not working yet
-    
-
-    //events.push({
-    //    'start': '',
-    //    'allDay': true,
-    //    'title': 'Checked In',
-    //    'display': 'background',
-    //    'color': '#d1ffc9'
-    //});
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var confirmBtn = document.getElementById('ConfirmCheckIn');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        function GenerateCalender(events) {
+            var calendarEl = document.getElementById('calendar');
+            var confirmBtn = document.getElementById('ConfirmCheckIn');
+           var calendar = new FullCalendar.Calendar(calendarEl, {
             initialDate: today,
             selectable: true,
             dayMaxEvents: true, // allow "more" link when too many events
@@ -140,6 +135,7 @@
                         userName: '@Model.userName'
                     },
                     success: function (mydata) {
+
                         alert("Saved");
                     },
                     error: function (error) {
@@ -147,27 +143,45 @@
                         alert(error);
                     }
                 });
+
                 calendar.unselect();
             },
-            //events: [
-            //    {
-            //        url: '/InterestedParty/GetUserCheckIn/',
-            //        startParam: '',
-            //        endParam: '',
-            //        success: function (data) {
-            //            alert("Check in fetched");
-            //        },
-            //        failure: function (error) {
-            //            alert('Check in fetch failed');
-            //            alert(error);
-            //        }
-            //    }
-            //]
+            events:events
 
         });
 
 
         calendar.render();
-        
-    });
+        }
+    })
+    //$.ajax({
+    //    type: "GET",
+    //    contentType: "application/json",
+    //    url: "/InterestedParty/GetUserCheckIn",
+    //    dataType: "JSON",
+    //    success: function (data) {
+    //        var events = [];
+    //        $.each(data, function (i, data) {
+    //            events.push({
+    //                start: startStr,
+    //                end: endStr,
+    //                display: display,
+    //                color: color
+    //            });
+    //        });
+    //        callback(events);
+    //    }
+    //}); // thtis section not working yet
+
+
+    //events.push({
+    //    'start': '',
+    //    'allDay': true,
+    //    'title': 'Checked In',
+    //    'display': 'background',
+    //    'color': '#d1ffc9'
+    //});
+
+
 </script>
+}

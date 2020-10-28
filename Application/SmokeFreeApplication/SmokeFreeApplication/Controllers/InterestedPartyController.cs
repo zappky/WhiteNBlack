@@ -162,6 +162,8 @@ namespace SmokeFreeApplication.Controllers
         [HttpPost]
         public ActionResult CheckIn([Bind(Include = "checkInId,checkInDate,userName")] CheckInDate check)
         {
+            string user = Session["username"].ToString();
+            smokeFreeDB.Progress.Where(c => c.userName == user).FirstOrDefault().totalCheckins += 1;
             // TODO check for duplicates
             smokeFreeDB.CheckInDate.Add(check);
             smokeFreeDB.SaveChanges();
