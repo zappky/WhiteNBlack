@@ -21,21 +21,6 @@
 *.smod
 
 # Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-*.js
-*.css
-*.p7s
-*.svg
-*.css
-*.config
 Application/SmokeFreeApplication/.vs/SmokeFreeApplication/config/applicationhost.config
 *.config
 *.config
