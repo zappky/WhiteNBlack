@@ -666,6 +666,15 @@ namespace SmokeFreeApplication.Migrations
                 },
                 new Doctor
                 {
+                    userName = "gohalice",
+                    workLocation = "Ministry of Health",
+                    description = "Specializing in Nicotine Research",
+                    contactNo = 91648764,
+                    doctorID = "DQ5501T",
+                    adminVerify = true
+                },
+                new Doctor
+                {
                     userName = "agastht",
                     workLocation = "Mount Elizabeth Medical Centre",
                     description = "Specializing in heart diseases",
