@@ -13,7 +13,6 @@
         @Html.AntiForgeryToken()
         <hr />
         <form onsubmit="return false;">
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
@@ -34,7 +33,6 @@
 
             <div class="form-group">
                 <h5>Upload Article Image </h5>
-                <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.articlePicture)</label>
                 <input type="file" class="form-control-file" name="ImageFile" id="ImageFile" />
             </div>
 
@@ -50,6 +48,7 @@
     @section Scripts
     {
       @*  <link href="~/Content/article-style.css" rel="stylesheet">*@
+        <link href="~/Content/story-style.css" rel="stylesheet">
         <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
         <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
         <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
