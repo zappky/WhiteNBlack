@@ -11,6 +11,7 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
+<script type="text/javascript" src="~/Scripts/leaflet.ajax.min.js"></script>
 
 <style>
     #mapid {
@@ -24,11 +25,8 @@
 
 
 <script>
-    
-    var geojsonFeature = "";
-    
-
-    var mymap = L.map('mapid').setView([1.3521, 103.8198], 13);
+    var quitCentres = "/Content/quit-centres-geojson.geojson";
+    var map = L.map('mapid').setView([1.3521, 103.8198], 13);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -37,9 +35,16 @@
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiaGlnaHBpZXMiLCJhIjoiY2p0Nml4NmR1MGhxajRhczA1NGFqZXV0NSJ9.c2tn1B3vCBSVni_W9dXQkQ'
-    }).addTo(mymap);
-
+    }).addTo(map);
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.Description) {
+            layer.bindPopup(feature.properties.Description);
+        }
+    }
     var myLayer = L.geoJSON().addTo(map);
-    myLayer.addData(geojsonFeature);
+    L.geoJson.ajax(quitCentres, {
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
 
 </script>

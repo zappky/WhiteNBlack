@@ -68,7 +68,7 @@ namespace SmokeFreeApplication.Controllers
         {
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInMember", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
 
             if (id == null)
@@ -95,7 +95,7 @@ namespace SmokeFreeApplication.Controllers
         {
             if (Session["username"] == null)
             {
-                return RedirectToAction("SignInMember", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             if (ModelState.IsValid)
             {
