@@ -145,7 +145,7 @@
             <a href="@Url.Action("ArticleManage", "Admin", new { id = anArticle.articleID})" style="text-decoration: none;">
                 <h4 class="card-title">@Html.DisplayFor(modelItem => anArticle.title)</h4>
                 <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => anArticle.postDate)</h6>
-                <p class="card-text">@Html.DisplayFor(modelItem => anArticle.body)</p>
+                <p class="card-text">@Html.Raw(anArticle.body)</p>
         </div>
     </div>
 }
@@ -157,7 +157,7 @@
             <a href="@Url.Action("DoctorManage", "Admin", new { id = aDoctor.userName})" style="text-decoration: none;">
                 <h4 class="card-title">@Html.DisplayFor(modelItem => aDoctor.userName)</h4>
                 <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => aDoctor.contactNo)</h6>
-                <p class="card-text">@Html.DisplayFor(modelItem => aDoctor.description)</p>
+                <p class="card-text">@Html.Raw(aDoctor.description)</p>
         </div>
     </div>
 }

@@ -20,15 +20,6 @@ namespace SmokeFreeApplication.Controllers
     public class AdminController : Controller
     {
 
-        private ActionResult ValidateAdminLogin()
-        {
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("SignInMember", "Account");
-            }
-
-            return View();
-        }
         private SmokeFreeDBContext smokeFreeDB = new SmokeFreeDBContext();
         // GET: Admin
         public ActionResult Index()
@@ -81,15 +72,15 @@ namespace SmokeFreeApplication.Controllers
         //Default view of the admin interface
         public ActionResult Manage(string option,string filter, string search)
         {
-            return View(populateView(option,filter,search));
+            if (Session["docOrMember"] == "admin")
+            {
+                return View(populateView(option, filter, search));
+                
+            }
+            return RedirectToAction("SignInAdmin", "Account");
         }
 
-        //When i click My Admin
-        //Brings me to main admin interface
-        public ActionResult MyAdmin()
-        {
-            return RedirectToAction("Manage");
-        }
+
 
         //When i click Logout
         //Brings me to home? and clear the session?
@@ -416,11 +407,17 @@ namespace SmokeFreeApplication.Controllers
 
         public FileContentResult retrieveUserPic(string username)
         {
-            //byte[] imgByteArray = smokeFreeDB.GeneralUser.Find(username).profilePicture;
-            //if (imgByteArray != null)
-            //{
-            //    return new FileContentResult(imgByteArray, "image/jpeg");
-            //}
+
+            var aUser = smokeFreeDB.GeneralUser.Find(username);
+            if (aUser != null)
+            {
+                byte[] imgByteArray = aUser.profilePicture;
+                if (imgByteArray != null)
+                {
+                    return new FileContentResult(imgByteArray, "image/jpeg");
+                }
+
+            }
 
             return null;
         }

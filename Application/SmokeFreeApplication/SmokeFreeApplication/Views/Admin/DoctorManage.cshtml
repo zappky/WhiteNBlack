@@ -18,7 +18,7 @@
     </div>
     <div class="card-body">
         <h3 class="card-title">@Html.DisplayFor(modelItem => Model.model.workLocation)</h3>
-        <p class="card-text">@Html.DisplayFor(modelItem => Model.model.description)</p>
+        <p class="card-text">@Html.Raw(Model.model.description)</p>
     </div>
 
     </a>
