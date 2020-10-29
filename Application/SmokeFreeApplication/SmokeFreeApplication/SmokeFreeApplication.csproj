@@ -210,6 +210,7 @@
     <Compile Include="Models\EmailMessage.cs" />
     <Compile Include="Models\InterestedPartyCompoundModel.cs" />
     <Compile Include="Models\Progress.cs" />
+    <Compile Include="Models\ProgressViewModel.cs" />
     <Compile Include="Models\SmokeFreeDBContext.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\InterestedParty.cs" />

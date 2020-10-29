@@ -1,4 +1,4 @@
-﻿@model SmokeFreeApplication.Models.Progress
+﻿@model SmokeFreeApplication.Models.ProgressViewModel
 
 
 @{
@@ -6,48 +6,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
+<!-- Create the circle class for the track progress display-->
+<style>
+    .circ {
+        width: 240px;
+        height: 240px;
+        background-color: white;
+        border: 11px solid #d1d1d1;
+    }
+</style>
 
-<h2>Welcome to progress page</h2>
-
-<dl class="dl-horizontal">
-    <dt>
-        @Html.DisplayNameFor(model => model.userName)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.userName)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.totalCheckins)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.totalCheckins)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.cigaIntake)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.cigaIntake)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.cigaPrice)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.cigaPrice)
-    </dd>
-</dl>
-
+<h3 style="padding-top:3%; padding-bottom:3%">@Html.DisplayFor(model => model.userName)'s Progress</h3>
 
 <!--Calendar-->
+
 <div id='calendar'></div>
 
-<!-- Modal -->
+<div class="d-flex justify-content-between" style="padding:5%">
+    <div class="circ rounded-circle d-flex flex-column justify-content-center align-items-center">
+        <h1>@Html.DisplayFor(model => model.streak) day</h1>
+        <h5>current streak</h5>
+    </div>
+    <div class="circ rounded-circle d-flex flex-column justify-content-center align-items-center">
+        <h1>@Html.DisplayFor(model => model.totalCheck) days</h1>
+        <h5>smoke-free</h5>
+    </div>
+    <div class="circ rounded-circle d-flex flex-column justify-content-center align-items-center">
+        <h1>@Html.DisplayFor(model => model.cigaSaved)</h1>
+        <h5>Sticks avoided</h5>
+    </div>
+    <div class="circ rounded-circle d-flex flex-column justify-content-center align-items-center">
+        <h1>$@Html.DisplayFor(model => model.cashSaved)</h1>
+        <h5>saved</h5>
+    </div>
+</div>
+
+
+
+
+<!-- Confirmation Modal -->
 <div class="modal fade" id="CheckInModal" role="dialog">
     <div class="modal-dialog">
 
@@ -73,114 +70,90 @@
 
 @section Scripts{
     <script src='~/Scripts/fullcalendar/main.js'></script>
-<script>
-    var today = '@DateTime.Now.ToString("yyyy-MM-dd")';
-    $(document).ready(function () {
-        var events = [];
-        $.ajax({
-            type: "GET",
-            url: "/InterestedParty/GetUserCheckIn",
-            success: function (data) {
-                $.each(data, function (i, v) {
-                    events.push({
-                        start: v.startStr,
-                        end: v.endStr,
-                        color: v.color,
-                        display: v.display,
-                        allDay: v.allDay
-                    });
-                })
-                GenerateCalender(events);
-            },
-            error: function (error) {
-                alert('failed');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script>
+        var today = '@DateTime.Now.ToString("yyyy-MM-dd")';
+        var validend = '@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")';
+        var selectedDate = '';
+        $(document).ready(function () {
+            var events = [];
+            // gets the checkin dates from the controller
+            $.ajax({
+                type: "GET",
+                url: "/InterestedParty/GetUserCheckIn",
+                success: function (data) {
+                    $.each(data, function (i, v) {
+                        events.push({
+                            start: v.startStr,
+                            end: v.endStr,
+                            color: v.color,
+                            display: v.display,
+                            allDay: v.allDay
+                        });
+                    })
+                    GenerateCalender(events);
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+
+            // builds and style the calendar
+            function GenerateCalender(events) {
+               var calendarEl = document.getElementById('calendar');
+               var calendar = new FullCalendar.Calendar(calendarEl, {
+                   initialDate: today,
+                   //selectable: true,
+                   dayMaxEvents: true, // allow "more" link when too many events
+                   events: events,
+
+                   // styling
+                   height: 370,
+                   aspectRatio: 1,
+                   headerToolbar: {
+                       start: 'prev',
+                       center: 'title',
+                       end: 'today next'
+                   },
+
+                   // restricts checkins to the past and today
+                   validRange: {
+                       end: validend
+                   },
+                   // functions
+                   dateClick: function (arg) {
+                       //show confirmation popup
+                       $('#CheckInModal').modal('show');
+                       selectedDate = arg.dateStr;
+                       calendar.unselect();
+                   }
+            });
+
+            calendar.render();
             }
-        })
 
-        function GenerateCalender(events) {
-           var calendarEl = document.getElementById('calendar');
-           var confirmBtn = document.getElementById('ConfirmCheckIn');
-           var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialDate: today,
-            selectable: true,
-            dayMaxEvents: true, // allow "more" link when too many events
-            //selectAllow: function (arg) {
-            //    if (arg.start < '2020-10-5' || arg.end < today) {
-            //        return false;
-            //    }
-            //    else {
-            //        return true;
-            //    }
-            //},
-            dateClick: function (arg) {
-                //var title = prompt('Event Title:');
-                //if (title) {
-                //    calendar.addEvent({
-                //        title: title,
-                //        start: arg.date
-                //    })
-                //}
-                //confirmBtn.addEventListener('click', function () {
-                //    alert("You clicked me");
-                //});
-                $('#CheckInModal').modal('show');
-                //confirmBtn.onclick(function (){
-                //    alert('clicked');
-                //});
+            // binding the form submit to the "confirm" button to let smoker cancel if they clicked the wrong date
+            document.getElementById("ConfirmCheckIn").addEventListener("click", submitDate)
+            function submitDate() {
                 $.post({
-                    url: '/InterestedParty/CheckIn',
-                    data: {
-                        checkInDate: arg.dateStr,
-                        userName: '@Model.userName'
-                    },
-                    success: function (mydata) {
+                        url: '/InterestedParty/CheckIn',
+                        data: {
+                            checkInDate: selectedDate,
+                            userName: '@Model.userName'
+                        },
+                        success: function (mydata) {
 
-                        alert("Saved");
-                    },
-                    error: function (error) {
-                        alert('Failed');
-                        alert(error);
-                    }
+                            //alert("Saved");
+                            // Refresh page
+                            location.reload();
+                        },
+                        error: function (error) {
+                            //alert('Failed');
+                            //alert(error);
+                        }
                 });
+            }
 
-                calendar.unselect();
-            },
-            events:events
-
-        });
-
-
-        calendar.render();
-        }
-    })
-    //$.ajax({
-    //    type: "GET",
-    //    contentType: "application/json",
-    //    url: "/InterestedParty/GetUserCheckIn",
-    //    dataType: "JSON",
-    //    success: function (data) {
-    //        var events = [];
-    //        $.each(data, function (i, data) {
-    //            events.push({
-    //                start: startStr,
-    //                end: endStr,
-    //                display: display,
-    //                color: color
-    //            });
-    //        });
-    //        callback(events);
-    //    }
-    //}); // thtis section not working yet
-
-
-    //events.push({
-    //    'start': '',
-    //    'allDay': true,
-    //    'title': 'Checked In',
-    //    'display': 'background',
-    //    'color': '#d1ffc9'
-    //});
-
-
-</script>
+        })
+    </script>
 }

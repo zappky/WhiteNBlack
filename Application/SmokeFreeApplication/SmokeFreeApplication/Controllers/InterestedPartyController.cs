@@ -95,6 +95,8 @@ namespace SmokeFreeApplication.Controllers
 
             return RedirectToAction("MemberProfile", new { viewUsername = username, page = 1 });
         }
+
+        // Track Progression actions
         public ActionResult FillInDetails()
         {
             if (Session["username"] == null)
@@ -117,8 +119,6 @@ namespace SmokeFreeApplication.Controllers
                 smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
                 smokeFreeDB.Progress.Add(progressInfo);
                 smokeFreeDB.SaveChanges();
-
-
             }
 
             return RedirectToAction("TrackProgress");
@@ -131,7 +131,8 @@ namespace SmokeFreeApplication.Controllers
             {
                 return RedirectToAction("SignIn", "Account");
             }
-
+            
+            ProgressViewModel progView = new ProgressViewModel();
             Progress progress = new Progress();
             string user = Session["username"].ToString();
 
@@ -143,33 +144,82 @@ namespace SmokeFreeApplication.Controllers
             }
             else
             {
-
                 // query for the correct progress
                 progress = smokeFreeDB.Progress.Find(user);
+
+                // query for all checkins
+                List<CheckInDate> checkins = new List<CheckInDate>();
+                checkins = smokeFreeDB.CheckInDate.Where(c => c.userName == user).OrderByDescending(c => c.checkInDate).ToList();
+                int totalCheckins = checkins.Count();
+
+                // pass out the calculated display
+                progView.userName = user;
+                progView.streak = getStreak(checkins);
+                progView.totalCheck = totalCheckins;
+                progView.cigaSaved = progress.cigaIntake * totalCheckins;
+                progView.cashSaved = (progress.cigaPrice / 20) * progView.cigaSaved * totalCheckins;
             }
 
-
-            return View(progress);
+            return View(progView);
         }
 
-        [HttpPost]
-        public ActionResult TrackProgress(CheckInDate check, Progress progress)
+        public int getStreak(List<CheckInDate> c)
         {
-
-            return View(progress);
+            int i = 0;
+            // If user has no checkins yet, streak is 0
+            if(c.Count() < 2)
+            {
+                return c.Count();
+            }
+            // If today or yesterday has a checkin, do a regular count
+            if ((c[i].checkInDate == DateTime.Today) || (c[i].checkInDate == DateTime.Today.AddDays(-1)))
+            {
+                // compare each check in date to ensure that they are consecutive days
+                while ((i < c.Count()-1))
+                {
+                    if(c[i].checkInDate.AddDays(-1) != c[i + 1].checkInDate)
+                    {
+                        // If not consecutive, that is where the streak has started
+                        break;
+                    }
+                    i++;
+                }
+                i++;
+                return i;
+            }
+            // If today and yesterday have no checkin, streak ended.
+            else
+            {
+                return 0;
+            }
+            
         }
 
         [HttpPost]
         public ActionResult CheckIn([Bind(Include = "checkInId,checkInDate,userName")] CheckInDate check)
         {
             string user = Session["username"].ToString();
-            smokeFreeDB.Progress.Where(c => c.userName == user).FirstOrDefault().totalCheckins += 1;
-            // TODO check for duplicates
-            smokeFreeDB.CheckInDate.Add(check);
-            smokeFreeDB.SaveChanges();
+            DateTime tod = DateTime.Now.Date;
+            
+            if (smokeFreeDB.CheckInDate.Where(c => c.userName == user && c.checkInDate == check.checkInDate).FirstOrDefault() != null)
+            {
+                // If it is duplicate, refresh and do nothing
+                return Redirect("~/InterestedParty/TrackProgress");
+            }
+            else if (check.checkInDate > tod)
+            {
+                // If check in is for a future date, also don't save
+                return Redirect("~/InterestedParty/TrackProgress");
+            }
+            else
+            {
+                // Else, save the new check in and update smokeFreeDB.Progress
+                smokeFreeDB.Progress.Where(c => c.userName == user).FirstOrDefault().totalCheckins += 1;
+                smokeFreeDB.CheckInDate.Add(check);
+                smokeFreeDB.SaveChanges();
+            }
 
-            // TODO update smokeFreeDB.Progress
-            return RedirectToAction("TrackProgress");
+            return Redirect("~/InterestedParty/TrackProgress");
         }
 
         public JsonResult GetUserCheckIn()

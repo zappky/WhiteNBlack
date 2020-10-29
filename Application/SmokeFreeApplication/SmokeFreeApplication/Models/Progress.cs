@@ -16,7 +16,7 @@ namespace SmokeFreeApplication.Models
 
         [Required]
         [Range(1, 100)]
-        [DisplayName("Daily Cigarette Intake(In Sticks)")]
+        [DisplayName("Daily Cigarettes Smoked(In Sticks)")]
         public int cigaIntake { get; set; }
         [Required]
         [Range(1, 1000)]
