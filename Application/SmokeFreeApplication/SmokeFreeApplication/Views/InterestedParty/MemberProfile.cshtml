@@ -7,31 +7,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="margin-left: 5px;">
-    <img src="@Url.Action("RetrieveMemberPic", "InterestedParty", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
-    <div>
-        <h3>@ViewBag.memberName</h3>
-        <h4>Bio</h4>
-        <p>@ViewBag.memberBio</p>
-    </div>
-</div>
-
-<div>
-    @if (ViewBag.ownAccount == true)
-    {
-        <button class="btn btn-secondary">@Html.ActionLink("Create Story", "CreateStory", "Story")</button>
-    }
-
-
-    @if (ViewBag.ownAccount == true)
-    {
-        <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditMemberProfile", "InterestedParty")</button>
-    }
-
-    @if (ViewBag.ownAccount == true && ViewBag.smokerOrNot == true)
-    {
-        <button class="btn btn-secondary">@Html.ActionLink("Track my progress", "TrackProgress", "InterestedParty")</button>
-    }
+<div style="margin-left: 5px; margin-top: 10px;">
+    <table>
+        <tr>
+            <td>
+                <img src="@Url.Action("RetrieveMemberPic", "InterestedParty", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
+            </td>
+            <td>
+                <h3>@ViewBag.memberName</h3>
+                <h5>Bio</h5>
+                <p>@ViewBag.memberBio</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if (ViewBag.ownAccount == true)
+                {
+                    <button class="btn btn-secondary">@Html.ActionLink("Create Story", "CreateStory", "Story")</button>
+                }
+            </td>
+            <td>
+                @if (ViewBag.ownAccount == true)
+                {
+                    <button class="btn btn-secondary">@Html.ActionLink("Edit Profile", "EditMemberProfile", "InterestedParty")</button>
+                }
+            </td>
+            <td>
+                @if (ViewBag.ownAccount == true && ViewBag.smokerOrNot == true)
+                {
+                    <button class="btn btn-secondary">@Html.ActionLink("Track my progress", "TrackProgress", "InterestedParty")</button>
+                }
+            </td>
+        </tr>
+    </table>
 </div>
 
 <h2>Stories</h2>
@@ -61,7 +69,7 @@
 }
 <!---linking pager to search display-->
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Stories", new { page, option = ViewBag.option, search = ViewBag.search }))
+@Html.PagedListPager(Model, page => Url.Action("MemberProfile", new { page, option = ViewBag.option, search = ViewBag.search }))
 
 <!--Search script-->
 @section Scripts
