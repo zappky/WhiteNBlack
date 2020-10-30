@@ -5,7 +5,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 
 using System.Net.Mail;
-using System.Web;
+
 using System.Web.Mvc;
 
 
@@ -310,10 +310,24 @@ namespace SmokeFreeApplication.Controllers
             EmailMessage theMail = aModel.emailModel;
             Doctor theDoc = aModel.model;
             var aDocc = smokeFreeDB.Doctor.Find(theDoc.userName);
-            var aDoc = smokeFreeDB.GeneralUser.Find(theDoc.userName);
+            var aDoc = smokeFreeDB.GeneralUser.Find(aDocc.userName);
 
             const string systemEmail = "zappiky@gmail.com";
             const string systemEmailPw = "Omaewamou"; // dont hack me , thx
+
+            if( (aDocc != null && aDoc == null) || (aDocc == null && aDoc != null))
+            {
+                //anomally in db
+                //no email is sent as this is a data inconsistency
+                if(aDocc != null)
+                    smokeFreeDB.Doctor.Remove(aDocc);
+                if (aDoc != null)
+                    smokeFreeDB.GeneralUser.Remove(aDoc);
+                smokeFreeDB.SaveChanges();
+                ViewBag.activeTabContent = "Pending Doctor";
+                return View("Manage", populateView());
+            }
+
 
             try
             {
@@ -337,8 +351,8 @@ namespace SmokeFreeApplication.Controllers
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
 
-                smokeFreeDB.GeneralUser.Remove(aDoc);
                 smokeFreeDB.Doctor.Remove(aDocc);
+                smokeFreeDB.GeneralUser.Remove(aDoc);
                 smokeFreeDB.SaveChanges();
 
             }

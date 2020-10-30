@@ -9,12 +9,12 @@
     <table>
         <tr>
             <td>Title: </td>
-            <td>@Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "title", required = "required" })</td>
+            <td>@Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "title", @required = "required" })</td>
             @Html.ValidationMessageFor(m => m.title, "", new { @class = "badge badge-danger" })
         </tr>
         <tr>
             <td>Content: </td>
-            <td>@Html.TextAreaFor(m => m.content, new { @class = "form-control", @placeholder = "message", required = "required", @cols = "100", @rows = "8", @style = "width:100%;" })</td>
+            <td>@Html.TextAreaFor(m => m.content, new { @class = "form-control", @placeholder = "message", @required = "required", @cols = "100", @rows = "8", @style = "width:100%;" })</td>
             @Html.ValidationMessageFor(m => m.content, "", new { @class = "badge badge-danger" })
         </tr>
 
