@@ -56,9 +56,9 @@
 
                                         @Html.ValidationSummary()
                                         <p>Subject: </p>
-                                        <p>@Html.TextBoxFor(m => Model.emailModel.Subject)</p>
+                                        <p>@Html.TextBoxFor(m => Model.emailModel.Subject, new { @placeholder = "Article Rejected - Thank you for your interest" })</p>
                                         <p>Body: </p>
-                                        <p>@Html.TextAreaFor(m => Model.emailModel.Body)</p>
+                                        <p>@Html.TextAreaFor(m => Model.emailModel.Body, new { @placeholder = "Hi Sir/Mdm,\n Sorry, we have deem it unfit to be posted. Please submit another one\n Thank you" })</p>
                                         <input type="submit" class="btn btn-primary" value="Send" />
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     }
@@ -81,10 +81,3 @@
        </ul>
     </div>
 </nav>
-
-
-
-@*
-    <p>@Model.articleStatus</p>
-
-*@
