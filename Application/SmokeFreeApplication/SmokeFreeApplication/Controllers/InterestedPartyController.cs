@@ -152,8 +152,10 @@ namespace SmokeFreeApplication.Controllers
                 checkins = smokeFreeDB.CheckInDate.Where(c => c.userName == user).OrderByDescending(c => c.checkInDate).ToList();
                 int totalCheckins = checkins.Count();
 
+                // query for user's name
+                string user_realname = smokeFreeDB.GeneralUser.Where(c => c.userName == user).FirstOrDefault().name;
                 // pass out the calculated display
-                progView.userName = user;
+                progView.userName = user_realname;
                 progView.streak = getStreak(checkins);
                 progView.totalCheck = totalCheckins;
                 progView.cigaSaved = progress.cigaIntake * totalCheckins;

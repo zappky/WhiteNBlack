@@ -21,7 +21,7 @@
                     <div class="card-body" style="padding:10px">
                         <div class="d-flex">
                             <div class="mr-auto">
-                                <h6>@Html.DisplayFor(modelItem => item.userName) says</h6>
+                                <h6>@Html.ActionLink(item.userName, "MemberProfile", "InterestedParty", new { viewUsername = item.userName }, new { page = 1 }) says</h6>
                             </div>
                             <div>
                                 <p class="text-muted">@Html.DisplayFor(modelItem => item.postDate)</p>
