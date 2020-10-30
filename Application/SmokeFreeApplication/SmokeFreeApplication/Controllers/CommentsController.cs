@@ -48,7 +48,7 @@ namespace SmokeFreeApplication.Controllers
                 comment.status = "visible";
 
                 
-                if (comment.body != "")
+                if (comment.body != "" && comment.body != null)
                 {
                     db.Comment.Add(comment);
                     db.SaveChanges();
