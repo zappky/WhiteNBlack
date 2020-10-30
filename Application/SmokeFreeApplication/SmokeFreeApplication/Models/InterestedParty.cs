@@ -20,6 +20,7 @@ namespace SmokeFreeApplication.Models
         [DisplayName("Are you a smoker or not")]
         [Required]
         public bool smokerOrNot { get; set; }
+        [DisplayName("Bio")]
         public string bio { get; set; }
 
         public InterestedParty()

@@ -43,7 +43,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">@Html.LabelFor(m => m.GeneralUsers.name)</label>
         <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.GeneralUsers.name, "", new { @class = "form-control", @placeholder = "name" })
+            @Html.TextBoxFor(m => m.GeneralUsers.name, "", new { @class = "form-control", @placeholder = "Name" })
             @Html.ValidationMessageFor(m => m.GeneralUsers.name, "", new { @class = "badge badge-danger" })
         </div>
     </div>

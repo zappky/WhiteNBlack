@@ -26,7 +26,6 @@ namespace SmokeFreeApplication.Models
         public string email { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "The password cannot be shorter than 8 characters")]
-        //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         [DisplayName("Password")]
         public string password { get; set; }
         [NotMapped]
@@ -36,7 +35,9 @@ namespace SmokeFreeApplication.Models
         public string confirmPassword { get; set; }
         [Required]
         [DisplayName("Date of Birth")]
-        [Range(typeof(DateTime), "1/1/1900", "31/12/2004", ErrorMessage = "You have to be at least 16 years old to register")]
+        [Range(typeof(DateTime), "1/1/1900", "31/12/2004",
+                ErrorMessage = "You must be at least 16 years old to register.")]
+        [DataType(DataType.Date)]
         public DateTime dateOfBirth { get; set; }
         [Required]
         [DisplayName("Gender")]
