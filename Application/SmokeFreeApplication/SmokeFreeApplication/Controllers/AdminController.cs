@@ -198,7 +198,7 @@ namespace SmokeFreeApplication.Controllers
             EmailMessage theMail = aModel.emailModel;
             Article theArticle = aModel.model;
             var article = smokeFreeDB.Article.Find(theArticle.articleID);
-            var doc = smokeFreeDB.GeneralUser.Find(theArticle.userName);
+            var doc = smokeFreeDB.GeneralUser.Find(article.userName);
             const string systemEmail = "zappiky@gmail.com";
             const string  systemEmailPw = "Omaewamou"; // dont hack me , thx
 
