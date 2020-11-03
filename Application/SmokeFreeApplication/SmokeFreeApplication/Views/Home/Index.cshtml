@@ -4,7 +4,11 @@
 }
 @model SmokeFreeApplication.Models.BroadcastMessage
 
-
+<style>
+    .jumbotron {
+        padding: 2rem 2rem;
+    }
+</style>
 <div class="alert alert-info" role="alert">
     <h4 class="alert-heading">@Html.DisplayFor(modelItem => Model.title)</h4>
     <p>@Html.DisplayFor(modelItem => Model.content)</p>
