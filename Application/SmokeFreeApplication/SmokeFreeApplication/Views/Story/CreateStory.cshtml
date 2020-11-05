@@ -13,7 +13,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        <h5>Title: </h5>
+        <h5><strong style="color:red;">*</strong>Title: </h5>
         <div id="titleDiv">
             @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
             <span id="titleVali" class="badge badge-danger">Please enter the story title that has at least 2 words!</span>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group">
-        <h5>Description: </h5>
+        <h5><strong style="color:red;">*</strong>Description: </h5>
         <div>
             @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
             <span id="bodyVali" class="badge badge-danger">Please enter the story description that has at least 500 characters!</span>
@@ -44,5 +44,5 @@
     <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
     <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
     <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
-    <script type="text/javascript" src="~/Scripts/validation.js"></script>
+    <script type="text/javascript" src="~/Scripts/story-validation.js"></script>
 }

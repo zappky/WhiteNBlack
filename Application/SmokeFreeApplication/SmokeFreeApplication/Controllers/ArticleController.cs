@@ -105,6 +105,10 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult createArticle()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
             return View();
         }
         [HttpPost]
@@ -128,7 +132,7 @@ namespace SmokeFreeApplication.Controllers
                 article.articleStatus = "pending";
                 string tags = Request["tagsinput"].ToString();
                 article.articlePicture = img;
-                smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
+                //smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
                 smokeFreeDB.Article.Add(article);
                 smokeFreeDB.SaveChanges();
                 smokeFreeDB.Entry(article).Reload();

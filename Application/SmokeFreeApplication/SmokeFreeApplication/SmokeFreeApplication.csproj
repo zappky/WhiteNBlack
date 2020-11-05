@@ -294,6 +294,7 @@
     <Content Include="images\user_images\Steven.jpg" />
     <Content Include="images\user_images\Susan.jpg" />
     <Content Include="images\user_images\Tony.jpg" />
+    <Content Include="Scripts\article-validation.js" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -480,7 +481,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Scripts\validation.js" />
+    <Content Include="Scripts\story-validation.js" />
     <Content Include="Summernote\summernote-bs4.css" />
     <Content Include="Summernote\summernote-bs4.js" />
     <Content Include="Web.config" />
