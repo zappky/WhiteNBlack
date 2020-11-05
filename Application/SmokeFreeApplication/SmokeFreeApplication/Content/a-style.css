@@ -1,14 +1,14 @@
 ﻿img {
     height: 200px;
     width: 100% !important;
-    border-top-left-radius:20px;
-    border-top-right-radius:20px;
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
 }
 
 .card {
     width: 18rem;
     height: 520px !important;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .card-title {
@@ -23,4 +23,7 @@
 }
 footer{
     text-decoration:underline;
+}
+#articleImg{
+    border-radius:0px;
 }
