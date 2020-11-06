@@ -22,7 +22,7 @@ namespace SmokeFreeApplication.Models
         public string description { get; set; }
         [Required(ErrorMessage = "Please enter a proper phone number. E.g. 91234567")]
         [DisplayName("Contact Number")]
-        [Range(10000000, 99999999)]
+        [Range(10000000, 99999999, ErrorMessage = "Please enter a proper phone number. E.g. 91234567")]
         public int contactNo { get; set; }
 
         [Required]
