@@ -1,19 +1,18 @@
-﻿img {
+﻿.viewimg {
     height: 200px;
     width: 100% !important;
-    border-top-left-radius:15px;
-    border-top-right-radius:15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
-.card {
+.maincard {
     width: 18rem;
     height: 520px !important;
     border-radius: 15px;
 }
 
-.card-title {
+.main-card-title {
     font-size: 20px;
-
 }
 
 .articleBody {
@@ -21,9 +20,10 @@
     height: 180px !important;
     overflow: hidden;
 }
-footer{
-    text-decoration:underline;
+.articlefooter {
+    text-decoration: underline;
 }
 #articleImg{
     border-radius:0px;
+    width: 100% !important;
 }

@@ -31,15 +31,15 @@ else
             {
                 <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID})" style="text-decoration: none;">
 
-                    <div class="card">
-                        <img class="card-img img" src="@Url.Action("retrieveArticlePic", "Article", new { articleID = item.articleID })" alt="Image" />
+                    <div class="card maincard">
+                        <img class="card-img viewimg" src="@Url.Action("retrieveArticlePic", "Article", new { articleID = item.articleID })" alt="Image" />
                         <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.title)</h5>
+                            <h5 class="card-title main-card-title">@Html.DisplayFor(modelItem => item.title)</h5>
                             <span class="card-text">
                                 <div class="articleBody">@Html.Raw(item.body)</div>
                             </span>
                             <br/>
-                            <footer> <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a></footer>
+                            <footer class="articlefooter"> <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a></footer>
                         </div>
 
                     </div>
