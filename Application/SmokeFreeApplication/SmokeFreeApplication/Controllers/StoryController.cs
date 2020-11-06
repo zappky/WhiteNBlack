@@ -87,6 +87,10 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult CreateStory()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
             return View();
         }
         [HttpPost]

@@ -12,17 +12,18 @@
 <table>
     <tr>
         <td colspan="2">
-            <img src="@Url.Action("retrieveArticlePic", "Article", new { articleID = Model.articleID })" style="width:650px; height:350px;" alt="Image" />
+            <img src="@Url.Action("retrieveArticlePic", "Article", new { articleID = Model.articleID })" style="width:650px; height:350px;" alt="Image" id="articleImg"/>
         </td>
     </tr>
     <tr>
         <td colspan="2">
+            <br />
             <h2> @Html.DisplayFor(model => model.title)</h2>
         </td>
     </tr>
     <tr>
         <td>
-            <p class="font-weight-light">Posted By: @Html.ActionLink(Model.userName, "DrProfile", "Doctor", new { viewUsername = Model.userName }, new { page = 1 })</p>     
+            <p class="font-weight-light">Posted By: @Html.ActionLink(Model.userName, "DrProfile", "Doctor", new { viewUsername = Model.userName }, new { page = 1 })</p>
         </td>
         <td>
             <p class="font-weight-light">Date Posted: @Html.DisplayFor(model => model.postDate)</p>
@@ -34,11 +35,13 @@
                 @foreach (var tag in ViewBag.tagList)
                 {
                     <span class="badge badge-dark"> @Html.Raw(tag) </span>
-                }</div>
-</td> 
+                }
+            </div>
+        </td>
     </tr>
     <tr>
         <td colspan="2">
+            <br/>
             <div>
                 @Html.Raw(ViewBag.articleDetails)
             </div>
@@ -47,7 +50,7 @@
     </tr>
 </table>
 
-
+<br/>
 
 
 <h3>Comments</h3>
@@ -57,3 +60,7 @@
 <div id="accordion">
     @Html.Action("ViewComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(Model.articleID, "A"))
 </div>
+@section Scripts
+{
+    <link href="~/Content/a-style.css" rel="stylesheet">
+}

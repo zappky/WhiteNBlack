@@ -38,7 +38,9 @@
     }).addTo(map);
     function onEachFeature(feature, layer) {
         if (feature.properties && feature.properties.Description) {
-            layer.bindPopup(feature.properties.Description);
+            layer.bindPopup(feature.properties.Description, {
+                maxWidth: "auto"});
+
         }
     }
     var myLayer = L.geoJSON().addTo(map);
