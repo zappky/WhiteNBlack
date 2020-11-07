@@ -11,7 +11,7 @@
 
     function setApprovedTab() {
         var approvedTab = document.getElementById("approvedTag");
-        approvedTab.style.backgroundColor = "#d9d9d9";
+        approvedTab.style.backgroundColor = "#ffffff";
 
     }
 
@@ -24,8 +24,8 @@
         if (approved.style.display === "none") {
             approved.style.display = "block";
             pending.style.display = "none";
-            approvedTab.style.backgroundColor = "#d9d9d9";
-            pendingTab.style.backgroundColor = "#ffffff";
+            approvedTab.style.backgroundColor = "#ffffff";
+            pendingTab.style.backgroundColor = "#d9d9d9"; 
 
         }
     }
@@ -39,8 +39,8 @@
         if (pending.style.display === "none") {
             pending.style.display = "block";
             approved.style.display = "none";
-            approvedTab.style.backgroundColor = "#ffffff";
-            pendingTab.style.backgroundColor = "#d9d9d9";
+            approvedTab.style.backgroundColor = "#d9d9d9";
+            pendingTab.style.backgroundColor = "#ffffff";
         }
     }
 </script>
@@ -83,10 +83,10 @@
 {
     <ul class="nav nav-tabs ">
         <li class="nav-item">
-            <button class="nav-link active" id ="approvedTab" style="background-color:#d9d9d9;" onload="setApprovedTab()" onclick="showApprovedArticles()">Approved Articles</button>
+            <button class="nav-link active" id ="approvedTab"  onload="setApprovedTab()" onclick="showApprovedArticles()">Approved Articles</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link active" id="pendingTab" onclick="showPendingArticles()">Pending Articles</button>
+            <button class="nav-link active" id="pendingTab" style="background-color: #d9d9d9;" onclick="showPendingArticles()">Pending Articles</button>
 
         </li>
     </ul>
