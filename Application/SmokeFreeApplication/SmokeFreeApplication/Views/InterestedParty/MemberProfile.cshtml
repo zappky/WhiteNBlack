@@ -69,7 +69,7 @@
 }
 <!---linking pager to search display-->
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("MemberProfile", new { page, option = ViewBag.option, search = ViewBag.search }))
+@Html.PagedListPager(Model, page => Url.Action("MemberProfile", new { page, viewUsername = ViewBag.username }))
 
 <!--Search script-->
 @section Scripts
