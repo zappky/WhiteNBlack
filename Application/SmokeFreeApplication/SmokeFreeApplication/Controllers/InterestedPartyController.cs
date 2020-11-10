@@ -19,7 +19,7 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult MemberProfile(string viewUsername, int? page)
         {
-            int pageSize = 1;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
             List<Story> displayList = new List<Story>();
 

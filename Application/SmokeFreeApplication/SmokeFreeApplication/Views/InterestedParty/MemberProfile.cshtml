@@ -11,11 +11,11 @@
     <table>
         <tr>
             <td>
-                <img src="@Url.Action("RetrieveMemberPic", "InterestedParty", new { username = ViewBag.username})" style="width:5rem; height:5rem; float:left; margin-right:10px;" alt="Image" />
+                <img src="@Url.Action("RetrieveMemberPic", "InterestedParty", new { username = ViewBag.username})" style="width:10rem; height:10rem; float:left; margin-right:10px;" alt="Image" />
             </td>
             <td>
                 <h3>@ViewBag.memberName</h3>
-                <h5>Bio</h5>
+                <span class="text-muted">Bio</span>
                 <p>@ViewBag.memberBio</p>
             </td>
         </tr>
@@ -49,10 +49,8 @@
     <div class="card" style="width: 70rem;">
         <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID })" style="text-decoration: none;">
             <div class="card-header">
-                <img src="@Url.Action("retrieveUserPic", "Story", new { username = item.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
-                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                <div style="height:1rem;">
                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
                 </div>
             </div>
             <div class="card-body">
@@ -61,7 +59,6 @@
             </div>
             <div class="card-footer">
                 <a href="@Url.Action("ViewStory", "Story", new { id = item.storyID })" style="text-decoration: none;">Read More</a>
-                <a href="#" class="card-link">Share</a>
             </div>
         </a>
     </div>
