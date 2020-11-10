@@ -16,16 +16,16 @@ namespace SmokeFreeApplication.Controllers
         // search is implement at index method, stories (in this case)
         public ActionResult Stories(string option,string search, int? page)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             List<Story> displayList = new List<Story>();
             ViewBag.option = option;
             ViewBag.search = search;
             ViewBag.userType = Session["docOrMember"].ToString();
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("SignIn", "Account");
-            }
             if (!String.IsNullOrEmpty(search))
             {
                 search.Replace(' ', '+');
