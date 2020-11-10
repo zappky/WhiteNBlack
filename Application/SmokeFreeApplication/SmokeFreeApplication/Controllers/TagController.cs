@@ -37,6 +37,16 @@ namespace SmokeFreeApplication.Controllers
             }
             return displayList;
         }
+        public void deleteArticleTags(int? id)
+        {
+            List<ArticlesTag> articleTags = smokeFreeDB.ArticlesTag.Where(x => x.articleID == id).ToList();
+            ArticlesTag temp;
+            for (int i = 0; i < articleTags.Count; i++)
+            {
+                temp = articleTags[i];
+                smokeFreeDB.ArticlesTag.Remove(temp);
+            }
+        }
         public void saveTags(string inputTags, int storyID)
         {
             string[] tagArray = inputTags.Split(',');
@@ -130,7 +140,10 @@ namespace SmokeFreeApplication.Controllers
                 for (int j = 0; j < storyTags.Count; j++)
                 {
                     tempId = storyTags[j].storyID;
-                    displayList.Add(smokeFreeDB.Story.Where(x => x.storyID == tempId).FirstOrDefault());
+                    if (smokeFreeDB.Story.Where(x => x.storyID == tempId).FirstOrDefault() != null)
+                    {
+                        displayList.Add(smokeFreeDB.Story.Where(x => x.storyID == tempId).FirstOrDefault());
+                    }
                 }
 
             }
@@ -159,9 +172,17 @@ namespace SmokeFreeApplication.Controllers
                 for (int j = 0; j < articleTags.Count; j++)
                 {
                     tempId = articleTags[j].articleID;
-                    displayList.Add(smokeFreeDB.Article.Where(x => x.articleID == tempId && x.articleStatus=="approved").FirstOrDefault());
+                    if(smokeFreeDB.Article.Where(x => x.articleID == tempId && x.articleStatus == "approved").FirstOrDefault() != null)
+                    {
+                        displayList.Add(smokeFreeDB.Article.Where(x => x.articleID == tempId && x.articleStatus == "approved").FirstOrDefault());
+                    }
                 }
 
+            }
+
+            foreach (var article in displayList)
+            {
+                    System.Diagnostics.Debug.WriteLine(article.articleID);
             }
             return displayList;
         }

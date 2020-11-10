@@ -545,7 +545,6 @@
     <Content Include="Views\Home\_PopUp.cshtml" />
     <Content Include="Views\InterestedParty\TrackProgress.cshtml" />
     <Content Include="Views\InterestedParty\FillInDetails.cshtml" />
-    <Content Include="Views\Article\EditArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

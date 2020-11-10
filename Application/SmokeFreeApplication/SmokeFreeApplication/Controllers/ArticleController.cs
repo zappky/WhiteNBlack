@@ -25,7 +25,6 @@ namespace SmokeFreeApplication.Controllers
             List<Article> displayList = new List<Article>();
             ViewBag.search = search;
             ViewBag.option = option;
-            List<Article> articlesList = new List<Article>();
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
@@ -40,7 +39,7 @@ namespace SmokeFreeApplication.Controllers
                 }
                 else if (option == "Tags")
                 {
-                    displayList =tagAccess.searchArticleByTag(search);
+                    displayList = tagAccess.searchArticleByTag(search);
                     ViewBag.DisplayStatus = "No results found.";
                 }
 
@@ -101,26 +100,30 @@ namespace SmokeFreeApplication.Controllers
             }
             return View(article);
         }
-        public ActionResult EditArticle(int? id)
+        public ActionResult DeleteArticle(int? id)
         {
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
             }
 
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ViewBag.tagList = tagAccess.getArticleTags(id);
-            Article article = smokeFreeDB.Article.Find(id);
-            ViewBag.articleDetails = article.body;
 
-            if (article == null)
-            {
-                return HttpNotFound();
+                var article = smokeFreeDB.Article.Find(id);
+                if (article != null) {
+                    tagAccess.deleteArticleTags(id);
+                    smokeFreeDB.Article.Remove(article);
+                }
+
+                smokeFreeDB.SaveChanges();
+
+                return Redirect(Request.UrlReferrer.ToString());
             }
-            return View(article);
+            catch
+            {
+                return View();
+            }
         }
 
 
@@ -135,7 +138,9 @@ namespace SmokeFreeApplication.Controllers
         [HttpPost]
         public ActionResult createArticle([Bind(Include = "articleID, articleStatus, userName, title, body,postDate")] Models.Article article)
         {
-
+            string username = Session["username"].ToString();
+            var doctor = smokeFreeDB.Doctor.Find(username);
+            var generalUser = smokeFreeDB.GeneralUser.Find(username);
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
@@ -158,10 +163,10 @@ namespace SmokeFreeApplication.Controllers
                 smokeFreeDB.SaveChanges();
                 smokeFreeDB.Entry(article).Reload();
                 tagAccess.saveArticleTags(tags, article.articleID);
-                return RedirectToAction("Articles");
+                return RedirectToAction("DrProfile","Doctor", new { viewUsername = username, page = 1 });
             }
 
-            return RedirectToAction("Articles");
+            return RedirectToAction("DrProfile", "Doctor", new { viewUsername = username, page = 1 });
         }
 
     }

@@ -38,7 +38,7 @@ else
                             <span class="card-text">
                                 <div class="articleBody">@Html.Raw(item.body)</div>
                             </span>
-                            <br/>
+                            <br />
                             <footer class="articlefooter"> <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a></footer>
                         </div>
 
@@ -49,13 +49,13 @@ else
         </div>
     </div>
 }
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Articles", new { page, option = ViewBag.option, search = ViewBag.search }))
-@section Scripts
-{
-    <link href="~/Content/a-style.css" rel="stylesheet">
-    <link href="~/Content/story-style.css" rel="stylesheet">
-    <script type="text/javascript" src="~/Scripts/search.js"></script>
-}
+<!---paging link with search and option-->
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Articles", new { page, option = ViewBag.option, search = ViewBag.search }))
+    @section Scripts{
+        <link href="~/Content/a-style.css" rel="stylesheet">
+        <link href="~/Content/story-style.css" rel="stylesheet">
+        <script type="text/javascript" src="~/Scripts/search.js"></script>
+    }
 
 

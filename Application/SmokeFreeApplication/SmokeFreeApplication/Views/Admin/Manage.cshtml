@@ -66,6 +66,35 @@
             border: 1px solid #ccc;
             border-top: none;
         }
+        .articleCard {
+            height: 220px !important;
+            border-radius: 5px;
+            margin-top:4px;
+        }
+        .articleBody {
+            width: 100%;
+            height: 100px !important;
+            overflow: hidden;
+        }
+        .doctorCard {
+            height: 100px !important;
+            border-radius: 9px;
+            margin-top: 5px;
+        }
+        #searchBar {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            display: inline-block;
+            padding: 4px 6px;
+            color: #555;
+            vertical-align: middle;
+            border-radius: 4px;
+            min-width: 90% !important;
+            line-height: 22px;
+            cursor: text;
+        }
+
     </style>
 </head>
 
@@ -84,8 +113,8 @@
     <br />
 
     <b> Filter By: </b>
-    @Html.RadioButton("filter", "pending", new { id = "pendingRad"  })<text>pending</text>
-    @Html.RadioButton("filter", "approved", new { id = "approvedRad"  })<text> approved </text>
+    @Html.RadioButton("filter", "pending", new { id = "pendingRad" })<text>pending</text>
+    @Html.RadioButton("filter", "approved", new { id = "approvedRad" })<text> approved </text>
     <br />
 
     <input name="search" id="searchBar" type="text" data-role="none" required" />
@@ -140,24 +169,31 @@
 
 @helper DisplayArticle(SmokeFreeApplication.Models.Article anArticle)
 {
-    <div class="card">
+    <div class="card articleCard">
         <div class="card-body" style="padding-left:37px">
             <a href="@Url.Action("ArticleManage", "Admin", new { id = anArticle.articleID})" style="text-decoration: none;">
                 <h4 class="card-title">@Html.DisplayFor(modelItem => anArticle.title)</h4>
                 <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => anArticle.postDate)</h6>
-                <p class="card-text">@Html.Raw(anArticle.body)</p>
+                <span class="card-text">
+                    <div class="articleBody">@Html.Raw(anArticle.body)</div>
+                </span>
+                <a href="@Url.Action("ArticleManage", "Admin", new { id = anArticle.articleID})" class="card-link" style="font-weight:bold;">Read More</a>
+            </a>
+
         </div>
     </div>
 }
 
 @helper DisplayDoctor(SmokeFreeApplication.Models.Doctor aDoctor)
 {
-    <div class="card">
+
+    <div class="card doctorCard">
         <div class="card-body" style="padding-left:37px">
             <a href="@Url.Action("DoctorManage", "Admin", new { id = aDoctor.userName})" style="text-decoration: none;">
                 <h4 class="card-title">@Html.DisplayFor(modelItem => aDoctor.userName)</h4>
                 <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => aDoctor.contactNo)</h6>
                 <p class="card-text">@Html.Raw(aDoctor.description)</p>
+            </a>
         </div>
     </div>
 }
@@ -315,7 +351,4 @@ else
 
     }
 </script>
-
-
-
 

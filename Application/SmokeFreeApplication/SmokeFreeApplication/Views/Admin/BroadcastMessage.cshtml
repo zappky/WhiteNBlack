@@ -3,39 +3,55 @@
 }
 @model SmokeFreeApplication.Models.BroadcastMessage
 <title>@ViewBag.Title</title>
-
+<br />
+<style>
+    form {
+        margin-left: 25%;
+        margin-right: 25%;
+        width:50%;
+    }
+    #content,#title{
+        min-width:100% !important;
+    }
+    #submitBtn{
+        margin-left:70%;
+    }
+</style>
 @using (Html.BeginForm("broadcastForm", "Admin", FormMethod.Post))
 {
-    <table>
-        <tr>
-            <td>Title: </td>
-            <td>@Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "title", @required = "required" })</td>
+    <h4> Broadcast Message</h4>
+    <br/>
+    <div class="form-group">
+        <h5><strong style="color:red;">*</strong>Title: </h5>
+        <div>
+            @Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "title", @required = "required" })
             @Html.ValidationMessageFor(m => m.title, "", new { @class = "badge badge-danger" })
-        </tr>
-        <tr>
-            <td>Content: </td>
-            <td>@Html.TextAreaFor(m => m.content, new { @class = "form-control", @placeholder = "message", @required = "required", @cols = "100", @rows = "8", @style = "width:100%;" })</td>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5><strong style="color:red;">*</strong>Content: </h5>
+        <div>
+            @Html.TextAreaFor(m => m.content, new { @class = "form-control", @placeholder = "message", @required = "required", @cols = "100", @rows = "8", @style = "width:100%;" })
             @Html.ValidationMessageFor(m => m.content, "", new { @class = "badge badge-danger" })
-        </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.expiresTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.TextBoxFor(m => m.expiresTime, new { @type = "date", @class = "form-control datepicker" })
-                @Html.ValidationMessageFor(m => m.expiresTime, "", new { @class = "badge badge-danger" })
-            </td>
-
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Submit Form" /></td>
-            <td colspan="2">@Html.ActionLink("Close", "Manage", "Admin")</td>
-        </tr>
-    </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5><strong style="color:red;">*</strong>Expire Date: </h5>
+        <div>
+            @Html.TextBoxFor(m => m.expiresTime, new { @type = "date", @class = "form-control datepicker" })
+            @Html.ValidationMessageFor(m => m.expiresTime, "", new { @class = "badge badge-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <input id="submitBtn" type="submit" value="Submit Form" class="btn btn-primary"/>
+        </div>
+    </div>
 }
 
 <script>
     function closeBroadcast() {
-        
+
 
     }
 </script>
