@@ -30,11 +30,11 @@ $('#body').on('summernote.keyup', function (e) {
 
 $('#createForm').on('submit', function (e) {
     var body = $('#body').next('.note-editor').find('.note-editable').text();
-    if (body.length < 500 && $("#title").val() == "") {
+    if (body.length < 500 || body.length > 2000 && $("#title").val() == "") {
         $("#titleVali").css("display", "block");
         $("#bodyVali").css("display", "block");
         e.preventDefault();
-    } else if (body.length < 500) {
+    } else if (body.length < 500 |||| body.length > 2000 ) {
         $("#titleVali").css("display", "none");
         $("#bodyVali").css("display", "block");
         e.preventDefault();
