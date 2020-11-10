@@ -1,0 +1,68 @@
+﻿@model SmokeFreeApplication.Models.Article
+@{
+    ViewBag.Title = "EditArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="btnDiv"><a class="btn btn-outline-primary" href='javascript:history.go(-1)'>Back</a></div>
+<br />
+<h2>Edit Article</h2>
+@{ 
+    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+    foreach (var tag in ViewBag.tagList)
+    {
+        sb.Append(tag+" ");
+    }
+    <p> @sb</p>
+
+}
+@using (Html.BeginForm("createArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data", @id = "editForm" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+
+    <div class="form-group">
+        <h5><strong style="color:red;">*</strong>Title: </h5>
+        <div>
+            @Html.TextBoxFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+            <span id="titleVali" class="badge badge-danger">Please enter the story title that has at least 3 words!</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h5><strong style="color:red;">*</strong>Description: </h5>
+        <div>
+            @Html.TextAreaFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
+            <span id="bodyVali" class="badge badge-danger">Please enter the story description that has at least 1000 characters!</span>
+            <p style="text-align:left; display:inline;text-decoration:solid">Words Limit:</p>
+            <p id="withinRange" style="text-align:right;display:inline;">5000</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h5><strong style="color:red;">*</strong>Upload Article Image: </h5>
+        <input type="file" class="form-control-file" name="ImageFile" id="ImageFile" />
+        <span id="imgVali" class="badge badge-danger" style="display:none;">Please upload article image.</span>
+    </div>
+    <div class="form-group">
+        <h5>Tags: </h5>
+        <div>
+            <input id="tags" name="tagsinput" value=@sb.ToString() data-role="tagsinput" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button id="createBtn" type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+}
+@section Scripts
+    {
+    <link href="~/Content/story-style.css" rel="stylesheet">
+    <link href="~/Summernote/summernote-bs4.css" rel="stylesheet">
+    <script type="text/javascript" src="~/Summernote/summernote-bs4.js"></script>
+    <script type="text/javascript" src="~/Scripts/text-editor.js"></script>
+    <script type="text/javascript" src="~/Scripts/article-validation.js"></script>
+}
+

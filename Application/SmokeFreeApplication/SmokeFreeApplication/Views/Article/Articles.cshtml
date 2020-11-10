@@ -50,13 +50,12 @@ else
     </div>
 }
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Articles", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("Articles", new { page, option = ViewBag.option, search = ViewBag.search }))
 @section Scripts
 {
     <link href="~/Content/a-style.css" rel="stylesheet">
     <link href="~/Content/story-style.css" rel="stylesheet">
     <script type="text/javascript" src="~/Scripts/search.js"></script>
-    <script type="text/javascript" src="~/Scripts/article-validation.js"></script>
 }
 
 

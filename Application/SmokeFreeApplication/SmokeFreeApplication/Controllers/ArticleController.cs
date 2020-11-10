@@ -40,7 +40,7 @@ namespace SmokeFreeApplication.Controllers
                 }
                 else if (option == "Tags")
                 {
-                    displayList =(dynamic) tagAccess.searchArticleByTag(search);
+                    displayList =tagAccess.searchArticleByTag(search);
                     ViewBag.DisplayStatus = "No results found.";
                 }
 
@@ -95,6 +95,27 @@ namespace SmokeFreeApplication.Controllers
             Article article = smokeFreeDB.Article.Find(id);
             ViewBag.articleDetails = article.body;
  
+            if (article == null)
+            {
+                return HttpNotFound();
+            }
+            return View(article);
+        }
+        public ActionResult EditArticle(int? id)
+        {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.tagList = tagAccess.getArticleTags(id);
+            Article article = smokeFreeDB.Article.Find(id);
+            ViewBag.articleDetails = article.body;
+
             if (article == null)
             {
                 return HttpNotFound();

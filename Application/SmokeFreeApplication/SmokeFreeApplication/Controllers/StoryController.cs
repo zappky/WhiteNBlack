@@ -22,7 +22,6 @@ namespace SmokeFreeApplication.Controllers
             ViewBag.option = option;
             ViewBag.search = search;
             ViewBag.userType = Session["docOrMember"].ToString();
-            // Session["docOrMember"] = "doc";
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
