@@ -57,6 +57,9 @@
                 <p>Bio</p>
                 <p class="title">Doctor at @ViewBag.workLocation</p>
                 <p>@ViewBag.description</p>
+                <p>Contact</p>
+                <p class="title">Email: @ViewBag.contactEmail</p>
+                <p class="title">Office No: @ViewBag.contactPhone</p>
             </td>
         </tr>
         <tr>
@@ -113,7 +116,7 @@ else
                     <div class="card" style="width: 70rem;">
                         <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">
                             <div class="card-header">
-                                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                                <div style="height:2rem;">
                                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
                                 </div>
@@ -123,8 +126,6 @@ else
                                 <p class="card-text">@Html.Raw(item.body)</p>
                             </div>
                             <div class="card-footer">
-                                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a>
-                                <a href="#" class="card-link">Share</a>
                                 <p>@Html.DisplayFor(modelItem => item.articleStatus)</p>
                             </div>
                         </a>
@@ -146,7 +147,7 @@ else
                     <div class="card" style="width: 70rem;">
                         <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">
                             <div class="card-header">
-                                <div style="height:5rem; padding-top:30px; padding-left:100px;">
+                                <div style="height:2rem;">
                                     <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => item.postDate)</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => item.userName)</h6>
                                 </div>
@@ -156,8 +157,6 @@ else
                                 <p class="card-text">@Html.Raw(item.body)</p>
                             </div>
                             <div class="card-footer">
-                                <a href="@Url.Action("ViewArticle", "Article", new { id = item.articleID })" style="text-decoration: none;">Read More</a>
-                                <a href="#" class="card-link">Share</a>
                                 <p>@Html.DisplayFor(modelItem => item.articleStatus)</p>
                             </div>
                         </a>

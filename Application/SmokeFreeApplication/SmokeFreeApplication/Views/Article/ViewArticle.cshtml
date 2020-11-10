@@ -5,14 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<p>
-    @Html.ActionLink("Back to List", "Articles")
-</p>
+<div class="btnDiv"><a class="btn btn-outline-primary" href='javascript:history.go(-1)'>Back</a></div>
 
 <table>
     <tr>
         <td colspan="2">
-            <img src="@Url.Action("retrieveArticlePic", "Article", new { articleID = Model.articleID })" style="width:650px; height:350px;" alt="Image" id="articleImg"/>
+            <img src="@Url.Action("retrieveArticlePic", "Article", new { articleID = Model.articleID })" style="width:650px; height:350px;" alt="Image" id="articleImg" />
         </td>
     </tr>
     <tr>
@@ -41,7 +39,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <br/>
+            <br />
             <div>
                 @Html.Raw(ViewBag.articleDetails)
             </div>
@@ -50,7 +48,7 @@
     </tr>
 </table>
 
-<br/>
+<br />
 
 
 <h3>Comments</h3>

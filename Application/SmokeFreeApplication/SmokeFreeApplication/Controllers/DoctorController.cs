@@ -55,6 +55,8 @@ namespace SmokeFreeApplication.Controllers
                 displayList = smokeFreeDB.Article.Where(x => x.userName.Equals(viewUsername)).ToList();
                 ViewBag.docName = generaldata.FirstOrDefault().name;
                 ViewBag.workLocation = docdata.FirstOrDefault().workLocation;
+                ViewBag.contactEmail = generaldata.FirstOrDefault().email;
+                ViewBag.contactPhone = docdata.FirstOrDefault().contactNo;
                 ViewBag.description = docdata.FirstOrDefault().description;
                 ViewBag.username = viewUsername;
 
