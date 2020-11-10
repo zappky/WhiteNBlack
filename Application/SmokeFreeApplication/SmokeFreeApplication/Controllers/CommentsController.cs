@@ -98,57 +98,8 @@ namespace SmokeFreeApplication.Controllers
                            select c;
 
             return View(comments.ToList());
-            }
+        }
 
-
-        // GET: Comments/Details/5
-        /*public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comment comment = db.Comment.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comment);
-        }*/
-
-        // GET: Comments/Edit/5
-        /*public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comment comment = db.Comment.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comment);
-        }*/
-
-        // POST: Comments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "commentID,parentType,parentID,body,postDate,userName,status")] Comment comment)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(comment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            comment.body = null;
-            return View(comment);
-        }*/
-
-        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
 
@@ -178,6 +129,26 @@ namespace SmokeFreeApplication.Controllers
             //return View(comment);
         }
 
+        public ActionResult ViewAuthor (string username, int? pg)
+        {
+            // Search for username and check account type
+            // Try searching in interested party first
+            var author = db.InterestedParty.Where(s => s.userName.Equals(username)).FirstOrDefault();
+
+            // Redirect to appropriate action
+            if (author == null) // author is a doctor
+            {
+                return RedirectToAction("DrProfile", "Doctor", new { viewUsername = username, page = 1 });
+            }
+            else // author is a interested party
+            {
+                return RedirectToAction("MemberProfile", "InterestedParty", new { viewUsername = username, page = 1 });
+            }
+            
+            // Something went wrong
+            return Redirect("~/Home/");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -198,7 +169,7 @@ namespace SmokeFreeApplication.Controllers
 
         public CommentQuery(int i, string p)
         {
-            id = i; 
+            id = i;
             pType = p;
         }
         public CommentQuery()
@@ -207,4 +178,54 @@ namespace SmokeFreeApplication.Controllers
             pType = "X";
         }
     }
+
+
+    // GET: Comments/Details/5
+    /*public ActionResult Details(int? id)
+    {
+        if (id == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        Comment comment = db.Comment.Find(id);
+        if (comment == null)
+        {
+            return HttpNotFound();
+        }
+        return View(comment);
+    }*/
+
+    // GET: Comments/Edit/5
+    /*public ActionResult Edit(int? id)
+    {
+        if (id == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        Comment comment = db.Comment.Find(id);
+        if (comment == null)
+        {
+            return HttpNotFound();
+        }
+        return View(comment);
+    }*/
+
+    // POST: Comments/Edit/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+    /*[HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit([Bind(Include = "commentID,parentType,parentID,body,postDate,userName,status")] Comment comment)
+    {
+        if (ModelState.IsValid)
+        {
+            db.Entry(comment).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        comment.body = null;
+        return View(comment);
+    }*/
+
+    // GET: Comments/Delete/5
 }
