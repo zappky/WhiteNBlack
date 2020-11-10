@@ -12,15 +12,16 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 <script type="text/javascript" src="~/Scripts/leaflet.ajax.min.js"></script>
+<script type="text/javascript" src="~/Scripts/leaflet-knn.min.js"></script>
 
 <style>
     #mapid {
         height: 700px;
     }
 </style>
-
+<br/>
 <h2>Quit Centres</h2>
-
+<button class="btn btn-outline-primary" style="border-radius:2px; padding:2px; height:40px;width:100px;" onclick="getLocation()">Find nearest</button>
 <div id="mapid"></div>
 
 
@@ -43,10 +44,32 @@
 
         }
     }
-    var myLayer = L.geoJSON().addTo(map);
-    L.geoJson.ajax(quitCentres, {
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                latit = position.coords.latitude;
+                longit = position.coords.longitude;
+                // this is just a marker placed in that position
+                var currntIcon = L.icon({
+                    iconUrl: '/images/placeholder.png',
+
+                    iconSize: [30, 36],
+                    iconAnchor: [15, 36],
+                    shadowAnchor: [4, 62],  // the same for the shadow
+                    popupAnchor: [-3, -26] // point from which the popup should open relative to the iconAnchor
+                });
+                var abc = L.marker([position.coords.latitude, position.coords.longitude], { icon: currntIcon }).addTo(map);
+                // move the map to have the location in its center
+                abc.bindPopup("Your location.").openPopup();
+                map.panTo(new L.LatLng(latit, longit));
+            }); 
+        }
+    }
+    var data =  L.geoJson.ajax(quitCentres, {
         onEachFeature: onEachFeature
-    }).addTo(map);
+    })
+    data.addTo(map);
+
 
 
 </script>

@@ -9,12 +9,13 @@
         padding: 2rem 2rem;
     }
 </style>
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">@Html.DisplayFor(modelItem => Model.title)</h4>
-    <p>@Html.DisplayFor(modelItem => Model.content)</p>
-</div>
-
-
+@if (Model.expiresTime > DateTime.Now)
+{
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">@Html.DisplayFor(modelItem => Model.title)</h4>
+        <p>@Html.DisplayFor(modelItem => Model.content)</p>
+    </div>
+}
 <div class="jumbotron">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -48,53 +49,53 @@
 </div>
 @if (Session["username"] != null)
 {
-<div class="row">
-    <div class="col-md-3">
-        <h2>Getting started</h2>
-        <p>Share your stories here or see other stories!</p>
-        <p class="btn btn-default">@Html.ActionLink("Stories", "Stories", "Story")</p>
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Getting started</h2>
+            <p>Share your stories here or see other stories!</p>
+            <p class="btn btn-default">@Html.ActionLink("Stories", "Stories", "Story")</p>
+        </div>
+        <div class="col-md-3">
+            <h2>Articles</h2>
+            <p>Read some of our articles written by professionals about what smoking can do to your health!</p>
+            <p class="btn btn-default">@Html.ActionLink("Articles", "Articles", "Article")</p>
+        </div>
+        <div class="col-md-3">
+            <h2>Quit Centres</h2>
+            <p>Have trouble qutting? Visit one of the quit centres today!</p>
+            <p class="btn btn-default">@Html.ActionLink("Quit Centres", "QuitCentres", "Home")</p>
+        </div>
+        <div class="col-md-3">
+            <h2>About us</h2>
+            <p>Learn about our website and why we do what we do!</p>
+            <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>Articles</h2>
-        <p>Read some of our articles written by professionals about what smoking can do to your health!</p>
-        <p class="btn btn-default">@Html.ActionLink("Articles", "Articles", "Article")</p>
-    </div>
-    <div class="col-md-3">
-        <h2>Quit Centres</h2>
-        <p>Have trouble qutting? Visit one of the quit centres today!</p>
-        <p class="btn btn-default">@Html.ActionLink("Quit Centres", "QuitCentres", "Home")</p>
-    </div>
-    <div class="col-md-3">
-        <h2>About us</h2>
-        <p>Learn about our website and why we do what we do!</p>
-        <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
-    </div>
-</div>
 }
 else
 {
-<div class="row">
-    <div class="col-md-3">
-        <h2>Getting started</h2>
-        <p>Wonder how you can begin your journey to being smoke free? Start here today!</p>
-        <p class="btn btn-default">@Html.ActionLink("Sign Up", "SignUpMember", "Account")</p>
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Getting started</h2>
+            <p>Wonder how you can begin your journey to being smoke free? Start here today!</p>
+            <p class="btn btn-default">@Html.ActionLink("Sign Up", "SignUpMember", "Account")</p>
+        </div>
+        <div class="col-md-3">
+            <h2>Articles</h2>
+            <p>Read some of our articles written by professionals about what smoking can do to your health</p>
+            <p class="btn btn-default">@Html.ActionLink("Login", "SignIn", "Account")</p>
+        </div>
+        <div class="col-md-3">
+            <h2>Quit Centres</h2>
+            <p>Have trouble qutting? Visit one of the quit centres today!</p>
+            <p class="btn btn-default">@Html.ActionLink("Quit Centres", "QuitCentres", "Home")</p>
+        </div>
+        <div class="col-md-3">
+            <h2>About us</h2>
+            <p>Learn about our website and why we do what we do!</p>
+            <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>Articles</h2>
-        <p>Read some of our articles written by professionals about what smoking can do to your health</p>
-        <p class="btn btn-default">@Html.ActionLink("Login", "SignIn", "Account")</p>
-    </div>
-    <div class="col-md-3">
-        <h2>Quit Centres</h2>
-        <p>Have trouble qutting? Visit one of the quit centres today!</p>
-        <p class="btn btn-default">@Html.ActionLink("Quit Centres", "QuitCentres", "Home")</p>
-    </div>
-    <div class="col-md-3">
-        <h2>About us</h2>
-        <p>Learn about our website and why we do what we do!</p>
-        <p class="btn btn-default">@Html.ActionLink("About Us", "About", "Home")</p>
-    </div>
-</div>
 
 }
 @*
