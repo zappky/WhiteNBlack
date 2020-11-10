@@ -199,9 +199,12 @@ namespace SmokeFreeApplication.Controllers
             Article theArticle = aModel.model;
             var article = smokeFreeDB.Article.Find(theArticle.articleID);
             var doc = smokeFreeDB.GeneralUser.Find(article.userName);
+
             const string systemEmail = "zappiky@gmail.com";
             const string  systemEmailPw = "Omaewamou"; // dont hack me , thx
 
+            article.articleStatus = "rejected";
+            smokeFreeDB.SaveChanges();
             try
             {
                 MailMessage mail = new MailMessage();
@@ -225,8 +228,7 @@ namespace SmokeFreeApplication.Controllers
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
 
-                smokeFreeDB.Article.Remove(article);
-                smokeFreeDB.SaveChanges();
+                
             }
             catch(Exception e)
             {
@@ -331,6 +333,10 @@ namespace SmokeFreeApplication.Controllers
 
             try
             {
+                smokeFreeDB.Doctor.Remove(aDocc);
+                smokeFreeDB.GeneralUser.Remove(aDoc);
+                smokeFreeDB.SaveChanges();
+
                 MailMessage mail = new MailMessage();
                 mail.To.Add(aDoc.email);
                 mail.From = new MailAddress(systemEmail);
@@ -350,11 +356,6 @@ namespace SmokeFreeApplication.Controllers
                 smtp.Credentials = new System.Net.NetworkCredential(systemEmail, systemEmailPw); // Enter senders User name and password  
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
-
-                smokeFreeDB.Doctor.Remove(aDocc);
-                smokeFreeDB.GeneralUser.Remove(aDoc);
-                smokeFreeDB.SaveChanges();
-
             }
             catch (Exception e)
             {
