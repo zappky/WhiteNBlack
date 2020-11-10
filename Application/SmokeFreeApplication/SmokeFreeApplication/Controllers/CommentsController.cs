@@ -101,8 +101,8 @@ namespace SmokeFreeApplication.Controllers
             }
 
 
-            // GET: Comments/Details/5
-            public ActionResult Details(int? id)
+        // GET: Comments/Details/5
+        /*public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -114,10 +114,10 @@ namespace SmokeFreeApplication.Controllers
                 return HttpNotFound();
             }
             return View(comment);
-        }
+        }*/
 
         // GET: Comments/Edit/5
-        public ActionResult Edit(int? id)
+        /*public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -129,12 +129,12 @@ namespace SmokeFreeApplication.Controllers
                 return HttpNotFound();
             }
             return View(comment);
-        }
+        }*/
 
         // POST: Comments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "commentID,parentType,parentID,body,postDate,userName,status")] Comment comment)
         {
@@ -146,7 +146,7 @@ namespace SmokeFreeApplication.Controllers
             }
             comment.body = null;
             return View(comment);
-        }
+        }*/
 
         // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
