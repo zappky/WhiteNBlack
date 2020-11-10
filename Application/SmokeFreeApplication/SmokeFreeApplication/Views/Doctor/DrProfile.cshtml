@@ -176,7 +176,7 @@ else
 
 
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, viewUsername = ViewBag.username, option = ViewBag.option, search = ViewBag.search }))
+    @Html.PagedListPager(Model, page => Url.Action("DrProfile", new { page, viewUsername = ViewBag.username}))
 
     <!--Search script-->
     @section Scripts
