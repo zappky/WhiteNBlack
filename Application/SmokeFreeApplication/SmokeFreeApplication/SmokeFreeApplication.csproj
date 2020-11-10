@@ -515,8 +515,6 @@
     <Content Include="Views\Article\createArticle.cshtml" />
     <Content Include="Views\Comments\CreateComment.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
-    <Content Include="Views\Comments\Details.cshtml" />
-    <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\ViewComment.cshtml" />
     <Content Include="Views\Admin\ArticleManage.cshtml" />
