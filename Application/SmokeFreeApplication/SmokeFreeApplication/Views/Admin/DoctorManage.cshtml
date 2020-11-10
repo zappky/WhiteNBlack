@@ -6,6 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .btnStyle {
+        padding: 0;
+        line-height: 0;
+    }
+</style>
 
 <div class="card" style="width: 70rem;">
 
@@ -38,14 +44,14 @@
                 </li>
                 <li class="nav-item active nav-link">
                     @*
-        @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
+                        @Html.ActionLink("Reject", "RejectDoc", "Admin", new SmokeFreeApplication.Controllers.DocQuery(Model.model.userName), null)
                     *@
-                    <button type="button" class="btn" data-target="#MyModal" data-toggle="modal"> Reject</button>
+                    <a href="#" data-target="#MyModal" data-toggle="modal">Reject</a>
                     <div class="modal" id="MyModal" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
 
-                                <fieldset>
+                                <fieldset style="margin: 70px;">
                                     <legend>
                                         Rejection Email
                                     </legend>
@@ -54,12 +60,24 @@
                                     {
                                         @Html.HiddenFor(m => Model.model.userName);
                                         @Html.ValidationSummary()
-                                        <p>Subject: </p>
-                                        <p>@Html.TextBoxFor(m => Model.emailModel.Subject, new { @placeholder = "Registration rejected - Thank you for your interest" })</p>
-                                        <p>Body: </p>
-                                        <p>@Html.TextAreaFor(m => Model.emailModel.Body, new { @placeholder = "Hi Sir/Mdm,\n Sorry, we have deem you unfit to be accepted. Please submit another one request\n Thank you" })</p>
-                                        <input type="submit" class="btn btn-primary" value="Send" />
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Subject: </label>
+                                            <div class="col-sm-10">
+                                                @Html.TextBoxFor(m => Model.emailModel.Subject, new { @placeholder = "Registration rejected - Thank you for your interest", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Body: </label>
+                                            <div class="col-sm-10">
+                                                @Html.TextAreaFor(m => Model.emailModel.Body, new { @placeholder = "Hi Sir/Mdm,\nSorry, we have deem you unfit to be accepted. Please submit another one request\nThank you", @class = "form-control", @rows=5 })
+                                            </div>
+                                        </div>
+                                        <div class="form-group-lg">
+                                            <input type="submit" class="btn btn-primary" value="Send" />
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                        </div>
+
                                     }
 
                                 </fieldset>
