@@ -34,6 +34,27 @@
                                 <p class="card-text" style="margin-left:2rem;">
                                     @Html.DisplayFor(modelItem => item.body)
                                 </p>
+                                @*Button actions for comment card*@
+                                <div class="d-flex">
+                                    <button class="reply btn btn-primary collapsed mr-auto" data-toggle="collapse" data-target="@cmtToDataTarg" aria-expanded="false" aria-controls="collapseTwo">
+                                        Reply
+                                    </button>
+                                    @if (Session["username"].ToString() == item.userName)
+                                    {
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="@cmtToDataTargModal">
+                                            Delete
+                                        </button>
+                                    }
+
+                                </div>
+
+                                @*Reply box*@
+                                <div id="@cmtToDiv" class="collapse" data-parent="#accordion">
+                                    <br />
+                                    <div>
+                                        @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
+                                    </div>
+                                </div>
                             }
                             else if (item.status == "del")
                             {
@@ -41,30 +62,6 @@
                                     This comment has been removed by the author.
                                 </p>
                             }
-
-
-
-                            @*Button actions for comment card*@
-                            <div class="d-flex">
-                                <button class="reply btn btn-primary collapsed mr-auto" data-toggle="collapse" data-target="@cmtToDataTarg" aria-expanded="false" aria-controls="collapseTwo">
-                                    Reply
-                                </button>
-                                @if (Session["username"].ToString() == item.userName)
-                                {
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="@cmtToDataTargModal">
-                                        Delete
-                                    </button>
-                                }
-
-                            </div>
-
-                            @*Reply box*@
-                            <div id="@cmtToDiv" class="collapse" data-parent="#accordion">
-                                <br />
-                                <div>
-                                    @Html.Action("CreateComment", "Comments", new SmokeFreeApplication.Controllers.CommentQuery(item.commentID, "C"))
-                                </div>
-                            </div>
 
                             @*Delete modal dialog*@
                             @Html.Action("Delete", "Comments", new { id = item.commentID })
