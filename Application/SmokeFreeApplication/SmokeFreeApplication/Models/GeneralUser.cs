@@ -13,7 +13,7 @@ namespace SmokeFreeApplication.Models
     {
         [Key, Column(Order = 1)]
         [Required]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Username must be at least 5 characters long")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "Username must be between 5 to 50 characters")]
         [DisplayName("Username")]
         public string userName { get; set; }
         [Required]
