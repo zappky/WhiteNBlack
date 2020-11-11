@@ -21,7 +21,7 @@ namespace SmokeFreeApplication.Models
         [DisplayName("Name")]
         public string name { get; set; }
         [Required]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Please put a proper email. E.g. abc@gmail.com")]
         [DisplayName("Email")]
         public string email { get; set; }
         [Required]
