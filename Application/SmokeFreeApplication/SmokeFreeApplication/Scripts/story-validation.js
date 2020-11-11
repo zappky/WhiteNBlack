@@ -16,14 +16,15 @@ $('#body').on('summernote.keyup', function (e) {
     debugger;
     var text = $(this).next('.note-editor').find('.note-editable').text();
     var length = text.length;
-    var num = 1000 - length;
+    var num = 2000 - length;
 
     if (length > 1000) {
         $('#withinRange').hide();
-        $("#summernote").summernote("code", text.substring(0, 1000));
+        $('#withinRange').css("color", "red");
+        $("#summernote").summernote("code", text.substring(0, 2000));
     }
     else {
-        $('#withinRange').text(1000 - length).show();
+        $('#withinRange').text(2000 - length).show();
     }
 
 });
@@ -34,7 +35,7 @@ $('#createForm').on('submit', function (e) {
         $("#titleVali").css("display", "block");
         $("#bodyVali").css("display", "block");
         e.preventDefault();
-    } else if (body.length < 500 |||| body.length > 2000 ) {
+    } else if (body.length < 500 || body.length > 2000 ) {
         $("#titleVali").css("display", "none");
         $("#bodyVali").css("display", "block");
         e.preventDefault();
