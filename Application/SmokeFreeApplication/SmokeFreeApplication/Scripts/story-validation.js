@@ -18,7 +18,7 @@ $('#body').on('summernote.keyup', function (e) {
     var length = text.length;
     var num = 2000 - length;
 
-    if (length > 1000) {
+    if (length > 2000) {
         $('#withinRange').hide();
         $('#withinRange').css("color", "red");
         $("#summernote").summernote("code", text.substring(0, 2000));
