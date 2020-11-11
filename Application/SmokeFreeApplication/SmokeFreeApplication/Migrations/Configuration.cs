@@ -354,7 +354,7 @@ namespace SmokeFreeApplication.Migrations
                    name = "Acacia Soh",
                    password = GetMD5("123doctor11"),
                    dateOfBirth = DateTime.Parse("1975-3-1"),
-                   email = "sedoctoracc@mailinator.com",
+                   email = "acacia_s@gmail.com",
                    gender = "Male",
                    profilePicture = File.ReadAllBytes(getImagePath("~/images/doctor_images/Acacia_Soh.jpg")),
                    confirmPassword = GetMD5("123doctor11")
