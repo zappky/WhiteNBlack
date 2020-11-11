@@ -173,7 +173,7 @@ namespace SmokeFreeApplication.Controllers
                 mail.To.Add(aDoc.email);
                 mail.From = new MailAddress(systemEmail);
                 mail.Subject = "Article Accepted - Thank you for your submission";
-                mail.Body = "Hi Sir/Mdm,\n Welcome!, we have decided to accept your article.\n Thank you";
+                mail.Body = "Hi Sir/Mdm,\n Welcome! We have decided to accept your article.\n Thank you";
 
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
@@ -216,7 +216,7 @@ namespace SmokeFreeApplication.Controllers
                 else
                     mail.Subject = theMail.Subject;
                 if (String.IsNullOrEmpty(theMail.Body))
-                    mail.Body = "Hi Sir/Mdm,\n Sorry, we have deem it unfit to be posted. Please submit another one\n Thank you";
+                    mail.Body = "Hi Sir/Mdm,\n Sorry, we have deemed it unfit to be posted. Please submit another request\n Thank you";
                 else
                     mail.Body = theMail.Body;
                 mail.IsBodyHtml = true;
@@ -270,7 +270,7 @@ namespace SmokeFreeApplication.Controllers
                     mail.To.Add(aDocc.email);
                     mail.From = new MailAddress(systemEmail);
                     mail.Subject = "Registration Accepted - Thank you for your interest";
-                    mail.Body = "Hi Sir/Mdm,\n Welcome!, we have decided to accept your registration.\n Thank you";
+                    mail.Body = "Hi Sir/Mdm,\n Welcome!We have decided to accept your registration.\n Thank you";
 
                     mail.IsBodyHtml = true;
                     SmtpClient smtp = new SmtpClient();
@@ -345,7 +345,7 @@ namespace SmokeFreeApplication.Controllers
                 else
                     mail.Subject = theMail.Subject;
                 if (String.IsNullOrEmpty(theMail.Body))
-                    mail.Body = "Hi Sir/Mdm,\n Sorry, we have deem you unfit to be accepted. Please submit another one request\n Thank you";
+                    mail.Body = "Hi Sir/Mdm,\n Sorry, we have deem you unfit to be accepted. Please submit another request\n Thank you";
                 else
                     mail.Body = theMail.Body;
                 mail.IsBodyHtml = true;
