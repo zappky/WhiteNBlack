@@ -18,12 +18,13 @@
     <div class="card-header">
         <img src="@Url.Action("retrieveUserPic", "Admin", new { username = Model.model.userName })" style="width:5rem; height:5rem; float:left;" alt="Image" />
         <div style="height:5rem; padding-top:30px; padding-left:100px;">
-            <h6 class="card-subtitle mb-2 text-muted">Posted on : @Html.DisplayFor(modelItem => Model.model.doctorID)</h6>
-            <h6 class="card-subtitle mb-2 text-muted">By : @Html.DisplayFor(modelItem => Model.model.userName)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Doctor ID: @Html.DisplayFor(modelItem => Model.model.doctorID)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Doctor Username : @Html.DisplayFor(modelItem => Model.model.userName)</h6>
         </div>
     </div>
     <div class="card-body">
-        <h3 class="card-title">@Html.DisplayFor(modelItem => Model.model.workLocation)</h3>
+        <p class="card-text">@Html.DisplayFor(modelItem => Model.model.workLocation)</p>
+        <p class="card-text">@Html.DisplayFor(modelItem => Model.model.contactNo)</p>
         <p class="card-text">@Html.Raw(Model.model.description)</p>
     </div>
 
