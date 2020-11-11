@@ -89,7 +89,7 @@ namespace SmokeFreeApplication.Controllers
                 ViewBag.username = username;
 
             }
-            return View();
+            return View(memModel);
         }
         public ActionResult EditedMemberProfile(InterestedPartyCompoundModel accountInfo)
         {
