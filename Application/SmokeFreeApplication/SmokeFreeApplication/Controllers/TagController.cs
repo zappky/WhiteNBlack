@@ -51,31 +51,35 @@ namespace SmokeFreeApplication.Controllers
         {
             string[] tagArray = inputTags.Split(',');
             Tag[] tagList = smokeFreeDB.Tag.ToArray();
-            for (int i = 0; i < tagArray.Length; i++)
+            if (!String.IsNullOrEmpty(inputTags))
             {
-                string tmp = tagArray[i];
-                Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tmp).FirstOrDefault();
-                StoriesTag storyTag = new StoriesTag();
-                if (tag != null)
+                for (int i = 0; i < tagArray.Length; i++)
                 {
-                    // Tag is found
-                    storyTag.tagID = tag.tagID;
-                    storyTag.storyID = storyID;
-                    smokeFreeDB.StoriesTag.Add(storyTag);
-                    smokeFreeDB.SaveChanges();
-                }
-                else
-                {
-                    //Tag is not found in database
-                    Tag newTag = new Tag();
-                    newTag.tagName = tagArray[i];
-                    smokeFreeDB.Tag.Add(newTag);
-                    smokeFreeDB.SaveChanges();
-                    smokeFreeDB.Entry(newTag).Reload();
-                    storyTag.tagID = newTag.tagID;
-                    storyTag.storyID = storyID;
-                    smokeFreeDB.StoriesTag.Add(storyTag);
-                    smokeFreeDB.SaveChanges();
+                    string tmp = tagArray[i];
+                    Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tmp).FirstOrDefault();
+                    StoriesTag storyTag = new StoriesTag();
+                    if (tag != null)
+                    {
+                        // Tag is found
+                        storyTag.tagID = tag.tagID;
+                        storyTag.storyID = storyID;
+                        smokeFreeDB.StoriesTag.Add(storyTag);
+                        smokeFreeDB.SaveChanges();
+                    }
+                    else
+                    {
+                        //Tag is not found in database
+                        Tag newTag = new Tag();
+                        newTag.tagName = tagArray[i];
+                        smokeFreeDB.Tag.Add(newTag);
+                        smokeFreeDB.SaveChanges();
+                        smokeFreeDB.Entry(newTag).Reload();
+                        storyTag.tagID = newTag.tagID;
+                        storyTag.storyID = storyID;
+                        smokeFreeDB.StoriesTag.Add(storyTag);
+                        smokeFreeDB.SaveChanges();
+
+                    }
 
                 }
             }
@@ -86,33 +90,38 @@ namespace SmokeFreeApplication.Controllers
         {
             string[] tagArray = inputTags.Split(',');
             Tag[] tagList = smokeFreeDB.Tag.ToArray();
-            for (int i = 0; i < tagArray.Length; i++)
+            if(!String.IsNullOrEmpty(inputTags))
             {
-                string tmp = tagArray[i];
-                Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tmp).FirstOrDefault();
-                ArticlesTag articleTag = new ArticlesTag();
-                if (tag != null)
+                for (int i = 0; i < tagArray.Length; i++)
                 {
-                    // Tag is found
-                    articleTag.tagID = tag.tagID;
-                    articleTag.articleID = articleId;
-                    smokeFreeDB.ArticlesTag.Add(articleTag);
-                    smokeFreeDB.SaveChanges();
-                }
-                else
-                {
-                    //Tag is not found in database
-                    Tag newTag = new Tag();
-                    newTag.tagName = tagArray[i];
-                    smokeFreeDB.Tag.Add(newTag);
-                    smokeFreeDB.SaveChanges();
-                    smokeFreeDB.Entry(newTag).Reload();
-                    articleTag.tagID = newTag.tagID;
-                    articleTag.articleID = articleId;
-                    smokeFreeDB.ArticlesTag.Add(articleTag);
-                    smokeFreeDB.SaveChanges();
+                    string tmp = tagArray[i];
+                    Tag tag = smokeFreeDB.Tag.Where(x => x.tagName == tmp).FirstOrDefault();
+                    ArticlesTag articleTag = new ArticlesTag();
+                    if (tag != null)
+                    {
+                        // Tag is found
+                        articleTag.tagID = tag.tagID;
+                        articleTag.articleID = articleId;
+                        smokeFreeDB.ArticlesTag.Add(articleTag);
+                        smokeFreeDB.SaveChanges();
+                    }
+                    else
+                    {
+                        //Tag is not found in database
+                        Tag newTag = new Tag();
+                        newTag.tagName = tagArray[i];
+                        smokeFreeDB.Tag.Add(newTag);
+                        smokeFreeDB.SaveChanges();
+                        smokeFreeDB.Entry(newTag).Reload();
+                        articleTag.tagID = newTag.tagID;
+                        articleTag.articleID = articleId;
+                        smokeFreeDB.ArticlesTag.Add(articleTag);
+                        smokeFreeDB.SaveChanges();
+
+                    }
 
                 }
+            
             }
 
 

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SmokeFreeApplication.Models;
 using PagedList;
+using System.IO;
 
 namespace SmokeFreeApplication.Controllers
 {
@@ -67,17 +68,23 @@ namespace SmokeFreeApplication.Controllers
 
         public ActionResult EditMemberProfile()
         {
+            InterestedPartyCompoundModel memModel = new InterestedPartyCompoundModel();
             if (Session["username"] == null)
             {
                 return RedirectToAction("SignIn", "Account");
             }
             else
             {
+                //Get username of current user logged in
                 string username = Session["username"].ToString();
+
+                //Get info of profile that is being viewed
                 var generaldata = smokeFreeDB.GeneralUser.Where(x => x.userName.Equals(username));
                 var interestedPartydata = smokeFreeDB.InterestedParty.Where(x => x.userName.Equals(username));
 
-                //ViewBag.smokerOrNot = interestedPartydata.FirstOrDefault().smokerOrNot;
+                memModel.InterestedParties = interestedPartydata.FirstOrDefault();
+                memModel.GeneralUsers = generaldata.FirstOrDefault();
+
                 ViewBag.bio = interestedPartydata.FirstOrDefault().bio;
                 ViewBag.username = username;
 
@@ -89,8 +96,20 @@ namespace SmokeFreeApplication.Controllers
             string username = Session["username"].ToString();
             var member = smokeFreeDB.InterestedParty.Find(username);
             member.bio = accountInfo.InterestedParties.bio;
-            //member.smokerOrNot = accountInfo.InterestedParties.smokerOrNot;
+            var generalUser = smokeFreeDB.GeneralUser.Find(username);
 
+            HttpPostedFileBase postedFile = Request.Files["ImageFile"];
+            //If user uploads new profile picture
+            if (postedFile.ContentLength > 0 && postedFile.ContentType.Contains("image"))
+            {
+                Stream stream = postedFile.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] img = binaryReader.ReadBytes((int)stream.Length);
+                generalUser.profilePicture = img;
+            }
+
+            member.bio = accountInfo.InterestedParties.bio;
+            smokeFreeDB.Configuration.ValidateOnSaveEnabled = false;
             smokeFreeDB.SaveChanges();
 
             return RedirectToAction("MemberProfile", new { viewUsername = username, page = 1 });
